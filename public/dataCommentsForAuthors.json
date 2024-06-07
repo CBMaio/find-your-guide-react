@@ -1,0 +1,153 @@
+[
+  {
+    "id": 1,
+    "course": {
+      "id": 101,
+      "title": "Introduction to Programming"
+    },
+    "user": "user123",
+    "status": "PENDING",
+    "content": "Please enroll me in the course."
+  },
+  {
+    "id": 2,
+    "course": {
+      "id": 102,
+      "title": "Web Development Fundamentals"
+    },
+    "user": "user456",
+    "status": "RECEIVED",
+    "content": "I have completed the assignment."
+  },
+  {
+    "id": 3,
+    "course": {
+      "id": 103,
+      "title": "Data Science Essentials"
+    },
+    "user": "user789",
+    "status": "CANCELLED",
+    "content": "I need to withdraw from the course."
+  },
+  {
+    "id": 4,
+    "course": {
+      "id": 104,
+      "title": "Advanced JavaScript"
+    },
+    "user": "user101",
+    "status": "PENDING",
+    "content": "When does the course start?"
+  },
+  {
+    "id": 5,
+    "course": {
+      "id": 105,
+      "title": "Machine Learning Basics"
+    },
+    "user": "user202",
+    "status": "RECEIVED",
+    "content": "I have a question about the lecture."
+  },
+  {
+    "id": 6,
+    "course": {
+      "id": 106,
+      "title": "Database Design"
+    },
+    "user": "user303",
+    "status": "PENDING",
+    "content": "I can't access the course materials."
+  },
+  {
+    "id": 7,
+    "course": {
+      "id": 107,
+      "title": "Graphic Design Fundamentals"
+    },
+    "user": "user404",
+    "status": "CANCELLED",
+    "content": "I've changed my mind about this course."
+  },
+  {
+    "id": 8,
+    "course": {
+      "id": 108,
+      "title": "Cybersecurity Basics"
+    },
+    "user": "user505",
+    "status": "RECEIVED",
+    "content": "I need an extension for the assignment."
+  },
+  {
+    "id": 9,
+    "course": {
+      "id": 109,
+      "title": "Mobile App Development"
+    },
+    "user": "user606",
+    "status": "PENDING",
+    "content": "Can I switch to the evening class?"
+  },
+  {
+    "id": 10,
+    "course": {
+      "id": 110,
+      "title": "Artificial Intelligence"
+    },
+    "user": "user707",
+    "status": "RECEIVED",
+    "content": "I'm having trouble with the course materials."
+  },
+  {
+    "id": 11,
+    "course": {
+      "id": 111,
+      "title": "Project Management"
+    },
+    "user": "user808",
+    "status": "CANCELLED",
+    "content": "I've been assigned to a different project."
+  },
+  {
+    "id": 12,
+    "course": {
+      "id": 112,
+      "title": "Digital Marketing Strategies"
+    },
+    "user": "user909",
+    "status": "PENDING",
+    "content": "When is the next lecture?"
+  },
+  {
+    "id": 13,
+    "course": {
+      "id": 113,
+      "title": "Ethical Hacking"
+    },
+    "user": "user010",
+    "status": "RECEIVED",
+    "content": "I've completed the certification exam."
+  },
+  {
+    "id": 14,
+    "course": {
+      "id": 114,
+      "title": "UI/UX Design"
+    },
+    "user": "user111",
+    "status": "PENDING",
+    "content": "I need assistance with my project."
+  },
+  {
+    "id": 15,
+    "course": {
+      "id": 115,
+      "title": "Data Analytics"
+    },
+    "user": "user212",
+    "status": "CANCELLED",
+    "content": "I have a scheduling conflict."
+  }
+]
+  

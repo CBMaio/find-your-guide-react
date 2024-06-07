@@ -1,0 +1,8 @@
+.custom-alert-styles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  margin: 24px;
+  width: calc(100% - 48px);
+}

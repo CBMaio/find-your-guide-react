@@ -1,0 +1,20 @@
+.input-file-container {
+  border: 3px #ddd dashed;
+  border-radius: 4px;
+  cursor: pointer;
+  padding:  40px;
+  width: 100%;
+
+  .upload-file-input {
+    cursor: pointer;
+    margin: auto;
+    text-align: center;
+    display: flex;
+    max-width: 100%;
+
+    &::-webkit-file-upload-button {
+      background-color: transparent !important;
+      border: none;
+    }
+  }
+}

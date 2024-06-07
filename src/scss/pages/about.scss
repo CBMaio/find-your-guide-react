@@ -1,0 +1,22 @@
+.header-banner {
+  background-color: var(--light-purple);
+}
+
+.text-green {
+  color: #3cb027;
+
+  &:hover {
+    color: #006000;
+  }
+}
+
+.bg-light-green {
+  background-color: #e7f5e5;
+}
+
+.professor-img {
+  @media (max-width: 990px) {
+    width: 50%;
+    margin: auto;
+  }
+}

@@ -1,0 +1,15 @@
+.search-area {
+  .filters-btn-container {
+    cursor: pointer;
+  }
+
+  .outline-btn {
+    border: 2px solid var(--primary-purple);
+    color: var(--primary-purple);
+    
+    &:hover {
+      background-color: white;
+      color: var(--primary-purple);
+    }
+  }
+}

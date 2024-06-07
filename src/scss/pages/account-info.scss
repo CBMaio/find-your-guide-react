@@ -1,0 +1,22 @@
+.account-user-img {
+  height: 100px;
+  object-fit: cover;
+}
+
+.avatar {
+  position: relative;
+
+  .account-input-file {
+    position: absolute;
+    height: 98px;
+    width: 100px;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    opacity: 0;
+  }
+}
+
+.delete-img-text {
+  cursor: pointer;
+}

@@ -1,0 +1,24 @@
+li.nav-item .navi-link i.black-icon {
+  color: #222e3c !important;
+}
+
+.nav-item {
+  cursor: pointer;
+}
+
+.user-img {
+  height: 45px;
+  object-fit: cover;
+}
+
+@media (max-width: 1199px) {
+  .logout-icon {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-icons {
+    flex-direction: row !important;
+  }
+}

@@ -1,0 +1,23 @@
+.main-section {
+  height: calc(100vh - 94px);
+  background-color: #f8f9fa;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+
+  h1 {
+    font-size: 72px;
+
+    @media (max-widt: 768px) {
+      font-size: 56px;
+    }
+  }
+
+
+  .illustration-container {
+    img {
+      max-width: 100%;
+    }
+  }
+}

@@ -1,0 +1,21 @@
+.filters-modal {
+  .filters-btn-container {
+    border-bottom: 1px solid darkgray;
+  }
+
+  .close-btn {
+    cursor: pointer;
+    display: flex;
+    width: fit-content;
+    padding-right: 30px;
+    color: var(--primary-purple);
+    font-weight: bold;
+  }
+
+  .modal-content {
+    @media (max-width: 768px) {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+}

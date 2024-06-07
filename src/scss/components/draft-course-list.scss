@@ -1,0 +1,50 @@
+.draft-course-line {
+  .course-action {
+    position: relative;
+
+    .button-legend {
+      background-color: var(--dark-gray);
+      border-radius: 4px;
+      color: white;
+      font-size: 11px;
+      left: -25%;
+      opacity: 0;
+      padding: 2px 5px;
+      position: absolute;
+      top: -24px;
+      width: max-content;
+      z-index: 1;
+
+      &:before {
+        content: "";
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 10px solid var(--dark-gray);
+        bottom: -8px;
+        height: 0;
+        left: calc(50% - 5px);
+        position: absolute;
+        width: 0;
+      }
+    }
+
+    &:hover {
+      .button-legend {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.my-course-line {
+  &.desktop-view {
+    .price-cell {
+      padding: 14px 0 !important;
+    }
+    
+    .btn-actions {
+     display: flex;
+     padding-right: 0 !important;
+    }
+  }
+}

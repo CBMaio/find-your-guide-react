@@ -1,0 +1,175 @@
+.modal-background {
+  position: fixed;
+  background-color: black;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 9;
+  overflow: hidden;
+}
+
+.my-course-line {
+  .course-action {
+    position: relative;
+
+    .button-legend {
+      background-color: var(--dark-gray);
+      border-radius: 4px;
+      color: white;
+      font-size: 11px;
+      left: -25%;
+      opacity: 0;
+      padding: 2px 5px;
+      position: absolute;
+      top: -24px;
+      width: max-content;
+      z-index: 1;
+
+      &:before {
+        content: "";
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 10px solid var(--dark-gray);
+        bottom: -8px;
+        height: 0;
+        left: calc(50% - 5px);
+        position: absolute;
+        width: 0;
+      }
+    }
+
+    &:hover {
+      .button-legend {
+        opacity: 1;
+      }
+    }
+  }
+
+  &.desktop-view {
+    @media (max-width: 1023px) {
+      display: none;
+    }
+
+    .course-image {
+      width: 125px;
+    }
+  }
+  
+  &.mobile-view {
+    @media (min-width: 1024px) {
+      display: none;
+    }
+
+    &.course-row {
+      align-items: center;
+      border-bottom: 1px solid #e1e1f0;
+      display: flex;
+    }
+
+    .course-image-container {
+      cursor: pointer;
+      padding: 14px;
+      width: 100px;
+   
+      .course-image {
+        width: 80px;
+      }
+    }
+
+    .course-title-container {
+      cursor: pointer;
+      font-size: 13px;
+      padding-left: 14px;
+    }
+  }
+}
+
+.course-data-overlay {
+  align-items: center;
+  background: rgba($color: #000000, $alpha: 0.5);
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 99;
+
+  .course-data-modal {
+    background-color: white;
+    width: 90%;
+    
+    .close-btn {
+      cursor: pointer;
+    }
+
+    .course-modal-body {
+      .actions-container {
+        .light-filled-btn {
+          background-color: var(--light-purple);
+          border: 1px solid var(--primary-purple);
+          color: var(--primary-purple);
+        }
+
+        .filled-btn {
+          background-color: var(--primary-purple);
+          color: white;
+        }
+
+        .outline-btn {
+          background: white;
+          border: 1px solid var(--primary-purple);
+          color: var(--primary-purple);
+        }
+
+        .action-btn {
+          margin-bottom: 12px;
+
+          &:hover {
+            opacity: .6;
+          }
+        }
+      }
+    }
+  }
+}
+
+.admin-product-list-section {
+  .desktop-view {
+    @media (max-width: 1023px) {
+      display: none;
+    }
+  }
+  
+  .mobile-view {
+    @media (min-width: 1024px) {
+      display: none;
+    }
+  }
+}
+
+.admin-product-list-main {
+  .table-responsive {
+    
+    &.mobile-view {
+      .table-header {
+        align-items: center;
+        border-bottom: 1px solid #e1e1f0;
+        display: flex;
+        height: 50px;
+
+        .title-header {
+          margin-left: 122px;
+          font-size: 13px;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
+
+.min-height-container {
+  min-height: 83vh;
+}

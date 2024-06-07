@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "user": "Alice",
+    "content":
+      "I really enjoyed the Introduction to Web Development course by John Doe. It's a great starting point for beginners!"
+  },
+  {
+    "id": 1,
+    "user": "Bob",
+    "content":
+      "The course is well-structured, and the explanations are clear. I found it very helpful."
+  },
+  {
+    "id": 2,
+    "user": "Charlie",
+    "content":
+      "Python Programming for Beginners with Jane Smith was an excellent choice for someone new to programming."
+  },
+  {
+    "id": 2,
+    "user": "David",
+    "content":
+      "Jane explains complex concepts in a simple way. I'm excited to continue learning Python."
+  },
+  {
+    "id": 3,
+    "user": "Eva",
+    "content":
+      "Digital Marketing Fundamentals with Emily Johnson gave me insights into the world of online marketing. Highly recommended!"
+  },
+  {
+    "id": 3,
+    "user": "Frank",
+    "content":
+      "I now understand the importance of digital marketing strategies. Emily's expertise shines through in the course."
+  },
+  {
+    "id": 4,
+    "user": "Grace",
+    "content":
+      "The Graphic Design Masterclass by David Smith is fantastic! I've improved my design skills significantly."
+  },
+  {
+    "id": 4,
+    "user": "Hank",
+    "content":
+      "I can now create stunning graphics thanks to this course. David's teaching style is engaging."
+  },
+  {
+    "id": 5,
+    "user": "Isabel",
+    "content":
+      "Data Science Foundations by Sophia Adams is a challenging but rewarding course. It deepened my understanding of data analysis."
+  },
+  {
+    "id": 5,
+    "user": "Jack",
+    "content":
+      "Sophia's explanations are crystal clear. This course is a must for anyone interested in data science."
+  },
+  {
+    "id": 6,
+    "user": "Katie",
+    "content":
+      "I've always wanted to improve my photography skills, and Michael Brown's Photography Essentials course helped me do just that."
+  },
+  {
+    "id": 6,
+    "user": "Leo",
+    "content":
+      "Michael's practical tips and demonstrations were incredibly helpful. I'm capturing better photos now."
+  },
+  {
+    "id": 7,
+    "user": "Mike",
+    "content":
+      "Financial Planning and Budgeting with Sarah Wilson is a valuable course for managing personal finances."
+  },
+  {
+    "id": 7,
+    "user": "Nina",
+    "content":
+      "I no longer stress about my finances thanks to this course. Sarah's guidance is practical and effective."
+  },
+  {
+    "id": 8,
+    "user": "Oliver",
+    "content":
+      "Art History and Appreciation with Robert Johnson broadened my understanding of art. I now appreciate art on a deeper level."
+  },
+  {
+    "id": 8,
+    "user": "Pamela",
+    "content":
+      "Robert's passion for art history is contagious. This course is a gem for art enthusiasts."
+  },
+  {
+    "id": 9,
+    "user": "Quincy",
+    "content":
+      "Business Leadership Strategies with Jennifer Lee is a must for aspiring leaders. I learned valuable leadership skills."
+  },
+  {
+    "id": 9,
+    "user": "Rachel",
+    "content":
+      "Jennifer's insights into leadership were eye-opening. I feel more confident in my leadership abilities now."
+  },
+  {
+    "id": 10,
+    "user": "Sam",
+    "content":
+      "Yoga and Mindfulness Meditation with Megan Davis improved my mental and physical well-being. I'm more relaxed and focused."
+  },
+  {
+    "id": 10,
+    "user": "Tina",
+    "content":
+      "Megan's yoga sessions are soothing, and her mindfulness practices are effective. I highly recommend this course."
+  },
+  {
+    "id": 11,
+    "user": "Ursula",
+    "content":
+      "Claire Martin's French Language Immersion course was a fun way to learn French. I feel more confident speaking French now."
+  },
+  {
+    "id": 11,
+    "user": "Vince",
+    "content":
+      "I enjoyed the cultural experiences in this course. Claire's teaching style makes learning French enjoyable."
+  },
+  {
+    "id": 12,
+    "user": "Wendy",
+    "content":
+      "Cooking Basics for Beginners with Daniel Smith helped me become a better cook. I can now prepare delicious meals confidently."
+  },
+  {
+    "id": 12,
+    "user": "Xander",
+    "content":
+      "Daniel's cooking techniques are easy to follow. This course is perfect for beginners like me."
+  },
+  {
+    "id": 13,
+    "user": "Yvonne",
+    "content":
+      "Environmental Sustainability with Emma Johnson is a must for anyone interested in eco-friendly practices. I'm more conscious of my impact on the environment now."
+  },
+  {
+    "id": 13,
+    "user": "Zach",
+    "content":
+      "Emma's passion for sustainability is inspiring. This course motivates you to make positive changes for the planet."
+  },
+  {
+    "id": 14,
+    "user": "Alex",
+    "content":
+      "Mobile App Development with React Native by Alex Wilson is a comprehensive course. I can now build mobile apps with confidence."
+  },
+  {
+    "id": 14,
+    "user": "Betty",
+    "content":
+      "Alex's explanations are clear, and the hands-on projects are challenging but rewarding. A great course for aspiring app developers."
+  },
+  {
+    "id": 15,
+    "user": "Charlie",
+    "content":
+      "Olivia Davis' Creative Writing Workshop is a nurturing environment for writers. My writing skills have improved significantly."
+  },
+  {
+    "id": 15,
+    "user": "Diana",
+    "content":
+      "Olivia's feedback and interactive workshops are invaluable. I've gained confidence in my writing abilities."
+  }
+]

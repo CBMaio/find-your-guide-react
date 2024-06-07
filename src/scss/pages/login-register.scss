@@ -1,0 +1,53 @@
+.bg-primary-purple {
+  background-color: var(--primary-purple);
+}
+
+.link {
+  color: var(--dark-purple);
+
+  &:hover {
+    color: var(--dark-purple1);
+  }
+}
+
+.white-btn {
+  border: 1px solid var(--dark-gray);
+  color: var(--dark-gray);
+
+  &:hover {
+    background-color: var(--light-gray);
+    color: var(--dark-gray);
+  }
+}
+
+.btn-content {
+  align-items: center;
+  display: flex;
+
+
+  .btn-img-container {
+    align-items: center;
+    background-color: var(--light-gray);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    margin: 0 8px;
+    padding: 4px;
+
+    img {
+      margin: 0;
+    }
+  }
+}
+
+.toggle-pw-icon {
+  cursor: pointer;
+  left: auto !important;
+  right: 15px;
+}
+
+.number-input::-webkit-outer-spin-button,
+.number-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

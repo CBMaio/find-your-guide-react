@@ -1,0 +1,479 @@
+[
+    {
+        "id": 1,
+        "title": "Introducción al desarrollo web",
+        "type": "Grupal",
+        "category": "Desarrollo web",
+        "duration": 8,
+        "frequency": "Semanal",
+        "author": {
+            "name": "John Doe",
+            "id": 2
+        },
+        "price": 99.99,
+        "image": "course1.jpg",
+        "description": "Aprenda los conceptos básicos del desarrollo web y cree su primer sitio web.",
+        "requirements": "No se requieren conocimientos previos. Se necesita una computadora y acceso a Internet.",
+        "comments": [
+            {
+                "id": 1,
+                "user": "Alice",
+                "rating": 3,
+                "content":
+                    "Realmente disfruté el curso de Introducción al desarrollo web de John Doe. Es un gran punto de partida para principiantes.!"
+                },
+                {
+                "id": 2,
+                "user": "Bob",
+                "rating": 3,
+                "content":
+                    "El curso está bien estructurado y las explicaciones son claras. Lo encontré muy útil."
+                }
+        ]
+    },
+    {
+        "id": 2,
+        "title": "Programación Python para principiantes",
+        "type": "Grupal",
+        "category": "Programación",
+        "duration": 10,
+        "frequency": "Semanal",
+        "author": {
+            "name": "Jane Smith",
+            "id": 1
+        },
+        "price": 149.99,
+        "image": "course2.jpg",
+        "description": "Comience su viaje de programación con Python y cree aplicaciones simples.",
+        "requirements": "No se necesita experiencia previa en programación.",
+        "comments": [
+            {
+                "id": 1,
+                "user": "Charlie",
+                "rating": 3,
+                "content":
+                  "La programación Python para principiantes con Jane Smith fue una excelente opción para alguien nuevo en la programación."
+              },
+              {
+                "id": 2,
+                "user": "David",
+                "rating": 3,
+                "content":
+                  "Jane explica conceptos complejos de forma sencilla. Estoy emocionado de seguir aprendiendo Python."
+              }
+        ]
+    },
+    {
+        "id": 3,
+        "title": "Fundamentos del marketing digital",
+        "type": "Grupal",
+        "category": "Marketing",
+        "duration": 6,
+        "frequency": "Mensual",
+        "author": {
+            "name": "Jane Smith",
+            "id": 1
+        },
+        "price": 79.99,
+        "image": "course3.jpg",
+        "description": "Explora el mundo del marketing digital y haz crecer tu presencia online.",
+        "requirements": "Se requieren conocimientos básicos de informática.",
+        "comments": [
+            {
+                "id": 1,
+                "user": "Eva",
+                "rating": 3,
+                "content":
+                  "Los Fundamentos del marketing digital con Emily Johnson me brindaron información sobre el mundo del marketing online. ¡Muy recomendable!"
+              },
+              {
+                "id": 2,
+                "user": "Frank",
+                "rating": 3,
+                "content":
+                  "Ahora entiendo la importancia de las estrategias de marketing digital. La experiencia de Emily se destaca en el curso."
+              }
+        ]
+    },
+    {
+        "id": 4,
+        "title": "Clase magistral de diseño gráfico",
+        "type": "Grupal",
+        "category": "Diseño",
+        "duration": 12,
+        "frequency": "Semanal",
+        "author": {
+            "name": "David Smith",
+            "id": 4
+        },
+        "price": 129.99,
+        "image": "course4.jpg",
+        "description": "Desbloquea tu creatividad y conviértete en un hábil diseñador gráfico.",
+        "requirements": "Se recomienda acceso a software de diseño gráfico.",
+        "comments": [
+            {
+                "id": 1,
+                "user": "Grace",
+                "rating": 3,
+                "content":
+                  "¡La Masterclass de Diseño Gráfico de David Smith es fantástica! He mejorado significativamente mis habilidades de diseño."
+              },
+              {
+                "id": 2,
+                "user": "Hank",
+                "rating": 3,
+                "content":
+                  "Ahora puedo crear gráficos impresionantes gracias a este curso. El estilo de enseñanza de David es atractivo."
+              }
+        ]
+    },
+    {
+        "id": 5,
+        "title": "Fundamentos de la ciencia de datos",
+        "type": "Grupal",
+        "category": "Ciencia de datos",
+        "duration": 8,
+        "frequency": "Unica",
+        "author": "John Doe",
+        "price": 149.99,
+        "image": "course5.jpg",
+        "description": "Sumérjase en la ciencia de datos y aproveche el poder de los datos para obtener información valiosa.",
+        "requirements": "Es útil tener conocimientos básicos de matemáticas y programación.",
+        "comments": [
+            {
+                "id": 1,
+                "user": "Isabel",
+                "rating": 3,
+                "content":
+                  "Data Science Foundations de Sophia Adams es un curso desafiante pero gratificante. Profundizó mi comprensión del análisis de datos."
+              },
+              {
+                "id": 2,
+                "user": "Jack",
+                "rating": 3,
+                "content":
+                  "Las explicaciones de Sofía son muy claras. Este curso es imprescindible para cualquier persona interesada en la ciencia de datos."
+              }
+        ]
+    },
+    {
+        "id": 6,
+        "title": "Esenciales de fotografía",
+        "type": "Grupal",
+        "category": "Fotografía",
+        "duration": 6,
+        "frequency": "Semanal",
+        "author": {
+            "name": "David Smith",
+            "id": 4
+        },
+        "price": 89.99,
+        "image": "course6.jpg",
+        "description": "Capture fotografías impresionantes con su cámara y domine las técnicas de fotografía.",
+        "requirements": "Se requiere una cámara digital o un teléfono inteligente con cámara.",
+        "comments": [
+            {
+                "id": 1,
+                "user": "Katie",
+                "rating": 3,
+                "content":
+                  "Siempre quise mejorar mis habilidades fotográficas y el curso Photography Essentials de Michael Brown me ayudó a conseguirlo."
+              },
+              {
+                "id": 2,
+                "user": "Leo",
+                "rating": 3,
+                "content":
+                  "Los consejos prácticos y las demostraciones de Michael fueron increíblemente útiles. Estoy capturando mejores fotos ahora."
+              }
+        ]
+    },
+    {
+        "id": 7,
+        "title": "Planificación financiera y presupuestación",
+        "type": "Grupal",
+        "category": "Finanzas",
+        "duration": 8,
+        "frequency": "Mensual",
+        "author": {
+            "name": "Sarah Wilson",
+            "id": 5
+        },
+        "price": 69.99,
+        "image": "course7.jpg",
+        "description": "Aprenda cómo administrar sus finanzas, presupuestar de manera efectiva y planificar para el futuro.",
+        "requirements": "No se requieren conocimientos financieros previos.",
+        "comments":[
+            {
+                "id": 1,
+                "user": "Mike",
+                "rating": 3,
+                "content":
+                  "Planificación financiera y elaboración de presupuestos con Sarah Wilson es un curso valioso para gestionar las finanzas personales."
+              },
+              {
+                "id": 2,
+                "user": "Nina",
+                "rating": 3,
+                "content":
+                  "Ya no me estreso por mis finanzas gracias a este curso. La orientación de Sarah es práctica y eficaz."
+              }
+        ]
+    },
+    {
+        "id": 8,
+        "title": "Historia y apreciación del arte.",
+        "type": "Grupal",
+        "category": "Arte",
+        "duration": 6,
+        "frequency": "Mensual",
+        "author": {
+            "name": "John Doe",
+            "id": 2
+        },
+        "price": 49.99,
+        "image": "course8.jpg",
+        "description": "Explora el mundo del arte, desde civilizaciones antiguas hasta obras maestras modernas.",
+        "requirements": "Sin requisitos previos.",
+        "comments":[
+            {
+                "id": 1,
+                "user": "Oliver",
+                "rating": 3,
+                "content":
+                  "Historia y apreciación del arte con Robert Johnson amplió mi comprensión del arte. Ahora aprecio el arte a un nivel más profundo."
+              },
+              {
+                "id": 2,
+                "user": "Pamela",
+                "rating": 3,
+                "content":
+                  "La pasión de Robert por la historia del arte es contagiosa. Este curso es una joya para los entusiastas del arte."
+              }
+        ]
+    },
+    {
+        "id": 9,
+        "title": "Estrategias de liderazgo empresarial",
+        "type": "Grupal",
+        "category": "Negocio",
+        "duration": 10,
+        "frequency": "Unica",
+        "author": {
+            "name": "John Doe",
+            "id": 2
+        },
+        "price": 119.99,
+        "image": "course9.jpg",
+        "description": "Desarrollar habilidades de liderazgo y estrategias para el éxito en el mundo empresarial.",
+        "requirements": "Sin requisitos previos específicos.",
+        "comments":[
+            {
+                "id": 1,
+                "user": "Quincy",
+                "rating": 3,
+                "content":
+                  "Estrategias de liderazgo empresarial con Jennifer Lee es imprescindible para los aspirantes a líderes. Aprendí valiosas habilidades de liderazgo."
+              },
+              {
+                "id": 2,
+                "user": "Rachel",
+                "rating": 3,
+                "content":
+                  "Las ideas de Jennifer sobre el liderazgo fueron reveladoras. Ahora me siento más seguro de mis habilidades de liderazgo."
+              }
+        ]
+    },
+    {
+        "id": 10,
+        "title": "Yoga y meditación de atención plena",
+        "type": "Grupal",
+        "category": "Salud",
+        "duration": 6,
+        "frequency": "Semanal",
+        "author": {
+            "name": "David Smith",
+            "id": 4
+        },
+        "price": 59.99,
+        "image": "course10.jpg",
+        "description": "Mejora tu bienestar físico y mental con prácticas de yoga y mindfulness.",
+        "requirements": "No se necesita experiencia previa.",
+        "comments":[
+            {
+                "id": 1,
+                "user": "Sam",
+                "rating": 3,
+                "content":
+                  "El yoga y la meditación de atención plena con Megan Davis mejoraron mi bienestar físico y mental. Estoy más relajado y concentrado."
+              },
+              {
+                "id": 2,
+                "user": "Tina",
+                "rating": 3,
+                "content":
+                  "Las sesiones de yoga de Megan son relajantes y sus prácticas de atención plena son efectivas. Recomiendo mucho este curso."
+              }
+        ]
+    },
+    {
+        "id": 11,
+        "title": "Inmersión en lengua francesa",
+        "type": "Grupal",
+        "category": "Idioma",
+        "duration": 12,
+        "frequency": "Semanal",
+        "author": {
+            "name": "Claire Martin",
+            "id": 3
+        },
+        "price": 129.99,
+        "image": "course11.jpg",
+        "description": "Aprenda francés a través de lecciones de idiomas inmersivas y experiencias culturales.",
+        "requirements": "No se requieren conocimientos previos del idioma.",
+        "comments": [
+            {
+                "id": 1,
+                "user": "Ursula",
+                "rating": 3,
+                "content":
+                  "El curso de inmersión en francés de Claire Martin fue una forma divertida de aprender francés. Ahora me siento más seguro hablando francés."
+              },
+              {
+                "id": 2,
+                "user": "Vince",
+                "rating": 3,
+                "content":
+                  "Disfruté las experiencias culturales en este curso. El estilo de enseñanza de Claire hace que aprender francés sea agradable."
+              }
+        ]
+    },
+    {
+        "id": 12,
+        "title": "Conceptos básicos de cocina para principiantes",
+        "type": "Grupal",
+        "category": "Cocina",
+        "duration": 8,
+        "frequency": "Semanal",
+        "author": {
+            "name": "Claire Martin",
+            "id": 3
+        },
+        "price": 79.99,
+        "image": "course12.jpg",
+        "description": "Domina técnicas de cocina esenciales y prepara deliciosas comidas en casa.",
+        "requirements": "No se necesita experiencia en cocina.",
+        "comments":[
+            {
+                "id": 1,
+                "user": "Wendy",
+                "rating": 3,
+                "content":
+                  "Conceptos básicos de cocina para principiantes con Daniel Smith me ayudó a convertirme en un mejor cocinero. Ahora puedo preparar comidas deliciosas con confianza."
+              },
+              {
+                "id": 2,
+                "user": "Xander",
+                "rating": 3,
+                "content":
+                  "Las técnicas de cocina de Daniel son fáciles de seguir. Este curso es perfecto para principiantes como yo"
+              }
+        ]
+    },
+    { 
+        "id": 13,
+        "title": "Sostenibilidad del medio ambiente",
+        "type": "Grupal",
+        "category": "Ambiente",
+        "duration": 6,
+        "frequency": "Mensual",
+        "author": {
+            "name": "Claire Martin",
+            "id": 3
+        },
+        "price": 69.99,
+        "image": "course13.jpg",
+        "description": "Aprenda sobre cuestiones ambientales y prácticas sostenibles para un mundo más verde.",
+        "requirements": "Sin requisitos previos.",
+        "comments":[
+            {
+                "id": 1,
+                "user": "Yvonne",
+                "rating": 3,
+                "content":
+                  "Sostenibilidad ambiental con Emma Johnson es imprescindible para cualquier persona interesada en prácticas ecológicas. Ahora soy más consciente de mi impacto en el medio ambiente."
+              },
+              {
+                "id": 2,
+                "user": "Zach",
+                "rating": 3,
+                "content":
+                  "La pasión de Emma por la sostenibilidad es inspiradora. Este curso te motiva a hacer cambios positivos para el planeta."
+              }
+        ]
+    },
+    {
+        "id": 14,
+        "title": "Desarrollo de aplicaciones móviles con React Native",
+        "type": "Grupal",
+        "category": "Desarrollo Móvil",
+        "duration": 10,
+        "frequency": "Semanal",
+        "author": {
+            "name": "Alex Wilson",
+            "id": 6
+        },
+        "price": 149.99,
+        "image": "course14.jpg",
+        "description": "Cree aplicaciones móviles utilizando React Native y JavaScript.",
+        "requirements": "Es útil tener conocimientos básicos de JavaScript.",
+        "comments":[
+            {
+                "id": 1,
+                "user": "Alex",
+                "rating": 3,
+                "content":
+                  "Desarrollo de aplicaciones móviles con React Native de Alex Wilson es un curso completo. Ahora puedo crear aplicaciones móviles con confianza."
+              },
+              {
+                "id": 2,
+                "user": "Betty",
+                "rating": 3,
+                "content":
+                  "Las explicaciones de Alex son claras y los proyectos prácticos son desafiantes pero gratificantes. Un gran curso para aspirantes a desarrolladores de aplicaciones."
+              }
+        ]
+    },
+    {
+        "id": 15,
+        "title": "Taller de escritura creativa",
+        "type": "Grupal",
+        "category": "Escritura",
+        "duration": 8,
+        "frequency": "Semanal",
+        "author": {
+            "name": "Alex Wilson",
+            "id": 6
+        },
+        "price": 89.99,
+        "image": "course15.jpg",
+        "description": "Desbloquea tu creatividad y mejora tus habilidades de escritura a través de talleres interactivos.",
+        "requirements": "No se requiere experiencia previa en escritura.",
+        "comments": [
+            {
+                "id": 1,
+                "user": "Charlie",
+                "rating": 3,
+                "content":
+                  "El taller de escritura creativa de Olivia Davis es un entorno enriquecedor para escritores. Mis habilidades de escritura han mejorado significativamente."
+              },
+              {
+                "id": 2,
+                "user": "Diana",
+                "rating": 3,
+                "content":
+                  "Los comentarios de Olivia y los talleres interactivos son invaluables. He ganado confianza en mis habilidades de escritura."
+              }
+        ]
+    }
+]

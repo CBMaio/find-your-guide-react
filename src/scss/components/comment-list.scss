@@ -1,0 +1,71 @@
+.bg {
+  &-pendiente {
+    background-color: #ffead6;
+    border-color: #ffe1c5;
+    color: #844d19;
+  }
+
+  &-aceptado {
+    background-color: #cff7e4;
+    border-color: #bcf4d9;
+    color: #08703d;
+  }
+
+  &-bloqueado {
+    background-color: #facccc;
+    border-color: #f8b8b8;
+    color: #770101;
+  }
+
+  &-rechazado {
+    background-color: #facccc;
+    border-color: #f8b8b8;
+    color: #770101;
+  }
+}
+
+.comments-actions {
+  .course-action {
+    position: relative;
+
+    .button-legend {
+      background-color: var(--dark-gray);
+      border-radius: 4px;
+      color: white;
+      font-size: 11px;
+      left: -20%;
+      opacity: 0;
+      padding: 2px 5px;
+      position: absolute;
+      top: -24px;
+      width: max-content;
+      z-index: 1;
+
+      &:before {
+        content: "";
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 10px solid var(--dark-gray);
+        bottom: -8px;
+        height: 0;
+        left: calc(50% - 5px);
+        position: absolute;
+        width: 0;
+      }
+
+      &.review-comment {
+        left: -110%;
+      }
+    }
+
+    &:hover {
+      .button-legend {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.comments-list-container {
+  min-height: calc(100vh - 150px);
+}

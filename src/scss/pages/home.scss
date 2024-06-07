@@ -1,0 +1,127 @@
+.banner-container {
+  @media (max-width: 1024px) {
+    margin: auto;
+    padding-top: 50px;
+    width: 60%;
+  }
+}
+
+.card-container {
+  max-width: 300px;
+  padding: 30px;
+  background-color: #F5F5F5;
+}
+
+.course-card {
+  height: 100%;
+
+  .course-body-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
+.category-card-body {
+  flex-direction: column;
+
+  div {
+    height: auto !important;
+  }
+}
+
+.experience-banner {
+  padding: 40px 0;
+  background-color: #F3E5F5;
+
+  .experience-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: auto;
+
+    .experience-box {
+      padding-top: 2rem;
+      text-align: center;
+
+      img {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 1rem;
+      }
+    }
+  }
+}
+
+.slick-prev, .slick-next {
+  &.slick-disabled {
+    &::before {
+      color: var(--disabled);
+    }
+  }
+}
+
+.slick-prev:before, .slick-next:before {
+  color: var(--primary-purple);
+}
+
+.slick-prev {
+  left: 0 !important;
+}
+
+.slick-next {
+  right: 0 !important;
+}
+
+.slider-element {
+  .slick-slide {
+    div {
+      display: flex !important;
+      justify-content: center;
+    }
+  }
+}
+
+.light-btn {
+  background-color: var(--light-purple);
+  color: var(--primary-purple);
+
+  &:hover {
+    color: var(--primary-purple);
+    opacity: .7;
+  }
+}
+
+.header-container {
+  .banner-btn {
+    align-items: center;
+    display: flex;
+    font-size: 12px;
+    height: 55px;
+    justify-content: center;
+  }
+  
+  .create-account-btn {
+    align-items: center;
+    display: flex;
+    font-size: 12px;
+    height: 55px;
+    justify-content: center;
+  
+    &:hover {
+      opacity: .7;
+    }
+  }
+} 
+
+
+.outline-btn {
+  border: 1px solid var(--primary-purple);
+  color: var(--primary-purple);
+
+
+  &:hover {
+    background-color: var(--primary-purple);
+    color: white;
+  }
+}

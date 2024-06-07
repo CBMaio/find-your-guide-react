@@ -1,0 +1,23 @@
+.custom-modal {
+  align-items: center;
+  background: rgba($color: #000000, $alpha: 0.5);
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+
+  .modal-description {
+    text-align: center;
+    color: var(--dark-gray);
+  }
+
+  .modal-content {
+    @media (max-width: 768px) {
+      width: 100%;
+      max-width: fit-content;
+    }
+  }
+}
