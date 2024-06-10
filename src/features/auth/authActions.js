@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import axiosInstance from "../../services/AxiosInstance";
 import { API_URL } from "../constants";
+import { userMockData } from "../../utils/mockData";
 
 const AUTH_API_COMPLETE = `${API_URL}/users`;
 const AUTH_API = "/users";
@@ -57,6 +58,7 @@ export const loginUser = createAsyncThunk(
   "auth/login",
   async (user, { rejectWithValue }) => {
     try {
+      return { ...userMockData, ...user };
       // const config = {
       //   headers: {
       //     "Content-type": "application/json",
