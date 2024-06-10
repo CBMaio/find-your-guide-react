@@ -86,10 +86,11 @@ const Home = () => {
             </div>
             <div className="col-xl-6 col-lg-7 order-lg-1 pt-lg--10 pb-lg--10 xl-p-5">
               <h2 className="display3-size display2-md-size fw-700">
-                Encuentra el curso online perfecto
+                Encuentra el tour perfecto para vos
               </h2>
               <h4 className="text-grey-500 font-xssss fw-500 ml-1 aos-init lh-24">
-                Cientos de cursos para comenzar tu camino al éxito
+                Descubre experiencias únicas y personalizadas con guías locales
+                expertos que harán de tu viaje algo inolvidable
               </h4>
               <div className="form-group mt-lg-5 p-3 border-light border p-2 bg-white rounded-lg">
                 <div className="row">
@@ -98,7 +99,7 @@ const Home = () => {
                       to="/courses-grid"
                       className="w-100 btn font-xssss fw-600 ls-3 banner-btn p-0 border-0 text-uppercase light-btn "
                     >
-                      Buscar cursos
+                      Buscar destinos
                     </Link>
                   </div>
                   <div className="col-6">
@@ -112,8 +113,8 @@ const Home = () => {
                 </div>
               </div>
               <h4 className="text-grey-500 font-xssss fw-500 ml-1 lh-24">
-                <b className="text-grey-800">Cursos Populares:</b> Diseño,
-                Programación, PHP, HTML, CSS, SCSS
+                <b className="text-grey-800">Destinos Populares:</b> Paris,
+                Roma, Buenos Aires, Nueva York
               </h4>
             </div>
           </div>

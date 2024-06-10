@@ -17,9 +17,9 @@ const Header = () => {
                 <Container>
                   <Link to="/">
                     <h1 className="fredoka-font ls-3 fw-700 text-current font-xxl">
-                      MarketClass
+                      TourFinder
                       <span className="d-block font-xsssss ls-1 text-grey-500 open-font ">
-                        El camino hacia el éxito comienza aquí
+                        Tu guía perfecto para cada destino
                       </span>
                     </h1>
                   </Link>
@@ -33,7 +33,7 @@ const Header = () => {
                         Sobre nosotros
                       </NavLink>
                       <NavLink to="/courses-grid" className="text-dark">
-                        Todos los cursos
+                        Todos los tours
                       </NavLink>
                       {/* <NavLink to="/contact" className="text-dark">
                         Contacto

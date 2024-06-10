@@ -41,9 +41,9 @@ const Forgot = () => {
                 <div className="card-body rounded-0 text-left">
                   <Link to="/">
                     <h1 className="fredoka-font ls-3 fw-700 text-current font-xxl">
-                      MarketClass
+                      TourFinder
                       <span className="d-block font-xsssss ls-1 text-grey-500 open-font ">
-                        El camino hacia el éxito comienza aquí
+                        Tu guía perfecto para cada destino
                       </span>
                     </h1>
                   </Link>
