@@ -20,15 +20,15 @@ const CourseList = ({ limit = false, queryFilter, filterSelected }) => {
 
   const authorsStatus = useSelector((state) => state.authors.status);
 
-  useEffect(() => {
-    if (coursesStatus === IDLE) {
-      dispatch(fetchCourses());
-    }
+  // useEffect(() => {
+  //   if (coursesStatus === IDLE) {
+  //     dispatch(fetchCourses());
+  //   }
 
-    if (authorsStatus === IDLE) {
-      dispatch(fetchAuthors());
-    }
-  }, [coursesStatus, authorsStatus, dispatch, IDLE]);
+  //   if (authorsStatus === IDLE) {
+  //     dispatch(fetchAuthors());
+  //   }
+  // }, [coursesStatus, authorsStatus, dispatch, IDLE]);
 
   useEffect(() => {
     const getProducts = async () => {

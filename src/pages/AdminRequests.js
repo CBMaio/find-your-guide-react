@@ -16,9 +16,7 @@ const AdminRequests = () => {
         <div id="content-wrapper" className="d-flex flex-column">
           <div id="content">
             <AdminTopnav />
-            <div className="requests-container">
-              <RequestsList />
-            </div>
+            <div className="requests-container">{/* <RequestsList /> */}</div>
 
             <Adminfooter />
           </div>

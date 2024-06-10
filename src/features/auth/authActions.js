@@ -57,20 +57,18 @@ export const loginUser = createAsyncThunk(
   "auth/login",
   async (user, { rejectWithValue }) => {
     try {
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-        },
-      };
-
-      const { data } = await axios.post(
-        `${AUTH_API_COMPLETE}/${LOGIN}`,
-        { ...user },
-        config
-      );
-
-      localStorage.setItem("userToken", data.loginUser.token);
-      return data;
+      // const config = {
+      //   headers: {
+      //     "Content-type": "application/json",
+      //   },
+      // };
+      // const { data } = await axios.post(
+      //   `${AUTH_API_COMPLETE}/${LOGIN}`,
+      //   { ...user },
+      //   config
+      // );
+      // localStorage.setItem("userToken", data.loginUser.token);
+      // return data;
     } catch (error) {
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);

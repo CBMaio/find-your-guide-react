@@ -50,11 +50,11 @@ const AddCourseForm = () => {
     setSelectedImage(base64);
   };
 
-  useEffect(() => {
-    if (statusCategory === IDLE) {
-      dispatch(fetchCategories());
-    }
-  });
+  // useEffect(() => {
+  //   if (statusCategory === IDLE) {
+  //     dispatch(fetchCategories());
+  //   }
+  // });
   return (
     <div className="row">
       <div className="col-lg-12 ">

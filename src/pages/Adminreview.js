@@ -14,7 +14,7 @@ const Adminreview = () => {
         <div id="content-wrapper" className="d-flex flex-column">
           <div id="content">
             <AdminTopnav />
-            <CommentList />
+            {/* <CommentList /> */}
 
             <Adminfooter />
           </div>

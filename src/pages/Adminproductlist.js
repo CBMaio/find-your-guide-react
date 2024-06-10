@@ -61,9 +61,7 @@ const Adminproductlist = () => {
                                 </th>
                               </tr>
                             </thead>
-                            <tbody>
-                              <MyCoursesList />
-                            </tbody>
+                            <tbody>{/* <MyCoursesList /> */}</tbody>
                           </table>
                         </div>
                       ) : (
@@ -76,9 +74,7 @@ const Adminproductlist = () => {
                                 </div>
                               </div>
                             </div>
-                            <div>
-                              <MyCoursesList />
-                            </div>
+                            <div>{/* <MyCoursesList /> */}</div>
                           </div>
                         </div>
                       )}

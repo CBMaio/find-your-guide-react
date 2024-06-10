@@ -10,7 +10,7 @@ import "../scss/pages/account-info.scss";
 
 const Accountinfo = () => {
   const dispatch = useDispatch();
-  const userInfo = useSelector(selectUserInfo);
+  const userInfo = useSelector(selectUserInfo) || {};
   const { loading } = useSelector((state) => state.auth);
   const [selectedImage, setSelectedImage] = useState(null);
 

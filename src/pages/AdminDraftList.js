@@ -59,9 +59,7 @@ const AdminDraftList = () => {
                                 </th>
                               </tr>
                             </thead>
-                            <tbody>
-                              <DraftCoursesList />
-                            </tbody>
+                            <tbody>{/* <DraftCoursesList /> */}</tbody>
                           </table>
                         </div>
                       ) : (
@@ -74,9 +72,7 @@ const AdminDraftList = () => {
                                 </div>
                               </div>
                             </div>
-                            <div>
-                              <DraftCoursesList />
-                            </div>
+                            <div>{/* <DraftCoursesList /> */}</div>
                           </div>
                         </div>
                       )}

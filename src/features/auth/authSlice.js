@@ -5,6 +5,7 @@ import {
   getUserData,
   updateUser,
 } from "./authActions";
+import { user } from "../../utils/mockData";
 
 const userToken = localStorage.getItem("userToken")
   ? localStorage.getItem("userToken")
