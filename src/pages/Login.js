@@ -43,7 +43,8 @@ const Login = () => {
           <div
             className="col-xl-5 d-none d-xl-block p-0 vh-100 bg-image-cover bg-no-repeat"
             style={{
-              backgroundImage: `url('assets/images/students.jpg')`,
+              backgroundImage: `url('assets/images/login.jpg')`,
+              backgroundPosition: "center",
             }}
           ></div>
 
