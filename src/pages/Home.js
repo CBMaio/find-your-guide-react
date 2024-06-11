@@ -17,15 +17,15 @@ const Home = () => {
 
   const iconList = [
     {
-      title: "Certifícate",
-      des: "Obtén reconocimiento por tu aprendizaje con nuestros certificados de finalización de cursos.",
+      title: "Certificación de guías",
+      des: "Asegúrate de que tus guías estén verificados con nuestras certificaciones de credenciales.",
       icon: "ti-check",
       color: "text-warning",
       bgcolor: "alert-warning",
     },
     {
-      title: "Excelentes instructores",
-      des: "Nuestra plataforma cuenta con instructores altamente calificados y apasionados.",
+      title: "Guías expertos",
+      des: "Nuestra plataforma cuenta con guías turísticos altamente calificados y apasionados.",
       icon: "ti-heart",
       color: "text-secondary",
       bgcolor: "alert-secondary",
@@ -129,10 +129,10 @@ const Home = () => {
                 Explorar las distintas categorías
               </h2>
               <p className="fw-300 font-xsss lh-28 text-grey-500">
-                Descubre un mundo de conocimiento al explorar las diversas
-                categorías disponibles en MarketClass. Desde programación hasta
-                análisis de datos y más, encontrarás cursos y recursos que se
-                adaptan a tus intereses y objetivos de aprendizaje.
+                Descubre un mundo de posibilidades al explorar las diversas
+                opciones de guías turísticos disponibles en TourFinder. Desde
+                tours individuales hasta traducciones, encontrarás servicios y
+                guías que se adaptan a tus intereses y destinos
               </p>
             </div>
           </div>
@@ -170,9 +170,9 @@ const Home = () => {
                 Aprovecha al máximo nuesta plataforma
               </h2>
               <p className="fw-300 font-xsss lh-28 text-grey-500">
-                En MarketClass, te ofrecemos una experiencia de aprendizaje
-                enriquecedora y flexible, diseñada para impulsar tu éxito en el
-                mundo de la tecnología y la innovación.
+                Te ofrecemos una experiencia de viaje enriquecedora y flexible,
+                diseñada para impulsar tu aventura y descubrimiento en cualquier
+                rincón del mundo
               </p>
             </div>
           </div>
@@ -202,12 +202,12 @@ const Home = () => {
           <div className="row justify-content-center">
             <div className="page-title style1 col-xl-6 col-lg-6 col-md-10 text-center mb-5">
               <h2 className="text-grey-900 fw-700 display1-size display2-md-size pb-3 mb-0 d-block">
-                Cursos populares online
+                Principales destinos
               </h2>
               <p className="fw-300 font-xsss lh-28 text-grey-500">
-                Descubre nuestra selección de cursos en línea altamente
-                demandados. Amplía tus horizontes y adquiere habilidades
-                relevantes con nuestros cursos líderes en el mercado.
+                Descubre nuestra selección de guías turísticos altamente
+                recomendados. Amplía tus horizontes y vive experiencias únicas
+                con nuestros guías líderes en el mercado.
               </p>
             </div>
           </div>
@@ -219,9 +219,9 @@ const Home = () => {
           <div className="row justify-content-center pt-5">
             <Link
               to="/courses-grid"
-              className="ml-1 mr-1 rounded-lg font-xss border-size-md fw-600 open-font p-3 w200 btn outline-btn"
+              className="ml-1 mr-1 rounded-lg font-xss border-size-md fw-600 open-font p-3 w250 btn outline-btn"
             >
-              Ver todos los cursos
+              Ver todos los destinos
             </Link>
           </div>
         </div>
@@ -233,7 +233,7 @@ const Home = () => {
             <div className="experience-box">
               <img src="assets/images/students.png" alt="students icon" />
               <p>260K +</p>
-              <p>Estudiantes en todo el mundo</p>
+              <p>Turistas en todo el mundo</p>
             </div>
             <div className="experience-box">
               <img src="assets/images/experience.png" alt="students icon" />
