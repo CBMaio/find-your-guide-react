@@ -14,7 +14,20 @@
   background-color: #e7f5e5;
 }
 
-.professor-img {
+.bg-light-purple {
+  align-items: center;
+  background-color: #9d5fcac3;
+}
+
+.text-purple{
+  color: #551b8b;
+
+  &:hover {
+    color: #2b0446;
+  }
+}
+
+.tourist-img{
   @media (max-width: 990px) {
     width: 50%;
     margin: auto;
