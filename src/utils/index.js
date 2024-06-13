@@ -1,103 +1,104 @@
 export const categories = [
   {
     id: 1,
-    name: "Desarrollo web",
+    name: "Tours históricos",
     img: "assets/images/language.svg",
     description:
-      "Domina el arte de la programación con nuestros cursos especializados.",
+      "Explora la historia de tu destino con nuestros guías expertos en tours históricos.",
   },
   {
     id: 2,
-    name: "Programación",
+    name: "Tours culturales",
     img: "assets/images/language.svg",
     description:
-      "Domina el arte de la programación con nuestros cursos especializados.",
+      "Descubre la cultura local con nuestros guías especializados en tours culturales.",
   },
   {
     id: 3,
-    name: "Marketing",
+    name: "Aventuras al aire libre",
     img: "assets/images/language.svg",
     description:
-      "Domina el arte de la programación con nuestros cursos especializados.",
+      "Vive la aventura con nuestros guías en actividades al aire libre y excursiones.",
   },
   {
     id: 4,
-    name: "Diseño",
+    name: "Gastronomía",
     img: "assets/images/language.svg",
     description:
-      "Domina el arte de la programación con nuestros cursos especializados.",
+      "Disfruta de la gastronomía local con nuestros guías conocedores de la cocina regional.",
   },
   {
     id: 5,
-    name: "Ciencia de datos",
+    name: "Tours de naturaleza",
     img: "assets/images/language.svg",
     description:
-      "Domina el arte de la programación con nuestros cursos especializados.",
+      "Conéctate con la naturaleza a través de nuestros tours guiados en entornos naturales.",
   },
   {
     id: 6,
     name: "Fotografía",
     img: "assets/images/language.svg",
     description:
-      "Domina el arte de la programación con nuestros cursos especializados.",
+      "Captura los mejores momentos con nuestros guías especializados en tours de fotografía.",
   },
   {
     id: 7,
-    name: "Finanzas",
+    name: "Deportes",
     img: "assets/images/language.svg",
     description:
-      "Domina el arte de la programación con nuestros cursos especializados.",
+      "Participa en actividades deportivas con la guía de nuestros expertos.",
   },
   {
     id: 8,
-    name: "Arte",
+    name: "Arte y arquitectura",
     img: "assets/images/language.svg",
     description:
-      "Domina el arte de la programación con nuestros cursos especializados.",
+      "Descubre el arte y la arquitectura de tu destino con nuestros guías especializados.",
   },
   {
     id: 9,
-    name: "Negocio",
+    name: "Compras",
     img: "assets/images/language.svg",
     description:
-      "Domina el arte de la programación con nuestros cursos especializados.",
+      "Encuentra las mejores tiendas y mercados locales con nuestros guías de compras.",
   },
   {
     id: 10,
-    name: "Salud",
+    name: "Salud y bienestar",
     img: "assets/images/language.svg",
     description:
-      "Domina el arte de la programación con nuestros cursos especializados.",
+      "Relájate y rejuvenece con nuestros tours de salud y bienestar.",
   },
   {
     id: 11,
-    name: "Idioma",
+    name: "Idiomas",
     img: "assets/images/language.svg",
     description:
-      "Domina el arte de la programación con nuestros cursos especializados.",
+      "Mejora tus habilidades lingüísticas con la ayuda de nuestros guías bilingües.",
   },
   {
     id: 12,
-    name: "Cocina",
+    name: "Gastronomía local",
     img: "assets/images/language.svg",
     description:
-      "Domina el arte de la programación con nuestros cursos especializados.",
+      "Prueba la cocina local con la orientación de nuestros expertos en gastronomía.",
   },
   {
     id: 13,
-    name: "Ambiente",
+    name: "Sostenibilidad",
     img: "assets/images/language.svg",
     description:
-      "Domina el arte de la programación con nuestros cursos especializados.",
+      "Descubre iniciativas sostenibles y ecológicas con nuestros guías comprometidos.",
   },
   {
     id: 14,
-    name: "Desarrollo Móvil",
+    name: "Tecnología",
     img: "assets/images/language.svg",
     description:
-      "Domina el arte de la programación con nuestros cursos especializados.",
+      "Explora la innovación tecnológica en tu destino con nuestros guías expertos.",
   },
 ];
+
 export const FETCH_STATUS = {
   LOADING: "loading",
   IDLE: "idle",
