@@ -1,4 +1,4 @@
-# MarketClass
+# TourFinder
 
 ## Init de project
 

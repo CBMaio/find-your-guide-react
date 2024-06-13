@@ -49,7 +49,7 @@ const Adminsidebar = () => {
           className="sidebar-brand d-flex align-items-start justify-content-start"
         >
           <span className="d-inline-block fredoka-font ls-3 fw-600 font-xl logo-text mb-0 text-capitalize lh-1 aside-title">
-            MarketClass
+            TourFinder
           </span>
           <button className="ms-auto mt-2 d-lg-none" id="sidebarClose">
             <i className="ti-close text-white font-sm text-grey-100 "></i>
@@ -57,7 +57,7 @@ const Adminsidebar = () => {
         </Link>
         <li className="nav-item mobile-item">
           <NavLink className="navi-link" to="/">
-            <span>MarketClass</span>
+            <span>TourFinder</span>
           </NavLink>
         </li>
         <li className="nav-item">
