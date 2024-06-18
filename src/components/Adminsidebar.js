@@ -68,14 +68,14 @@ const Adminsidebar = () => {
         </li>
         <li className="nav-item" onClick={toggleCourseOptions}>
           <div className="navi-link">
-            <i className="feather-video mr-2 droupdown-toggle"></i>
-            <span>Cursos</span>
+            <i className="feather-globe mr-2 droupdown-toggle"></i>
+            <span>Destinos</span>
           </div>
           {displayCourseOptions && (
             <ul className="submenu active">
               <li className="nav-item">
                 <NavLink className="navi-link" to="/admin-productlist">
-                  Ver cursos publicados
+                  Ver mis servicios
                 </NavLink>
               </li>
               <li className="nav-item">

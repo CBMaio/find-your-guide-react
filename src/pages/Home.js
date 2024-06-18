@@ -152,7 +152,6 @@ const Home = () => {
                     />
                     <Card.Body className="category-card-body">
                       <Card.Title>{name}</Card.Title>
-                      <Card.Text>{description}</Card.Text>
                     </Card.Body>
                   </Card>
                 ))}

@@ -68,11 +68,11 @@ const AddCourseForm = () => {
               {succeededAdded && (
                 <CustomAlert
                   isSuccess={true}
-                  text="Curso agregado con éxito!"
+                  text="Serivicio agregado con éxito!"
                 />
               )}
               <h4 className="font-xss text-grey-800 mb-4 mt-0 fw-700">
-                Información del curso
+                Información del servicio
               </h4>
               <div className="row">
                 <div className="col-md-6">
