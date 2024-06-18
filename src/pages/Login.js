@@ -45,7 +45,6 @@ const Login = () => {
 
   useEffect(() => {
     if (isAuth) {
-      debugger;
       navigate("/welcome-admin");
       dispatch(getUserData({ user: userInfo.username, type: userInfo.type }));
     }
