@@ -113,14 +113,14 @@ const About = () => {
             <div className="col-lg-12 mt-5 text-center pt-3">
               <a
                 href="/register"
-                className="ml-1 mr-1 rounded-lg bg-light-green text-green font-xss border-size-md border-0 fw-600 open-font p-3 w200 btn"
+                className="ml-1 mr-1 mb-2 rounded-lg bg-light-green text-green font-xss border-size-md border-0 fw-600 open-font p-3 w200 btn"
               >
                 Quiero dar tours
               </a>
 
               <a
                 href="/register"
-                className="ml-1 mr-1 rounded-lg bg-light-green text-green font-xss border-size-md border-0 fw-600 open-font p-3 w200 btn"
+                className="ml-1 mr-1 mb-2 rounded-lg bg-light-green text-green font-xss border-size-md border-0 fw-600 open-font p-3 btn"
               >
                 Quiero contratar un tour
               </a>
@@ -163,9 +163,9 @@ const About = () => {
                 Explora oportunidades asombrosas
               </h4>
               <p className="fw-300 font-xsss lh-28 text-grey-500 mt-0 ml-4 pl-3 w-75 w-xs-90">
-                
-                Aprende y disfruta de los inolvidables destinos que tenemos para vos. En FindYourGuide, te ayudamos a descubrir y
-                aprovechar al maximo tu proxima aventura.
+                Aprende y disfruta de los inolvidables destinos que tenemos para
+                vos. En FindYourGuide, te ayudamos a descubrir y aprovechar al
+                maximo tu proxima aventura.
               </p>
 
               <h4 className="fw-600 font-xs mt-5 mb-2">
@@ -173,7 +173,9 @@ const About = () => {
                 Información confiable y certificada
               </h4>
               <p className="fw-300 font-xsss lh-28 text-grey-500 mt-0 ml-4 pl-3 w-75 w-xs-90">
-              Todos nuestros guías pasan por un riguroso proceso de verificación para garantizar que recibas información precisa y confiable.
+                Todos nuestros guías pasan por un riguroso proceso de
+                verificación para garantizar que recibas información precisa y
+                confiable.
               </p>
 
               <h4 className="fw-600 font-xs mt-4 mb-2">
@@ -181,22 +183,28 @@ const About = () => {
                 Gane trofeos
               </h4>
               <p className="fw-300 font-xsss lh-28 text-grey-500 mt-0 ml-4 pl-3 w-75 w-xs-90">
-              Participa en nuestro sistema de trofeos y recompensas que incentivan tanto a guías
-               como a turistas a mantener altos estándares de calidad.
+                Participa en nuestro sistema de trofeos y recompensas que
+                incentivan tanto a guías como a turistas a mantener altos
+                estándares de calidad.
               </p>
-
             </div>
-
-
           </div>
         </div>
       </div>
       <div className="row justify-content-center">
-      <div className="page-title style1 col-xl-6 col-lg-6 col-md-10 text-center mb-5">   
-      <h2 h2 className="text-grey-900 fw-700 display1-size display2-md-size pb-3 mb-0 d-block">¿Tienes alguna pregunta o necesitas asistencia? ¡Estamos aquí para ayudarte!</h2>
-      <Link to="/contact" className="ml-1 mr-1 rounded-lg bg-light-purple text-purple font-xss border-size-md border-0 fw-600 open-font p-3 w200 btn "> Contáctanos</Link>
-
-      </div>
+        <div className="page-title style1 col-xl-6 col-lg-6 col-md-10 text-center mb-5">
+          <h2 className="text-grey-900 fw-700 display1-size display2-md-size pb-3 mb-0 d-block">
+            ¿Tienes alguna pregunta o necesitas asistencia? ¡Estamos aquí para
+            ayudarte!
+          </h2>
+          <Link
+            to="/contact"
+            className="ml-1 mr-1 rounded-lg bg-light-purple text-purple font-xss border-size-md border-0 fw-600 open-font p-3 w200 btn "
+          >
+            {" "}
+            Contáctanos
+          </Link>
+        </div>
       </div>
 
       <div className="subscribe-wrapper pb-lg--7 pb-5 pt-5 pt-lg--7">
