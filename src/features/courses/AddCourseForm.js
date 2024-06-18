@@ -90,25 +90,8 @@ const AddCourseForm = () => {
                 </div>
                 <div className="col-md-6">
                   <div className="form-group mb30">
-                    <label className="form-label">Categoría</label>
-                    <select
-                      name="category"
-                      required
-                      className="form-control form_control"
-                    >
-                      {categories.map(({ _id: id, title }) => (
-                        <option key={id} value={id}>
-                          {" "}
-                          {title}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="form-group mb30">
                     <label htmlFor="product_sku" className="form-label">
-                      Duración del curso
+                      Duración del servicio
                     </label>
                     <input
                       name="duration"
@@ -118,23 +101,9 @@ const AddCourseForm = () => {
                     />
                   </div>
                 </div>
-                <div className="col-md-6">
-                  <div className="form-group mb30">
-                    <label className="form-label">Frecuencia</label>
-                    <select
-                      name="frequency"
-                      required
-                      className="form-control form_control"
-                    >
-                      <option value="unica">Unica</option>
-                      <option value="semanal">Semanal</option>
-                      <option value="mensual">Mensual</option>
-                    </select>
-                  </div>
-                </div>
                 <div className="col-sm-12">
                   <div className="form-group mb30">
-                    <label className="form-label">Tipo de curso</label>
+                    <label className="form-label">Tipo de servicio</label>
                     <select
                       name="type"
                       required
@@ -142,6 +111,7 @@ const AddCourseForm = () => {
                     >
                       <option value="individual">Individual</option>
                       <option value="grupal">Grupal</option>
+                      <option value="translation">Traducción</option>
                     </select>
                   </div>
                 </div>
@@ -154,7 +124,7 @@ const AddCourseForm = () => {
                       name="description"
                       className="form-control h150"
                       rows="6"
-                      placeholder="Descripción del curso"
+                      placeholder="Descripción del servicio"
                     ></textarea>
                   </div>
                 </div>
@@ -168,7 +138,7 @@ const AddCourseForm = () => {
                       name="requirements"
                       className="form-control h150"
                       rows="6"
-                      placeholder="Requisitos del curso"
+                      placeholder="Requisitos del servicio"
                     ></textarea>
                   </div>
                 </div>

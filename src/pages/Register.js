@@ -75,7 +75,6 @@ const Register = () => {
 
   const registrationAction = async (newData) => {
     const payload = { ...userData, ...newData, profilePhoto: "photo.jpg" };
-    console.log(payload);
     dispatch(registerUser({ user: payload, type: userRol }));
 
     if (success) {
