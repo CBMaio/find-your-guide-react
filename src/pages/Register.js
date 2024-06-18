@@ -6,16 +6,11 @@ import { CustomAlert } from "../components/CustomAlert";
 import { registerUser } from "../features/auth/authActions";
 import { getUserInfo } from "../features/auth/authActions";
 import { API_URL } from "../features/constants";
+import { USER_ROL } from "../utils";
 
 import { isAuthenticated } from "../features/auth/authSlice";
 
 import "../scss/pages/login-register.scss";
-
-const USER_ROL = {
-  UNDEFINED: "undefined",
-  GUIDE: "guide",
-  TOURIST: "tourist",
-};
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -26,7 +21,11 @@ const Register = () => {
   const [userData, setUserData] = useState({});
   const [step, setStep] = useState(0);
   const [existingEmail, setExistingEmail] = useState(false);
-  const [displayCustomAlert, setDisplayCustomAlert] = useState(false);
+  const [displayCustomAlert, setDisplayCustomAlert] = useState({
+    display: false,
+    isSuccess: false,
+    text: "",
+  });
   const [userRol, setUserRol] = useState(USER_ROL.UNDEFINED);
 
   const updateStep = async (e, nextStep) => {
@@ -53,6 +52,7 @@ const Register = () => {
     }
 
     if (nextStep === 2 || userRol === USER_ROL.TOURIST) {
+      delete data.confirmPassword;
       registrationAction(data);
       return;
     }
@@ -75,16 +75,11 @@ const Register = () => {
 
   const registrationAction = async (newData) => {
     const payload = { ...userData, ...newData };
-    // dispatch(registerUser(payload));
-    if (!loading && !error) {
-      setDisplayCustomAlert(true);
-    }
+    dispatch(registerUser({ user: payload, type: userRol }));
 
-    setTimeout(() => {
-      if (!loading && !error) {
-        navigate("/login");
-      }
-    }, 1500);
+    if (success) {
+      handleSuccess();
+    }
   };
 
   const togglePw = (elementId) => {
@@ -108,6 +103,34 @@ const Register = () => {
   const setRol = (rol) => {
     setUserRol(rol);
   };
+
+  const handleSuccess = () => {
+    setDisplayCustomAlert({
+      display: true,
+      isSuccess: true,
+      text: "Registro exitoso! Inicie sesión para continuar",
+    });
+
+    setTimeout(() => {
+      if (success) {
+        navigate("/login");
+      }
+    }, 1500);
+  };
+
+  useEffect(() => {
+    if (error) {
+      setDisplayCustomAlert({
+        display: true,
+        isSuccess: false,
+        text: "Hubo un error con su registro. Por favor inténtelo nuevamente",
+      });
+    }
+
+    if (success) {
+      handleSuccess();
+    }
+  }, [loading, error, success]);
 
   return (
     <Fragment>
@@ -137,10 +160,10 @@ const Register = () => {
                   <br />
                 </h2>
 
-                {displayCustomAlert && (
+                {displayCustomAlert.display && (
                   <CustomAlert
-                    isSuccess={true}
-                    text="Registro exitoso! Inicie sesión para continuar"
+                    isSuccess={displayCustomAlert.isSuccess}
+                    text={displayCustomAlert.text}
                   />
                 )}
                 {userRol === USER_ROL.UNDEFINED && (
@@ -193,18 +216,40 @@ const Register = () => {
                           <div className="form-group icon-input mb-3">
                             <i className="font-sm ti-user text-grey-500 pr-0"></i>
                             <input
-                              required
+                              // required
                               type="text"
-                              name="name"
+                              name="username"
                               className="style2-input pl-5 form-control text-grey-900 font-xsss fw-600"
-                              placeholder="Nombre y apellido"
+                              placeholder="Nombre de usuario"
+                            />
+                          </div>
+
+                          <div className="form-group icon-input mb-3">
+                            <i className="font-sm ti-user text-grey-500 pr-0"></i>
+                            <input
+                              // required
+                              type="text"
+                              name="firstName"
+                              className="style2-input pl-5 form-control text-grey-900 font-xsss fw-600"
+                              placeholder="Nombre"
+                            />
+                          </div>
+
+                          <div className="form-group icon-input mb-3">
+                            <i className="font-sm ti-user text-grey-500 pr-0"></i>
+                            <input
+                              // required
+                              type="text"
+                              name="lastname"
+                              className="style2-input pl-5 form-control text-grey-900 font-xsss fw-600"
+                              placeholder="Apellido"
                             />
                           </div>
 
                           <div className="form-group icon-input mb-3">
                             <i className="font-sm ti-email text-grey-500 pr-0"></i>
                             <input
-                              required
+                              // required
                               type="email"
                               name="email"
                               className="style2-input pl-5 form-control text-grey-900 font-xsss fw-600"
@@ -220,7 +265,7 @@ const Register = () => {
                           <div className="form-group icon-input mb-3">
                             <i className="font-sm ti-id-badge text-grey-500 pr-0"></i>
                             <input
-                              required
+                              // required
                               type="text"
                               name="dni"
                               className="style2-input pl-5 form-control text-grey-900 font-xsss fw-600"
@@ -231,8 +276,19 @@ const Register = () => {
                           <div className="form-group icon-input mb-3">
                             <i className="font-sm feather-phone text-grey-500 pr-0"></i>
                             <input
-                              required
-                              name="number"
+                              // required
+                              name="gender"
+                              type="text"
+                              className="style2-input pl-5 form-control text-grey-900 font-xsss fw-600 number-input"
+                              placeholder="Sexo"
+                            />
+                          </div>
+
+                          <div className="form-group icon-input mb-3">
+                            <i className="font-sm feather-phone text-grey-500 pr-0"></i>
+                            <input
+                              // required
+                              name="phone"
                               type="number"
                               className="style2-input pl-5 form-control text-grey-900 font-xsss fw-600 number-input"
                               placeholder="Tu Número"
@@ -292,7 +348,7 @@ const Register = () => {
                           <div className="form-group icon-input mb-3">
                             <i className="font-sm ti-user text-grey-500 pr-0"></i>
                             <input
-                              required
+                              // required
                               name="license"
                               type="text"
                               className="style2-input pl-5 form-control text-grey-900 font-xsss fw-600"

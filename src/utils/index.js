@@ -1,103 +1,31 @@
 export const categories = [
   {
     id: 1,
-    name: "Tours históricos",
+    name: "Tour individual",
     img: "assets/images/language.svg",
-    description:
-      "Explora la historia de tu destino con nuestros guías expertos en tours históricos.",
+    description: "Explora la historia de tu destino con un guía solo para vos.",
   },
   {
     id: 2,
-    name: "Tours culturales",
+    name: "Tour grupal",
     img: "assets/images/language.svg",
     description:
-      "Descubre la cultura local con nuestros guías especializados en tours culturales.",
+      "Descubre tu destino con un grupo y un guía que los acompañará en todo momento.",
   },
   {
     id: 3,
-    name: "Aventuras al aire libre",
+    name: "Traducciones",
     img: "assets/images/language.svg",
     description:
-      "Vive la aventura con nuestros guías en actividades al aire libre y excursiones.",
-  },
-  {
-    id: 4,
-    name: "Gastronomía",
-    img: "assets/images/language.svg",
-    description:
-      "Disfruta de la gastronomía local con nuestros guías conocedores de la cocina regional.",
-  },
-  {
-    id: 5,
-    name: "Tours de naturaleza",
-    img: "assets/images/language.svg",
-    description:
-      "Conéctate con la naturaleza a través de nuestros tours guiados en entornos naturales.",
-  },
-  {
-    id: 6,
-    name: "Fotografía",
-    img: "assets/images/language.svg",
-    description:
-      "Captura los mejores momentos con nuestros guías especializados en tours de fotografía.",
-  },
-  {
-    id: 7,
-    name: "Deportes",
-    img: "assets/images/language.svg",
-    description:
-      "Participa en actividades deportivas con la guía de nuestros expertos.",
-  },
-  {
-    id: 8,
-    name: "Arte y arquitectura",
-    img: "assets/images/language.svg",
-    description:
-      "Descubre el arte y la arquitectura de tu destino con nuestros guías especializados.",
-  },
-  {
-    id: 9,
-    name: "Compras",
-    img: "assets/images/language.svg",
-    description:
-      "Encuentra las mejores tiendas y mercados locales con nuestros guías de compras.",
-  },
-  {
-    id: 10,
-    name: "Salud y bienestar",
-    img: "assets/images/language.svg",
-    description:
-      "Relájate y rejuvenece con nuestros tours de salud y bienestar.",
-  },
-  {
-    id: 11,
-    name: "Idiomas",
-    img: "assets/images/language.svg",
-    description:
-      "Mejora tus habilidades lingüísticas con la ayuda de nuestros guías bilingües.",
-  },
-  {
-    id: 12,
-    name: "Gastronomía local",
-    img: "assets/images/language.svg",
-    description:
-      "Prueba la cocina local con la orientación de nuestros expertos en gastronomía.",
-  },
-  {
-    id: 13,
-    name: "Sostenibilidad",
-    img: "assets/images/language.svg",
-    description:
-      "Descubre iniciativas sostenibles y ecológicas con nuestros guías comprometidos.",
-  },
-  {
-    id: 14,
-    name: "Tecnología",
-    img: "assets/images/language.svg",
-    description:
-      "Explora la innovación tecnológica en tu destino con nuestros guías expertos.",
+      "No te preocupes por un idioma que no conoces! Un guía capacitado estará con vos para traducirte cada detalle",
   },
 ];
+
+export const USER_ROL = {
+  UNDEFINED: "undefined",
+  GUIDE: "guide",
+  TOURIST: "tourist",
+};
 
 export const FETCH_STATUS = {
   LOADING: "loading",

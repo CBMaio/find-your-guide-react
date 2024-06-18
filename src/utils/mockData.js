@@ -6,5 +6,5 @@ export const userMockData = {
   picture: "../assets/images/author-profile.png",
   name: "Usuario",
   degree: "dev",
-  token: generateRandomToken(),
+  userToken: generateRandomToken(),
 };

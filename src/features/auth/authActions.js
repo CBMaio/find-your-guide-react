@@ -4,27 +4,32 @@ import axiosInstance from "../../services/AxiosInstance";
 import { API_URL } from "../constants";
 import { userMockData } from "../../utils/mockData";
 
-const AUTH_API_COMPLETE = `${API_URL}/users`;
+const AUTH_API_COMPLETE = `${API_URL}/auth`;
 const AUTH_API = "/users";
-const SIGNUP = "signup";
+const SIGNUP = "register";
 const LOGIN = "login";
 const USER = "user";
 
 export const registerUser = createAsyncThunk(
   "auth/signup",
-  async (user, { rejectWithValue }) => {
+  async ({ user, type }, { rejectWithValue }) => {
     try {
       const config = {
         headers: {
           "Content-Type": "application/json",
         },
       };
-      await axios.post(`${AUTH_API_COMPLETE}/${SIGNUP}`, { ...user }, config);
+
+      const response = await axios.post(
+        `${AUTH_API_COMPLETE}/${SIGNUP}/${type}`,
+        { ...user },
+        config
+      );
     } catch (error) {
-      if (error.response && error.response.data.message) {
+      if (error?.response && error?.response?.data?.message) {
         return rejectWithValue(error.response.data.message);
       } else {
-        return rejectWithValue(error.message);
+        return rejectWithValue(error?.message);
       }
     }
   }
@@ -56,21 +61,21 @@ export const getUserData = createAsyncThunk(
 
 export const loginUser = createAsyncThunk(
   "auth/login",
-  async (user, { rejectWithValue }) => {
+  async ({ user, type }, { rejectWithValue }) => {
     try {
-      return { ...userMockData, ...user };
-      // const config = {
-      //   headers: {
-      //     "Content-type": "application/json",
-      //   },
-      // };
-      // const { data } = await axios.post(
-      //   `${AUTH_API_COMPLETE}/${LOGIN}`,
-      //   { ...user },
-      //   config
-      // );
-      // localStorage.setItem("userToken", data.loginUser.token);
-      // return data;
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+      const { data } = await axios.post(
+        `${AUTH_API_COMPLETE}/${LOGIN}/${type}`,
+        { ...user },
+        config
+      );
+      const dataTest = { ...userMockData, ...user };
+      localStorage.setItem("userToken", dataTest.username);
+      return dataTest;
     } catch (error) {
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
