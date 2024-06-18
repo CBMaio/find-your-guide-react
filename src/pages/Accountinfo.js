@@ -13,6 +13,8 @@ const Accountinfo = () => {
   const userInfo = useSelector(selectUserInfo) || {};
   const { loading } = useSelector((state) => state.auth);
   const [selectedImage, setSelectedImage] = useState(null);
+  const userImage = userInfo.picture || "../assets/images/user.png";
+  const fullName = `${userInfo.firsName || ""} ${userInfo.lastName || ""}`;
 
   const updateAccount = (e) => {
     e.preventDefault();
@@ -57,9 +59,9 @@ const Accountinfo = () => {
                   <div className="row justify-content-center">
                     <div className="col-lg-4 text-center">
                       <figure className="avatar ml-auto mr-auto mb-0 mt-2 w100">
-                        {userInfo.picture && (
+                        {userImage && (
                           <img
-                            src={selectedImage || userInfo.picture}
+                            src={selectedImage || userImage}
                             id="imageProfile"
                             alt="avater"
                             className="shadow-sm rounded-lg w-100 account-user-img"
@@ -83,10 +85,10 @@ const Accountinfo = () => {
                       )}
 
                       <h2 className="fw-700 font-sm text-grey-900 mt-3">
-                        {userInfo.name}{" "}
+                        {fullName}
                       </h2>
                       <h4 className="text-grey-500 fw-500 mb-3 font-xsss mb-4">
-                        {userInfo.degree}
+                        Peril: Turista
                       </h4>
                     </div>
                   </div>
@@ -105,7 +107,7 @@ const Accountinfo = () => {
                             name="name"
                             type="text"
                             className="form-control"
-                            defaultValue={userInfo.name}
+                            defaultValue={fullName}
                           />
                         </div>
                       </div>
@@ -142,7 +144,7 @@ const Accountinfo = () => {
                             name="number"
                             type="text"
                             className="form-control"
-                            defaultValue={userInfo.number}
+                            defaultValue={userInfo.phone}
                           />
                         </div>
                       </div>
@@ -155,13 +157,13 @@ const Accountinfo = () => {
                             htmlFor="qualifications"
                             className="mont-font fw-600 font-xsss"
                           >
-                            Título
+                            Sexo
                           </label>
                           <input
                             name="degree"
                             type="text"
                             className="form-control"
-                            defaultValue={userInfo.degree}
+                            defaultValue={userInfo.gender}
                           />
                         </div>
                       </div>
@@ -169,13 +171,13 @@ const Accountinfo = () => {
                       <div className="col-lg-12 mb-3">
                         <div className="form-group">
                           <label className="mont-font fw-600 font-xsss">
-                            Experiencia profesional
+                            DNI
                           </label>
                           <input
                             name="experience"
                             type="text"
                             className="form-control"
-                            defaultValue={userInfo.experience}
+                            defaultValue={userInfo.dni}
                           />
                         </div>
                       </div>

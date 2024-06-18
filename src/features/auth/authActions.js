@@ -2,9 +2,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import axiosInstance from "../../services/AxiosInstance";
 import { API_URL } from "../constants";
-import { userMockData } from "../../utils/mockData";
 
 const AUTH_API_COMPLETE = `${API_URL}/auth`;
+const GET_ALL_USERS = `api/v1/user`;
 const AUTH_API = "/users";
 const SIGNUP = "register";
 const LOGIN = "login";
@@ -37,18 +37,21 @@ export const registerUser = createAsyncThunk(
 
 export const getUserData = createAsyncThunk(
   "auth/user",
-  async ({ token }, { rejectWithValue }) => {
+  async ({ user, type }, { rejectWithValue }) => {
     try {
       const getToken = localStorage.getItem("userToken");
-      if (!token && !getToken) return;
-      const response = await axiosInstance.get(`${AUTH_API}/${USER}`);
+      if (!getToken) return;
+      const response = await axiosInstance.get(`${GET_ALL_USERS}/${type}`);
+      const currentUser = response?.data?.find(
+        ({ username }) => username === user
+      );
 
       if (response.status === 200) {
-        const data = JSON.stringify(response?.data?.data);
+        const data = JSON.stringify(currentUser);
         localStorage.setItem("userData", data);
       }
 
-      return response.data;
+      return currentUser;
     } catch (error) {
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
@@ -68,14 +71,15 @@ export const loginUser = createAsyncThunk(
           "Content-type": "application/json",
         },
       };
-      const { data } = await axios.post(
+      const response = await axios.post(
         `${AUTH_API_COMPLETE}/${LOGIN}/${type}`,
         { ...user },
         config
       );
-      const dataTest = { ...userMockData, ...user };
-      localStorage.setItem("userToken", dataTest.username);
-      return dataTest;
+
+      const [, token] = response?.headers?.authorization.split("Bearer ");
+      localStorage.setItem("userToken", token);
+      return { username: user.username, type };
     } catch (error) {
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);

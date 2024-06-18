@@ -74,7 +74,8 @@ const Register = () => {
   };
 
   const registrationAction = async (newData) => {
-    const payload = { ...userData, ...newData };
+    const payload = { ...userData, ...newData, profilePhoto: "photo.jpg" };
+    console.log(payload);
     dispatch(registerUser({ user: payload, type: userRol }));
 
     if (success) {
@@ -212,7 +213,10 @@ const Register = () => {
                             {userRol === USER_ROL.GUIDE ? "turista" : "guía"}
                           </span>
                         </h6>
-                        <form onSubmit={(e) => updateStep(e, 1)}>
+                        <form
+                          onSubmit={(e) => updateStep(e, 1)}
+                          className="register-form"
+                        >
                           <div className="form-group icon-input mb-3">
                             <i className="font-sm ti-user text-grey-500 pr-0"></i>
                             <input
@@ -240,7 +244,7 @@ const Register = () => {
                             <input
                               // required
                               type="text"
-                              name="lastname"
+                              name="lastName"
                               className="style2-input pl-5 form-control text-grey-900 font-xsss fw-600"
                               placeholder="Apellido"
                             />

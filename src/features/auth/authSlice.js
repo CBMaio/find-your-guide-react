@@ -71,7 +71,7 @@ export const authSlice = createSlice({
       })
       //user data
       .addCase(getUserData.fulfilled, (state, { payload }) => {
-        state.userInfo = payload.data;
+        state.userInfo = payload;
       })
       .addCase(updateUser.fulfilled, (state, { payload }) => {
         const user = payload[1];

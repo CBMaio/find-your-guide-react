@@ -9,8 +9,10 @@ import "../scss/pages/welcome-admin.scss";
 
 const WelcomeAdmin = () => {
   const user = useSelector(selectUserInfo);
-
-  if (!user) return;
+  if (!user) {
+    localStorage.removeItem("userToken");
+    return;
+  }
   return (
     <Fragment>
       <div id="wrapper">
@@ -23,7 +25,7 @@ const WelcomeAdmin = () => {
             <main className="main-section container px-3 py-4">
               <h1 className="col-12 display4-xs-size">
                 Bienvenido/a,
-                <br /> {user?.name || "Usuario"}!
+                <br /> {user?.firsName || "Usuario"}!
               </h1>
               <div className="row">
                 <div className="illustration-container">

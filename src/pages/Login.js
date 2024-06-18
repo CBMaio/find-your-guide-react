@@ -45,8 +45,9 @@ const Login = () => {
 
   useEffect(() => {
     if (isAuth) {
+      debugger;
       navigate("/welcome-admin");
-      dispatch(getUserData(userInfo.loginUser));
+      dispatch(getUserData({ user: userInfo.username, type: userInfo.type }));
     }
 
     if (error) {
@@ -56,7 +57,7 @@ const Login = () => {
         text: "Hubo un error. Por favor inténtelo nuevamente",
       });
     }
-  }, [error, userInfo]);
+  }, [error, userInfo, isAuth]);
 
   return (
     <Fragment>
