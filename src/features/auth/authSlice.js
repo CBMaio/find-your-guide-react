@@ -46,7 +46,6 @@ export const authSlice = createSlice({
         state.error = null;
       })
       .addCase(loginUser.fulfilled, (state, { payload }) => {
-        debugger;
         state.loading = false;
         state.userToken = payload.userToken;
         state.isAuthenticated = true;
@@ -64,7 +63,6 @@ export const authSlice = createSlice({
       })
       .addCase(registerUser.fulfilled, (state) => {
         state.loading = false;
-        debugger;
         state.success = true;
       })
       .addCase(registerUser.rejected, (state, { payload }) => {
