@@ -1,13 +1,16 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { logout } from "../features/auth/authSlice";
+import { logout, isGuide, isTourist } from "../features/auth/authSlice";
 
 import "../scss/components/admin-sidebar.scss";
 
 const Adminsidebar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isGuideUser = useSelector(isGuide);
+  const isTouristUser = useSelector(isTourist);
 
   const [displayCourseOptions, setDisplayCouseOptions] = useState(false);
   const [isOpenNavbar, setIsOpenNavbar] = useState(false);
@@ -71,7 +74,7 @@ const Adminsidebar = () => {
             <i className="feather-globe mr-2 droupdown-toggle"></i>
             <span>Destinos</span>
           </div>
-          {displayCourseOptions && (
+          {displayCourseOptions && isGuideUser && (
             <ul className="submenu active">
               <li className="nav-item">
                 <NavLink className="navi-link" to="/admin-productlist">
@@ -85,13 +88,25 @@ const Adminsidebar = () => {
               </li>
             </ul>
           )}
+          {displayCourseOptions && isTouristUser && (
+            <ul className="submenu active">
+              <li className="nav-item">
+                <NavLink className="navi-link" to="/admin-productlist">
+                  Ver mis reservas
+                </NavLink>
+              </li>
+            </ul>
+          )}
         </li>
-        <li className="nav-item">
-          <Link to="/admin-draft-list" className="navi-link">
-            <i className="feather-slack mr-2"></i>
-            <span>Sin publicar</span>
-          </Link>
-        </li>
+        {isGuideUser && (
+          <li className="nav-item">
+            <Link to="/admin-draft-list" className="navi-link">
+              <i className="feather-slack mr-2"></i>
+              <span>Sin publicar</span>
+            </Link>
+          </li>
+        )}
+
         <li className="nav-item">
           <NavLink className="navi-link" to="/admin-review">
             <i className="feather-message-circle mr-2"></i>

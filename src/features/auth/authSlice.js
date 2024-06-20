@@ -71,7 +71,7 @@ export const authSlice = createSlice({
       })
       //user data
       .addCase(getUserData.fulfilled, (state, { payload }) => {
-        state.userInfo = payload;
+        state.userInfo = { ...state.userInfo, ...payload };
       })
       .addCase(updateUser.fulfilled, (state, { payload }) => {
         const user = payload[1];
@@ -90,3 +90,5 @@ export default authSlice.reducer;
 export const { logout } = authSlice.actions;
 export const isAuthenticated = (state) => state.auth.isAuthenticated;
 export const selectUserInfo = (state) => state.auth.userInfo;
+export const isGuide = (state) => state.auth.userInfo.type === "guide";
+export const isTourist = (state) => state.auth.userInfo.type === "tourist";

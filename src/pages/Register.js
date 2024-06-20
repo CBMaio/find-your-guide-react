@@ -277,7 +277,7 @@ const Register = () => {
                           </div>
 
                           <div className="form-group icon-input mb-3">
-                            <i className="font-sm feather-phone text-grey-500 pr-0"></i>
+                            <i className="font-sm ti-user text-grey-500 pr-0"></i>
                             <input
                               // required
                               name="gender"
@@ -352,10 +352,36 @@ const Register = () => {
                             <i className="font-sm ti-user text-grey-500 pr-0"></i>
                             <input
                               // required
-                              name="license"
+                              name="credentialPhoto"
                               type="text"
                               className="style2-input pl-5 form-control text-grey-900 font-xsss fw-600"
                               placeholder="Acreditación de guía"
+                            />
+                          </div>
+                          <div className="form-group icon-input mb-3">
+                            <i className="font-sm ti-user text-grey-500 pr-0"></i>
+                            <select
+                              // required
+                              name="language"
+                              type="text"
+                              className="style2-input pl-5 form-control text-grey-900 font-xsss fw-600"
+                              placeholder="Lenguaje"
+                            >
+                              <option value="ES">Español</option>
+                              <option value="EN">Inglés</option>
+                              <option value="RU">Ruso</option>
+                              <option value="GER">Aleman</option>
+                              <option value="POR">Portugués</option>
+                            </select>
+                          </div>
+                          <div className="form-group icon-input mb-3">
+                            <i className="font-sm ti-user text-grey-500 pr-0"></i>
+                            <input
+                              // required
+                              name="cities"
+                              type="text"
+                              className="style2-input pl-5 form-control text-grey-900 font-xsss fw-600"
+                              placeholder="Ciudades"
                             />
                           </div>
 
