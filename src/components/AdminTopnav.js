@@ -9,7 +9,6 @@ const AdminTopnav = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userInfo = useSelector(selectUserInfo);
-  console.log(userInfo);
 
   const closeSession = () => {
     dispatch(logout());

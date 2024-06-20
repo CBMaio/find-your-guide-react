@@ -1,12 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { FETCH_STATUS } from "../../utils";
 import axios from "axios";
-import { API_URL } from "../constants";
 import axiosInstance from "../../services/AxiosInstance";
 import { da } from "date-fns/locale";
 
 const { LOADING, SUCCEEDED, FAILED, IDLE } = FETCH_STATUS;
-const COMMENT_URL = `${API_URL}/comment`;
+const COMMENT_URL = `${process.env.REACT_APP_JAVA_BACK_URL}/comment`;
 
 const initialState = {
   data: [],

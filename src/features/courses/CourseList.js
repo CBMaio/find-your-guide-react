@@ -9,7 +9,6 @@ import {
 import { fetchAuthors } from "../authors/authorsSlice";
 import CourseCard from "../../components/CourseCard";
 import { FETCH_STATUS } from "../../utils";
-import { API_URL } from "../constants";
 
 const CourseList = ({ limit = false, queryFilter, filterSelected }) => {
   const { LOADING, SUCCEEDED, IDLE } = FETCH_STATUS;
@@ -54,7 +53,7 @@ const CourseList = ({ limit = false, queryFilter, filterSelected }) => {
     }
     const { category = "", frequency = "", ranking = "", type = "" } = filters;
     const params = `type=${type}&frequency=${frequency}&category=${category}&avg_rating=${ranking}`;
-    const response = await axios.get(`${API_URL}/course?${params}`);
+    const response = await axios.get(`${process.env.REACT_APP_JAVA_BACK_URL}/course?${params}`);
 
     if (response.status === 200) {
       return response.data.data;

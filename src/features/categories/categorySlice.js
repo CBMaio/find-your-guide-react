@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { FETCH_STATUS } from "../../utils";
-import { API_URL } from "../constants";
 import axiosInstance from "../../services/AxiosInstance";
 
 const { IDLE, LOADING, SUCCEEDED } = FETCH_STATUS;

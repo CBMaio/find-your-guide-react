@@ -5,7 +5,6 @@ import axios from "axios";
 import { CustomAlert } from "../components/CustomAlert";
 import { registerUser } from "../features/auth/authActions";
 import { getUserInfo } from "../features/auth/authActions";
-import { API_URL } from "../features/constants";
 import { USER_ROL } from "../utils";
 
 import { isAuthenticated } from "../features/auth/authSlice";
@@ -88,7 +87,7 @@ const Register = () => {
   };
 
   const isInvalidEmail = async (email) => {
-    const AUTH_API_COMPLETE = `${API_URL}/users`;
+    const AUTH_API_COMPLETE = `${process.env.REACT_APP_JAVA_BACK_URL}/users`;
     try {
       const response = await axios.get(
         `${AUTH_API_COMPLETE}/verify?email=${email}`

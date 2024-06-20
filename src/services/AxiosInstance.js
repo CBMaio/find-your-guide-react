@@ -1,8 +1,7 @@
 import axios from "axios";
-import { API_URL } from "../features/constants";
 
 const axiosInstance = axios.create({
-  baseURL: API_URL,
+  baseURL: process.env.REACT_APP_JAVA_BACK_URL || "",
 });
 
 axiosInstance.interceptors.request.use(

@@ -1,13 +1,12 @@
 import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
 import { FETCH_STATUS } from "../../utils";
 import axios from "axios";
-import { API_URL } from "../constants";
 import axiosInstance from "../../services/AxiosInstance";
 
 const { LOADING, IDLE, SUCCEEDED } = FETCH_STATUS;
 
 const BOOKING_URL = "booking";
-const BOOKING_URL_COMPLETE = `${API_URL}/${BOOKING_URL}`;
+const BOOKING_URL_COMPLETE = `${process.env.REACT_APP_JAVA_BACK_URL}/${BOOKING_URL}`;
 
 const initialState = {
   data: [],

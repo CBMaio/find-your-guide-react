@@ -32,6 +32,7 @@ import WelcomeAdmin from "./pages/WelcomeAdmin";
 import Reset from "./pages/Reset";
 
 import ProtectedRoute from "./pages/ProtectedRoute";
+import Chat from "./pages/Chat";
 
 class Root extends Component {
   render() {
@@ -39,136 +40,82 @@ class Root extends Component {
       <Provider store={store}>
         <BrowserRouter basename={"/"}>
           <Routes>
-            <Route
-              exact
-              path={`${process.env.PUBLIC_URL}/`}
-              element={<Home />}
-            />
+            <Route exact path={`/`} element={<Home />} />
+
+            <Route exact path={`/login`} element={<Login />} />
+
+            <Route exact path={`/register`} element={<Register />} />
+
+            <Route exact path={`/forgot`} element={<Forgot />} />
+
+            <Route exact path={`/notfound`} element={<Notfound />} />
+
+            <Route exact path={`/contact`} element={<Contact />} />
+
+            <Route exact path={`/about`} element={<About />} />
+
+            <Route exact path={`/courses-grid`} element={<Coursesgridone />} />
+
+            <Route exact path={`/chat`} element={<Chat />} />
 
             <Route
               exact
-              path={`${process.env.PUBLIC_URL}/login`}
-              element={<Login />}
-            />
-
-            <Route
-              exact
-              path={`${process.env.PUBLIC_URL}/register`}
-              element={<Register />}
-            />
-
-            <Route
-              exact
-              path={`${process.env.PUBLIC_URL}/forgot`}
-              element={<Forgot />}
-            />
-
-            <Route
-              exact
-              path={`${process.env.PUBLIC_URL}/notfound`}
-              element={<Notfound />}
-            />
-
-            <Route
-              exact
-              path={`${process.env.PUBLIC_URL}/contact`}
-              element={<Contact />}
-            />
-
-            <Route
-              exact
-              path={`${process.env.PUBLIC_URL}/about`}
-              element={<About />}
-            />
-
-            <Route
-              exact
-              path={`${process.env.PUBLIC_URL}/courses-grid`}
-              element={<Coursesgridone />}
-            />
-
-            <Route
-              exact
-              path={`${process.env.PUBLIC_URL}/author-profile/:authorId`}
+              path={`/author-profile/:authorId`}
               element={<AuthorProfile />}
             />
 
             <Route
               exact
-              path={`${process.env.PUBLIC_URL}/course-detail/:courseId`}
+              path={`/course-detail/:courseId`}
               element={<Coursedetails />}
             />
 
             <Route
               exact
-              path={`${process.env.PUBLIC_URL}/course-registration/:courseId`}
+              path={`/course-registration/:courseId`}
               element={<CourseRegistration />}
             />
 
-            <Route
-              exact
-              path={`${process.env.PUBLIC_URL}/reset`}
-              element={<Reset />}
-            />
+            <Route exact path={`/reset`} element={<Reset />} />
 
             {/* privates routes */}
             <Route element={<ProtectedRoute />}>
+              <Route exact path={`/admin`} element={<WelcomeAdmin />} />
               <Route
                 exact
-                path={`${process.env.PUBLIC_URL}/admin`}
-                element={<WelcomeAdmin />}
-              />
-              <Route
-                exact
-                path={`${process.env.PUBLIC_URL}/admin-productlist`}
+                path={`/admin-productlist`}
                 element={<Adminproductlist />}
               />
 
-              <Route
-                exact
-                path={`${process.env.PUBLIC_URL}/add-course`}
-                element={<AddCoursePage />}
-              />
+              <Route exact path={`/add-course`} element={<AddCoursePage />} />
 
               <Route
                 exact
-                path={`${process.env.PUBLIC_URL}/edit-course/:courseId`}
+                path={`/edit-course/:courseId`}
                 element={<EditCoursePage />}
               />
 
               <Route
                 exact
-                path={`${process.env.PUBLIC_URL}/admin-draft-list`}
+                path={`/admin-draft-list`}
                 element={<AdminDraftList />}
               />
 
-              <Route
-                exact
-                path={`${process.env.PUBLIC_URL}/admin-review`}
-                element={<Adminreview />}
-              />
+              <Route exact path={`/admin-review`} element={<Adminreview />} />
 
               <Route
                 exact
-                path={`${process.env.PUBLIC_URL}/account-information`}
+                path={`/account-information`}
                 element={<Accountinfo />}
               />
 
-              <Route
-                exact
-                path={`${process.env.PUBLIC_URL}/password`}
-                element={<Password />}
-              />
+              <Route exact path={`/password`} element={<Password />} />
+
+              <Route exact path={`/welcome-admin`} element={<WelcomeAdmin />} />
 
               <Route
                 exact
-                path={`${process.env.PUBLIC_URL}/welcome-admin`}
-                element={<WelcomeAdmin />}
-              />
-
-              <Route
-                exact
-                path={`${process.env.PUBLIC_URL}/admin-requests`}
+                path={`/admin-requests`}
                 element={<AdminRequests />}
               />
             </Route>

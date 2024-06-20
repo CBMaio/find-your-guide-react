@@ -1,9 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import axiosInstance from "../../services/AxiosInstance";
-import { API_URL } from "../constants";
 
-const AUTH_API_COMPLETE = `${API_URL}/auth`;
+
+const AUTH_API_COMPLETE = `${process.env.REACT_APP_JAVA_BACK_URL}/auth`;
 const GET_ALL_USERS = `api/v1/user`;
 const AUTH_API = "/users";
 const SIGNUP = "register";

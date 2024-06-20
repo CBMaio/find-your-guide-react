@@ -5,12 +5,11 @@ import {
 } from "@reduxjs/toolkit";
 import axios from "axios";
 import { FETCH_STATUS } from "../../utils";
-import { API_URL } from "../constants";
 import axiosInstance from "../../services/AxiosInstance";
 
 const { LOADING, IDLE, SUCCEEDED, FAILED } = FETCH_STATUS;
 
-const COURSE_BASE_URL = `${API_URL}/course`;
+const COURSE_BASE_URL = `${process.env.REACT_APP_JAVA_BACK_URL}/course`;
 const BASE_URL = "course";
 
 const initialState = {

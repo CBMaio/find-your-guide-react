@@ -104,6 +104,14 @@ const Adminsidebar = () => {
             <span>Contrataciones</span>
           </NavLink>
         </li>
+        <div className="sidebar-heading">Contacte a su guia</div>
+        <li className="nav-item">
+          <NavLink className="navi-link" to="/Chat">
+            <i className="feather-message-square mr-2"></i>
+            <span>Chat</span>
+          </NavLink>
+        </li>
+
         <div className="sidebar-heading">Mi cuenta</div>
         <li className="nav-item">
           <NavLink className="navi-link" to="/account-information">

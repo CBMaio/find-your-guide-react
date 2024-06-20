@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { FETCH_STATUS } from "../../utils";
-import { API_URL } from "../constants";
 
 const { LOADING, IDLE, SUCCEEDED, FAILED } = FETCH_STATUS;
 
@@ -15,7 +14,7 @@ export const fetchAuthors = createAsyncThunk(
   "authors/fetchAuthors",
   async () => {
     try {
-      const response = await axios.get(`${API_URL}/author`);
+      const response = await axios.get(`${process.env.REACT_APP_JAVA_BACK_URL}/author`);
       return response.data;
     } catch (error) {
       console.error(error);
