@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectUserInfo } from "../features/auth/authSlice";
+import { isGuide, selectUserInfo } from "../features/auth/authSlice";
 import { updateUser } from "../features/auth/authActions";
 import Adminsidebar from "../components/Adminsidebar";
 import AdminTopnav from "../components/AdminTopnav";
@@ -11,6 +11,7 @@ import "../scss/pages/account-info.scss";
 const Accountinfo = () => {
   const dispatch = useDispatch();
   const userInfo = useSelector(selectUserInfo) || {};
+  const isUserGuide = useSelector(isGuide);
   const { loading } = useSelector((state) => state.auth);
   const [selectedImage, setSelectedImage] = useState(null);
   const userImage = userInfo.picture || "../assets/images/user.png";
@@ -88,7 +89,7 @@ const Accountinfo = () => {
                         {fullName}
                       </h2>
                       <h4 className="text-grey-500 fw-500 mb-3 font-xsss mb-4">
-                        Peril: Turista
+                        Perfil: {isUserGuide ? "Guía" : "Turista"}
                       </h4>
                     </div>
                   </div>

@@ -111,6 +111,12 @@ const Login = () => {
                         Soy turista
                       </button>
                     </div>
+                    <h6 className="text-grey-500 font-xssss fw-500 mt-0 mb-0 lh-32">
+                      No tienes una cuenta?{" "}
+                      <a href="/register" className="link fw-700 ml-1">
+                        Registrarme
+                      </a>
+                    </h6>
                   </>
                 ) : (
                   <form onSubmit={validateUser}>
@@ -162,12 +168,6 @@ const Login = () => {
                           {loading ? "Cargando" : "Iniciar sesión"}
                         </button>
                       </div>
-                      <h6 className="text-grey-500 font-xssss fw-500 mt-0 mb-0 lh-32">
-                        No tienes una cuenta?{" "}
-                        <a href="/register" className="link fw-700 ml-1">
-                          Registrarme
-                        </a>
-                      </h6>
                     </div>
                   </form>
                 )}

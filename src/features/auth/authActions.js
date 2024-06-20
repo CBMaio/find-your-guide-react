@@ -47,7 +47,7 @@ export const getUserData = createAsyncThunk(
       );
 
       if (response.status === 200) {
-        const data = JSON.stringify(currentUser);
+        const data = JSON.stringify({ ...currentUser, type });
         localStorage.setItem("userData", data);
       }
 
