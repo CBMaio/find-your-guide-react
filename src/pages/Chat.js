@@ -51,7 +51,7 @@ function Chat() {
             body: JSON.stringify({
               serviceUuid: "service.serviceUuid",
               from: userInfo.email,
-              to: "service.guide.email",
+              to: room || "service.guide.email",
               fromMe: true,
               body: input,
             }),
