@@ -2,9 +2,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import axiosInstance from "../../services/AxiosInstance";
 
-
 const AUTH_API_COMPLETE = `${process.env.REACT_APP_JAVA_BACK_URL}/auth`;
-const GET_ALL_USERS = `api/v1/user`;
+const USER_PATH = `api/v1/user`;
 const AUTH_API = "/users";
 const SIGNUP = "register";
 const LOGIN = "login";
@@ -41,7 +40,7 @@ export const getUserData = createAsyncThunk(
     try {
       const getToken = localStorage.getItem("userToken");
       if (!getToken) return;
-      const response = await axiosInstance.get(`${GET_ALL_USERS}/${type}`);
+      const response = await axiosInstance.get(`${USER_PATH}/${type}`);
       const currentUser = response?.data?.find(
         ({ username }) => username === user
       );
@@ -90,23 +89,17 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-export const updateUser = createAsyncThunk("auth/update", async (user) => {
-  try {
-    const { data } = await axiosInstance.put(`${AUTH_API}/update`, user);
-    const { data: responseUser } = await axiosInstance.get(
-      `${AUTH_API}/${USER}`
-    );
-
-    if (responseUser.status === 200) {
-      const dataJSON = JSON.stringify(responseUser?.data);
-      localStorage.setItem("userData", dataJSON);
+export const updateUser = createAsyncThunk(
+  "auth/update",
+  async ({ user, type }) => {
+    try {
+      const response = await axiosInstance.patch(`${USER_PATH}/${type}`, user);
+      return response;
+    } catch (error) {
+      console.error(error);
     }
-
-    return [data, responseUser.data];
-  } catch (error) {
-    console.error(error);
   }
-});
+);
 
 export const sendEmailForReset = createAsyncThunk(
   "auth/reset",

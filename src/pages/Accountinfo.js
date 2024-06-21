@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { isGuide, selectUserInfo } from "../features/auth/authSlice";
 import { updateUser } from "../features/auth/authActions";
+import { CustomAlert } from "../components/CustomAlert";
 import Adminsidebar from "../components/Adminsidebar";
 import AdminTopnav from "../components/AdminTopnav";
 import { convertBase64 } from "../utils";
@@ -12,33 +13,87 @@ const Accountinfo = () => {
   const dispatch = useDispatch();
   const userInfo = useSelector(selectUserInfo) || {};
   const isUserGuide = useSelector(isGuide);
-  const { loading } = useSelector((state) => state.auth);
+  const { loading, error, success } = useSelector((state) => state.auth);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [credentialImage, setCredentialImage] = useState(null);
+  const [displayCustomAlert, setDisplayCustomAlert] = useState({
+    display: false,
+    isSuccess: false,
+    text: "",
+  });
   const userImage = userInfo.picture || "../assets/images/user.png";
-  const fullName = `${userInfo.firsName || ""} ${userInfo.lastName || ""}`;
+  const defaultImage = "../assets/images/user.png";
 
   const updateAccount = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const formattedData = Object.fromEntries(formData.entries());
-    let finalData = formattedData;
+    let finalData = {
+      ...formattedData,
+      username: userInfo.username,
+      email: userInfo.email,
+    };
 
-    if (selectedImage) {
-      finalData = { ...formattedData, picture: selectedImage };
+    if (credentialImage) {
+      finalData = {
+        ...finalData,
+        credentialPhoto: "credentialImage",
+      };
     }
 
-    dispatch(updateUser(finalData));
+    dispatch(updateUser({ user: finalData, type: userInfo.type }));
   };
 
   const handleFile = async (event) => {
     const file = event.target.files[0];
     const base64 = await convertBase64(file);
+    if (event.target.name === "credentialPhoto") {
+      setCredentialImage(base64);
+      return;
+    }
+
     setSelectedImage(base64);
   };
 
   const deleteImg = () => {
     setSelectedImage(null);
   };
+
+  const handleSuccess = () => {
+    setDisplayCustomAlert({
+      display: true,
+      isSuccess: true,
+      text: "Datos actualizados! Vuelva a iniciar sesión para ver sus cambios",
+    });
+
+    setTimeout(() => {
+      setDisplayCustomAlert({
+        display: false,
+      });
+    }, 2000);
+  };
+
+  useEffect(() => {
+    setDisplayCustomAlert({ display: false });
+
+    if (error) {
+      setDisplayCustomAlert({
+        display: true,
+        isSuccess: false,
+        text: "Hubo un error actualizando sus datos. Por favor inténtelo nuevamente",
+      });
+
+      setTimeout(() => {
+        setDisplayCustomAlert({
+          display: false,
+        });
+      }, 2000);
+    }
+
+    if (success) {
+      handleSuccess();
+    }
+  }, [loading, error, success]);
 
   return (
     <Fragment>
@@ -48,6 +103,13 @@ const Accountinfo = () => {
         <div id="content-wrapper" className="d-flex flex-column">
           <div id="content">
             <AdminTopnav />
+
+            {displayCustomAlert.display && (
+              <CustomAlert
+                isSuccess={displayCustomAlert.isSuccess}
+                text={displayCustomAlert.text}
+              />
+            )}
 
             <main className="main-section container px-3 py-4">
               <div className="card col-md-8 w-100 border-0 bg-white shadow-xs p-0 mb-4">
@@ -86,7 +148,7 @@ const Accountinfo = () => {
                       )}
 
                       <h2 className="fw-700 font-sm text-grey-900 mt-3">
-                        {fullName}
+                        {userInfo.username}
                       </h2>
                       <h4 className="text-grey-500 fw-500 mb-3 font-xsss mb-4">
                         Perfil: {isUserGuide ? "Guía" : "Turista"}
@@ -96,19 +158,36 @@ const Accountinfo = () => {
 
                   <form onSubmit={updateAccount}>
                     <div className="row">
-                      <div className="col-lg-12 mb-3">
+                      <div className="col-lg-6 col-12 mb-3">
                         <div className="form-group">
                           <label
                             htmlFor="name"
                             className="mont-font fw-600 font-xsss"
                           >
-                            Nombre Completo
+                            Nombre
                           </label>
                           <input
-                            name="name"
+                            name="firstName"
                             type="text"
                             className="form-control"
-                            defaultValue={fullName}
+                            defaultValue={userInfo.firsName}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="col-lg-6 col-12 mb-3">
+                        <div className="form-group">
+                          <label
+                            htmlFor="name"
+                            className="mont-font fw-600 font-xsss"
+                          >
+                            Apellido
+                          </label>
+                          <input
+                            name="lastName"
+                            type="text"
+                            className="form-control"
+                            defaultValue={userInfo.lastName}
                           />
                         </div>
                       </div>
@@ -142,7 +221,7 @@ const Accountinfo = () => {
                             Teléfono
                           </label>
                           <input
-                            name="number"
+                            name="phone"
                             type="text"
                             className="form-control"
                             defaultValue={userInfo.phone}
@@ -161,7 +240,7 @@ const Accountinfo = () => {
                             Sexo
                           </label>
                           <input
-                            name="degree"
+                            name="gender"
                             type="text"
                             className="form-control"
                             defaultValue={userInfo.gender}
@@ -175,13 +254,73 @@ const Accountinfo = () => {
                             DNI
                           </label>
                           <input
-                            name="experience"
+                            name="dni"
                             type="text"
                             className="form-control"
                             defaultValue={userInfo.dni}
                           />
                         </div>
                       </div>
+                      {isUserGuide && (
+                        <>
+                          <div className="col-lg-6 mb-3">
+                            <div className="form-group">
+                              <label className="mont-font fw-600 font-xsss">
+                                Ciudad
+                              </label>
+                              <input
+                                name="cities"
+                                type="text"
+                                className="form-control"
+                                defaultValue={userInfo.dni}
+                              />
+                            </div>
+                          </div>
+
+                          <div className="col-lg-6 mb-3">
+                            <div className="form-group">
+                              <label className="mont-font fw-600 font-xsss">
+                                Lenguaje
+                              </label>
+                              <select
+                                name="language"
+                                type="text"
+                                className="style2-input form-control font-xsss fw-600"
+                                placeholder="Lenguaje"
+                              >
+                                <option value="ES">Español</option>
+                                <option value="EN">Inglés</option>
+                                <option value="RU">Ruso</option>
+                                <option value="GER">Aleman</option>
+                                <option value="POR">Portugués</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <div className="col-lg-6 mb-3">
+                            <div className="form-group">
+                              <label className="mont-font fw-600 font-xsss">
+                                Foto de credencial
+                              </label>
+                              <figure className="avatar ml-auto mr-auto mb-0 mt-2">
+                                <img
+                                  src={credentialImage || defaultImage}
+                                  id="imageProfile"
+                                  alt="avater"
+                                  className="shadow-sm rounded-lg account-user-img"
+                                />
+
+                                <input
+                                  className="account-input-file"
+                                  type="file"
+                                  name="credentialPhoto"
+                                  onChange={(event) => handleFile(event)}
+                                />
+                              </figure>
+                            </div>
+                          </div>
+                        </>
+                      )}
                     </div>
 
                     <div className="row">
