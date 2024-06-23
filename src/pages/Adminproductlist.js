@@ -51,17 +51,19 @@ const Adminproductlist = () => {
                                   Precio
                                 </th>
                                 <th className="border-0" scope="col">
-                                  Categoria
+                                  Tipo de servicio
                                 </th>
                                 <th className="border-0" scope="col">
-                                  Frecuencia
+                                  Descripción
                                 </th>
                                 <th scope="col" className="text-right border-0">
                                   Acciones
                                 </th>
                               </tr>
                             </thead>
-                            <tbody>{/* <MyCoursesList /> */}</tbody>
+                            <tbody>
+                              <MyCoursesList />
+                            </tbody>
                           </table>
                         </div>
                       ) : (
@@ -74,7 +76,9 @@ const Adminproductlist = () => {
                                 </div>
                               </div>
                             </div>
-                            <div>{/* <MyCoursesList /> */}</div>
+                            <div>
+                              <MyCoursesList />
+                            </div>
                           </div>
                         </div>
                       )}

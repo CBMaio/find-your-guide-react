@@ -19,26 +19,28 @@ const CourseList = ({ limit = false, queryFilter, filterSelected }) => {
 
   const authorsStatus = useSelector((state) => state.authors.status);
 
-  // useEffect(() => {
-  //   if (coursesStatus === IDLE) {
-  //     dispatch(fetchCourses());
-  //   }
+  useEffect(() => {
+    if (coursesStatus === IDLE) {
+      dispatch(fetchCourses());
+    }
 
-  //   if (authorsStatus === IDLE) {
-  //     dispatch(fetchAuthors());
-  //   }
-  // }, [coursesStatus, authorsStatus, dispatch, IDLE]);
+    // if (authorsStatus === IDLE) {
+    //   dispatch(fetchAuthors());
+    // }
+  }, [coursesStatus, authorsStatus, dispatch, IDLE]);
 
   useEffect(() => {
     const getProducts = async () => {
-      let data = courseData;
+      let data = courseData || [];
       const filter = queryFilter?.toLowerCase() || "";
-      const filteredData = await filterByItems(filterSelected);
-      if (filteredData) {
-        data = filteredData;
-      }
+      // const filteredData = await filterByItems(filterSelected);
+      // if (filteredData) {
+      //   data = filteredData;
+      // }
 
-      data = data.filter(({ title }) => title.toLowerCase().includes(filter));
+      data = data.length
+        ? data.filter(({ name }) => name.toLowerCase().includes(filter))
+        : data;
       console.log(data);
       setCoursesToShow(data);
     };
@@ -46,19 +48,21 @@ const CourseList = ({ limit = false, queryFilter, filterSelected }) => {
     getProducts();
   }, [queryFilter, courseData, filterSelected]);
 
-  const filterByItems = async (filters) => {
-    console.log(filters);
-    if (!filters) {
-      return null;
-    }
-    const { category = "", frequency = "", ranking = "", type = "" } = filters;
-    const params = `type=${type}&frequency=${frequency}&category=${category}&avg_rating=${ranking}`;
-    const response = await axios.get(`${process.env.REACT_APP_JAVA_BACK_URL}/course?${params}`);
+  // const filterByItems = async (filters) => {
+  //   console.log(filters);
+  //   if (!filters) {
+  //     return null;
+  //   }
+  //   const { category = "", frequency = "", ranking = "", type = "" } = filters;
+  //   const params = `type=${type}&frequency=${frequency}&category=${category}&avg_rating=${ranking}`;
+  //   const response = await axios.get(
+  //     `${process.env.REACT_APP_JAVA_BACK_URL}/course?${params}`
+  //   );
 
-    if (response.status === 200) {
-      return response.data.data;
-    }
-  };
+  //   if (response.status === 200) {
+  //     return response.data.data;
+  //   }
+  // };
 
   return coursesStatus === LOADING ? (
     <div className="pl-3">Cargando...</div>
@@ -67,7 +71,7 @@ const CourseList = ({ limit = false, queryFilter, filterSelected }) => {
   ) : (
     coursesToShow
       .slice(0, limit || coursesToShow.length)
-      .map((course) => <CourseCard key={course._id} course={course} />)
+      .map((serice) => <CourseCard key={serice.id} service={serice} />)
   );
 };
 

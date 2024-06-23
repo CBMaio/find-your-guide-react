@@ -39,10 +39,10 @@ const Coursesgrid = () => {
               <h2 className="fw-400 font-lg">Resultados</h2>
             </div>
 
-            {/* <CourseList
+            <CourseList
               queryFilter={searchProductByQuery}
               filterSelected={filterSelected}
-            /> */}
+            />
 
             {isOpenFiltersModal && (
               <FiltersModal handleModal={handleModal} setFilters={setFilters} />

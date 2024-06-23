@@ -9,8 +9,8 @@ import axiosInstance from "../../services/AxiosInstance";
 
 const { LOADING, IDLE, SUCCEEDED, FAILED } = FETCH_STATUS;
 
-const COURSE_BASE_URL = `${process.env.REACT_APP_JAVA_BACK_URL}/course`;
-const BASE_URL = "course";
+const SERVICE_BASE_URL = `${process.env.REACT_APP_JAVA_BACK_URL}/api/v1`;
+const BASE_URL = "service";
 
 const initialState = {
   data: [],
@@ -34,8 +34,10 @@ export const fetchCourses = createAsyncThunk(
   "courses/fetchCourses",
   async () => {
     try {
-      const { data } = await axios.get(`${COURSE_BASE_URL}/`);
-      return [...data.data];
+      const response = await axiosInstance.get(
+        `${SERVICE_BASE_URL}/${BASE_URL}`
+      );
+      return response;
     } catch (error) {
       console.error(error);
     }
@@ -65,11 +67,12 @@ export const addNewCourse = createAsyncThunk(
           "Content-Type": "application/json",
           "Access-Control-Allow-Headers": "x-access-token",
           "x-access-token": token,
+          Authorization: `Bearer ${token}`,
         },
       };
 
       const response = await axios.post(
-        `${COURSE_BASE_URL}`,
+        `${SERVICE_BASE_URL}/${BASE_URL}`,
         initialCourse,
         config
       );
@@ -85,10 +88,11 @@ export const fetchMyCourses = createAsyncThunk(
   "courses/getMyCourses",
   async () => {
     try {
-      const response = await axiosInstance.get("/course/my", {
-        params: { state: "published" },
-      });
-      return response.data;
+      const response = await axiosInstance.get(
+        `${SERVICE_BASE_URL}/${BASE_URL}`
+      );
+      console.log(response);
+      return response;
     } catch (error) {
       console.error(error);
     }
@@ -136,23 +140,12 @@ export const updateMyCourseById = createAsyncThunk(
 
 export const deleteCourse = createAsyncThunk(
   "courses/deleteCourse",
-  async (course) => {
-    try {
-      const response = await axiosInstance.delete(`/course/${course}`);
-      console.log(response);
-      return response.data;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-);
-
-export const unpublishCourseAction = createAsyncThunk(
-  "courses/unpublish",
   async (id) => {
     try {
-      const data = { state: "unpublished" };
-      const response = await axiosInstance.put(`/course/${id}`, data);
+      const response = await axiosInstance.delete(
+        `${SERVICE_BASE_URL}/${BASE_URL}/${id}`
+      );
+      console.log(response);
       return response.data;
     } catch (error) {
       console.error(error);
@@ -184,7 +177,7 @@ const coursesSlice = createSlice({
       })
       .addCase(fetchCourses.fulfilled, (state, action) => {
         state.status = SUCCEEDED;
-        state.data = action.payload;
+        state.data = action.payload?.data || [];
       })
       .addCase(fetchCourses.rejected, (state, action) => {
         state.status = FAILED;
@@ -194,10 +187,10 @@ const coursesSlice = createSlice({
       .addCase(addNewCourse.fulfilled, (state, action) => {
         state.myCourses.status = IDLE;
       })
-      .addCase(fetchMyCourses.fulfilled, (state, { payload }) => {
+      .addCase(fetchMyCourses.fulfilled, (state, { payload = {} }) => {
         if (payload.status === 200) {
           state.myCourses.status = SUCCEEDED;
-          state.myCourses.data = payload.data;
+          state.myCourses.data = payload.data.data;
         }
       })
       .addCase(fetchMyCourses.pending, (state, { payload }) => {
@@ -227,12 +220,6 @@ const coursesSlice = createSlice({
       .addCase(fetchMyCoursesUnpublished.fulfilled, (state, { payload }) => {
         state.myCourses.unpublishedCourses.data = payload.data;
         state.myCourses.unpublishedCourses.status = SUCCEEDED;
-      })
-      .addCase(unpublishCourseAction.pending, (state) => {
-        state.myCourses.status = LOADING;
-      })
-      .addCase(unpublishCourseAction.fulfilled, (state) => {
-        state.myCourses.status = IDLE;
       })
       .addCase(publishCourseAction.pending, (state) => {
         state.myCourses.unpublishedCourses.status = LOADING;

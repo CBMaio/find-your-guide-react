@@ -35,6 +35,9 @@ const AddCourseForm = () => {
       }
       dispatch(addNewCourse({ ...finalData })).unwrap();
       setSucceededAdded(true);
+      setTimeout(() => {
+        setSucceededAdded(false);
+      }, 2000);
       e.target.reset();
     } catch (error) {
       console.error("Failed to save the course: ", error);
@@ -78,10 +81,10 @@ const AddCourseForm = () => {
                 <div className="col-md-6">
                   <div className="form-group mb30">
                     <label htmlFor="product_sku" className="form-label">
-                      Título
+                      Nombre del servicio
                     </label>
                     <input
-                      name="title"
+                      name="name"
                       className="form-control form_control"
                       type="text"
                       placeholder="Título"
@@ -91,21 +94,21 @@ const AddCourseForm = () => {
                 <div className="col-md-6">
                   <div className="form-group mb30">
                     <label htmlFor="product_sku" className="form-label">
-                      Duración del servicio
+                      Fecha
                     </label>
                     <input
-                      name="duration"
+                      name="date"
                       className="number-input form-control form_control"
-                      type="number"
-                      placeholder="Duración (Semanas)"
+                      type="text"
+                      placeholder="YYYY-MM-DD"
                     />
                   </div>
                 </div>
-                <div className="col-sm-12">
+                <div className="col-md-6">
                   <div className="form-group mb30">
                     <label className="form-label">Tipo de servicio</label>
                     <select
-                      name="type"
+                      name="serviceType"
                       required
                       className="form-control form_control"
                     >
@@ -113,6 +116,41 @@ const AddCourseForm = () => {
                       <option value="grupal">Grupal</option>
                       <option value="translation">Traducción</option>
                     </select>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="form-group mb30">
+                    <label className="form-label">Cupo disponible</label>
+                    <input
+                      name="quantity"
+                      className="number-input form-control form_control"
+                      type="text"
+                      placeholder="Cantidad de personas (solo número)"
+                    />
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="form-group mb30">
+                    <label htmlFor="product_sku" className="form-label">
+                      País
+                    </label>
+                    <input
+                      className="number-input form-control form_control"
+                      type="text"
+                      placeholder="País"
+                    />
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="form-group mb30">
+                    <label htmlFor="product_sku" className="form-label">
+                      Ciudad
+                    </label>
+                    <input
+                      className="number-input form-control form_control"
+                      type="text"
+                      placeholder="Ciudad"
+                    />
                   </div>
                 </div>
                 <div className="col-sm-12">
@@ -128,20 +166,6 @@ const AddCourseForm = () => {
                     ></textarea>
                   </div>
                 </div>
-
-                <div className="col-sm-12">
-                  <div className="form-group">
-                    <label htmlFor="product_sku" className="form-label">
-                      Requisitos
-                    </label>
-                    <textarea
-                      name="requirements"
-                      className="form-control h150"
-                      rows="6"
-                      placeholder="Requisitos del servicio"
-                    ></textarea>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -153,7 +177,6 @@ const AddCourseForm = () => {
               <div className="form-group mb30">
                 <div className="input-file-container">
                   <input
-                    name="course-image"
                     className="upload-file-input"
                     type="file"
                     id="course-image"

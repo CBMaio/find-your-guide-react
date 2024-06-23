@@ -2,12 +2,7 @@ import { useEffect, Fragment, useState } from "react";
 import { useSelector, useDispatch } from "react-redux/";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import {
-  fetchCourses,
-  fetchMyCourses,
-  deleteCourse,
-  unpublishCourseAction,
-} from "./coursesSlice";
+import { fetchCourses, fetchMyCourses, deleteCourse } from "./coursesSlice";
 import { BREAKPOIN_SMALL, FETCH_STATUS } from "../../utils";
 import { FetcherWithComponents } from "react-router-dom";
 
@@ -34,15 +29,8 @@ const MyCoursesList = () => {
 
   const closeCourseModal = () => setIsOpenCourseModal(false);
 
-  const deleteCourseAction = (courseId) => {
-    dispatch(deleteCourse(courseId));
-    if (isOpenCourseModal) {
-      setIsOpenCourseModal(false);
-    }
-  };
-
-  const unpublishCourse = (courseId) => {
-    dispatch(unpublishCourseAction(courseId));
+  const deleteCourseAction = (id) => {
+    dispatch(deleteCourse(id));
     if (isOpenCourseModal) {
       setIsOpenCourseModal(false);
     }
@@ -58,11 +46,11 @@ const MyCoursesList = () => {
     <>
       {courseData &&
         courseData.map((value) => (
-          <Fragment key={value._id}>
+          <Fragment key={value.id}>
             {!isMobile ? (
               <tr className="my-course-line desktop-view">
                 <td className="product-thumbnail text-start ps-0">
-                  <Link to={`/edit-course/${value._id}`} className="small-icon">
+                  <Link to={`/edit-course/${value.id}`} className="small-icon">
                     <img
                       src={value.image}
                       alt="product"
@@ -73,7 +61,7 @@ const MyCoursesList = () => {
                 </td>
 
                 <td>
-                  <b>{value.title}</b>
+                  <b>{value.name}</b>
                 </td>
 
                 <td>
@@ -83,29 +71,22 @@ const MyCoursesList = () => {
                   <span
                     className={`font-xsssss fw-700 pl-3 pr-3 lh-32 text-uppercase rounded-lg ls-2 d-inline-block mr-1 ${value.status}`}
                   >
-                    {value.category.title}
+                    {value.serviceType}
                   </span>
                 </td>
                 <td>
-                  <b>{value.frequency}</b>
+                  <b>{value.description}</b>
                 </td>
                 <td className="product-remove text-right">
-                  <Button
-                    className="bg-transparent border-0 course-action"
-                    onClick={() => unpublishCourse(value._id)}
-                  >
-                    <i className="ti-close  font-xs text-danger"></i>
-                    <span className="button-legend">Despublicar</span>
-                  </Button>
                   <Button className="bg-transparent border-0 pr-0 course-action">
-                    <Link to={`/edit-course/${value._id}`}>
+                    <Link to={`/edit-course/${value.id}`}>
                       <i className="feather-edit mr-1 font-xs text-grey-500"></i>
                       <span className="button-legend">Editar</span>
                     </Link>
                   </Button>
                   <Button
                     className="bg-transparent border-0 course-action"
-                    onClick={() => deleteCourseAction(value._id)}
+                    onClick={() => deleteCourseAction(value.id)}
                   >
                     <i className="ti-trash  font-xs text-danger"></i>
                     <span className="button-legend">Eliminar</span>
@@ -127,7 +108,7 @@ const MyCoursesList = () => {
                 </div>
 
                 <div className="course-title-container">
-                  <b>{value.title}</b>
+                  <b>{value.name}</b>
                 </div>
               </div>
             )}
@@ -141,7 +122,7 @@ const MyCoursesList = () => {
             </div>
             <div className="course-title pt-3">
               <h1 className="text-grey-900 fw-700 mb-3 lh-3 text-center">
-                {selectedCourse.title}
+                {selectedCourse.name}
               </h1>
             </div>
             <div className="course-modal-body">
@@ -152,15 +133,15 @@ const MyCoursesList = () => {
                 </span>
               </div>
               <div>
-                <span>Categoria: </span>
+                <span>Tipo de servicio: </span>
                 <span>
-                  <b>{selectedCourse.category.title} </b>
+                  <b>{selectedCourse.serviceType} </b>
                 </span>
               </div>
               <div>
-                <span>Frecuencia: </span>
+                <span>Descripción: </span>
                 <span>
-                  <b>{selectedCourse.frequency} </b>
+                  <b>{selectedCourse.description} </b>
                 </span>
               </div>
 
@@ -168,16 +149,10 @@ const MyCoursesList = () => {
                 <Button className="col-12 bg-current border-0 action-btn filled-btn">
                   <Link
                     className="text-white"
-                    to={`/edit-course/${selectedCourse._id}`}
+                    to={`/edit-course/${selectedCourse.id}`}
                   >
                     <span>Editar</span>
                   </Link>
-                </Button>
-                <Button
-                  onClick={() => unpublishCourse(selectedCourse._id)}
-                  className="col-12 action-btn outline-btn"
-                >
-                  <span>Despublicar</span>
                 </Button>
                 <Button
                   onClick={() => deleteCourseAction(selectedCourse._id)}

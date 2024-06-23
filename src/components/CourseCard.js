@@ -2,18 +2,18 @@ import { Link } from "react-router-dom";
 
 import "../scss/components/course-card.scss";
 
-const CourseCard = ({ course = {} }) => {
+const CourseCard = ({ service = {} }) => {
   const {
     avg_rating,
-    _id: id,
-    category,
-    status,
+    id,
+    serviceType,
     price,
-    title,
-    frequency,
-    author,
+    name,
+    date,
+    createdBy,
     image,
-  } = course;
+    description,
+  } = service;
 
   return (
     <div
@@ -27,7 +27,7 @@ const CourseCard = ({ course = {} }) => {
             className="position-relative d-block img-link"
           >
             <img
-              src={image || "/assets/images/course-default.avif"}
+              src={image || "/assets/images/user.png"}
               alt="course"
               className="w-100"
             />
@@ -37,9 +37,9 @@ const CourseCard = ({ course = {} }) => {
           <div className="card-body-top">
             <div>
               <span
-                className={`font-xsssss fw-700 pr-3 lh-32 text-uppercase rounded-lg ls-2 d-inline-block mr-1 ${status}`}
+                className={`font-xsssss fw-700 pr-3 lh-32 text-uppercase rounded-lg ls-2 d-inline-block mr-1`}
               >
-                {category?.title}
+                {serviceType}
               </span>
               <span className="font-xss fw-700 pl-3  ls-2 lh-32 d-inline-block float-right">
                 <span className="font-xsssss">$</span> {price}
@@ -50,12 +50,13 @@ const CourseCard = ({ course = {} }) => {
                 to={`/course-detail/${id}`}
                 className="text-dark text-grey-900"
               >
-                {title}
+                {name}
               </Link>
             </h4>
             <h6 className="font-xssss text-grey-500 fw-600 ml-0 mt-2">
-              {frequency.toUpperCase()}
+              {date.toUpperCase()}
             </h6>
+            <p>{description}</p>
             <span>
               {avg_rating &&
                 Array.from(Array(avg_rating).keys()).map((n) => (
@@ -70,10 +71,10 @@ const CourseCard = ({ course = {} }) => {
             <div className="memberlist mt-3 mb-2 ml-0 d-block">
               <li className="w-auto">
                 <Link
-                  to={`/author-profile/${author?._id}`}
+                  to={`/author-profile/${createdBy}`}
                   className="fw-500 text-grey-500 font-xssss"
                 >
-                  Profesor: {author?.name}
+                  Guía: {createdBy}
                 </Link>
               </li>
             </div>
@@ -84,7 +85,7 @@ const CourseCard = ({ course = {} }) => {
                 to={`/course-registration/${id}`}
                 className="w-100 p-1 font-xssss text-uppercase fw-600 rounded-lg float-right register-btn text-center"
               >
-                Inscribirme
+                Quiero reservar
               </Link>
             </div>
           </div>
