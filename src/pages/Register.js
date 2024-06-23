@@ -197,6 +197,12 @@ const Register = () => {
                         Soy turista
                       </button>
                     </div>
+                    <h6 className="text-grey-500 font-xssss fw-500 mt-0 mb-0 lh-32">
+                      Ya estas registrado?
+                      <a href="/login" className="link fw-700 ml-1">
+                        Iniciar sesión
+                      </a>
+                    </h6>
                   </>
                 )}
 
@@ -209,7 +215,7 @@ const Register = () => {
                           {userRol === USER_ROL.GUIDE ? "Guía" : "Turista"}
                         </h3>
                         <h6 className="text-grey-500 font-xssss fw-500 mt-0 mb-0 lh-32">
-                          Cambio de usuario?{" "}
+                          Cambio de usuario?
                           <span
                             onClick={() =>
                               setRol(
@@ -220,7 +226,7 @@ const Register = () => {
                             }
                             className="fw-700 ml-1"
                           >
-                            Soy{" "}
+                            Soy
                             {userRol === USER_ROL.GUIDE ? "turista" : "guía"}
                           </span>
                         </h6>
@@ -346,7 +352,7 @@ const Register = () => {
                               </button>
                             </div>
                             <h6 className="text-grey-500 font-xssss fw-500 mt-0 mb-0 lh-32">
-                              Ya estas registrado?{" "}
+                              Ya estas registrado?
                               <a href="/login" className="link fw-700 ml-1">
                                 Iniciar sesión
                               </a>

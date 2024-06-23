@@ -113,7 +113,7 @@ const Login = () => {
                       </button>
                     </div>
                     <h6 className="text-grey-500 font-xssss fw-500 mt-0 mb-0 lh-32">
-                      No tienes una cuenta?{" "}
+                      No tienes una cuenta?
                       <a href="/register" className="link fw-700 ml-1">
                         Registrarme
                       </a>
@@ -146,6 +146,7 @@ const Login = () => {
                         className="font-sm ti-eye text-grey-500 pr-0 toggle-pw-icon"
                       ></i>
                     </div>
+
                     {error && (
                       <div className="font-xssss text-danger mb-2">
                         Usuario o contraseña incorrectos
@@ -170,6 +171,12 @@ const Login = () => {
                         </button>
                       </div>
                     </div>
+                    <h6 className="text-grey-500 font-xssss fw-500 mt-0 mb-0 lh-32">
+                      No tienes una cuenta?
+                      <a href="/register" className="link fw-700 ml-1">
+                        Registrarme
+                      </a>
+                    </h6>
                   </form>
                 )}
               </div>

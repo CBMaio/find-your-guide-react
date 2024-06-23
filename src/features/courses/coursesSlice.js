@@ -99,6 +99,21 @@ export const fetchMyCourses = createAsyncThunk(
   }
 );
 
+export const getGuideServices = createAsyncThunk(
+  "courses/guideServices",
+  async (id) => {
+    try {
+      const response = await axiosInstance.get(
+        `${SERVICE_BASE_URL}/${BASE_URL}/guide/${id}`
+      );
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
 export const fetchMyCoursesUnpublished = createAsyncThunk(
   "courses/fetchMyCoursesUnpublished",
   async () => {
@@ -227,6 +242,19 @@ const coursesSlice = createSlice({
       .addCase(publishCourseAction.fulfilled, (state) => {
         state.myCourses.unpublishedCourses.status = IDLE;
         state.myCourses.status = IDLE;
+      })
+      .addCase(getGuideServices.fulfilled, (state, { payload = {} }) => {
+        if (payload.status === 200) {
+          state.myCourses.status = SUCCEEDED;
+          state.myCourses.data = payload.data.data;
+        }
+      })
+      .addCase(getGuideServices.pending, (state, { payload }) => {
+        state.myCourses.status = LOADING;
+      })
+      .addCase(getGuideServices.rejected, (state, action) => {
+        state.myCourses.status = FAILED;
+        state.myCourses.error = action.error.message;
       });
   },
 });

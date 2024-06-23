@@ -2,7 +2,12 @@ import { useEffect, Fragment, useState } from "react";
 import { useSelector, useDispatch } from "react-redux/";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import { fetchCourses, fetchMyCourses, deleteCourse } from "./coursesSlice";
+import {
+  fetchCourses,
+  fetchMyCourses,
+  deleteCourse,
+  getGuideServices,
+} from "./coursesSlice";
 import { BREAKPOIN_SMALL, FETCH_STATUS } from "../../utils";
 import { FetcherWithComponents } from "react-router-dom";
 
@@ -38,7 +43,9 @@ const MyCoursesList = () => {
 
   useEffect(() => {
     if (coursesStatus === IDLE) {
-      dispatch(fetchMyCourses());
+      dispatch(
+        getGuideServices(JSON.parse(localStorage.getItem("userData"))?.id)
+      );
     }
   }, [coursesStatus, dispatch, IDLE]);
 
@@ -52,7 +59,11 @@ const MyCoursesList = () => {
                 <td className="product-thumbnail text-start ps-0">
                   <Link to={`/edit-course/${value.id}`} className="small-icon">
                     <img
-                      src={value.image}
+                      src={
+                        value.image
+                          ? value.image
+                          : "/assets/images/FindYourGuide-images/noServiceImage.jpg"
+                      }
                       alt="product"
                       style={{ height: "60px", objectFit: "cover" }}
                       className="d-inline-block p-0 bg-greylight rounded-lg overflow-hidden course-image"
@@ -100,7 +111,11 @@ const MyCoursesList = () => {
               >
                 <div className="product-thumbnail text-start ps-0 course-image-container">
                   <img
-                    src={value.image}
+                    src={
+                      value.image
+                        ? value.image
+                        : "/assets/images/FindYourGuide-images/noServiceImage.jpg"
+                    }
                     alt="product"
                     style={{ height: "60px", objectFit: "cover" }}
                     className="d-inline-block p-0 bg-greylight rounded-lg overflow-hidden course-image"
