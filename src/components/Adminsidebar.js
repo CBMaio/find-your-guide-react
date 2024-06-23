@@ -72,7 +72,7 @@ const Adminsidebar = () => {
         <li className="nav-item" onClick={toggleCourseOptions}>
           <div className="navi-link">
             <i className="feather-globe mr-2 droupdown-toggle"></i>
-            <span>Destinos</span>
+            <span>Mis Servicios</span>
           </div>
           {displayCourseOptions && isGuideUser && (
             <ul className="submenu active">
@@ -98,14 +98,6 @@ const Adminsidebar = () => {
             </ul>
           )}
         </li>
-        {isGuideUser && (
-          <li className="nav-item">
-            <Link to="/admin-draft-list" className="navi-link">
-              <i className="feather-slack mr-2"></i>
-              <span>Sin publicar</span>
-            </Link>
-          </li>
-        )}
 
         <li className="nav-item">
           <NavLink className="navi-link" to="/admin-review">

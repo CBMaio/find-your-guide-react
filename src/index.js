@@ -95,12 +95,6 @@ class Root extends Component {
                 element={<EditCoursePage />}
               />
 
-              <Route
-                exact
-                path={`/admin-draft-list`}
-                element={<AdminDraftList />}
-              />
-
               <Route exact path={`/admin-review`} element={<Adminreview />} />
 
               <Route

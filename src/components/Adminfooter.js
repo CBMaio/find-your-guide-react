@@ -8,7 +8,7 @@ const Adminfooter = () => {
         <div className="row">
           <div className="col-md-6 text-center text-sm-left xs-mb-3">
             <p className="footer-text text-grey-500 fw-500 font-xssss mb-0">
-              @ Copyright 2021 Todos los derechos reservados.
+              @ Copyright 2024 Todos los derechos reservados.
             </p>
           </div>
           <div className="col-md-6 text-right">
