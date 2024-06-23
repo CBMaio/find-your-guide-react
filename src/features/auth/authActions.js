@@ -20,8 +20,8 @@ export const registerUser = createAsyncThunk(
       };
 
       const response = await axios.post(
-        `${AUTH_API_COMPLETE}/${SIGNUP}/${type}`,
-        { ...user },
+        `${AUTH_API_COMPLETE}/${SIGNUP}`,
+        { ...user, role: type },
         config
       );
     } catch (error) {
@@ -41,9 +41,7 @@ export const getUserData = createAsyncThunk(
       const getToken = localStorage.getItem("userToken");
       if (!getToken) return;
       const response = await axiosInstance.get(`${USER_PATH}/${type}`);
-      const currentUser = response?.data?.find(
-        ({ username }) => username === user
-      );
+      const currentUser = response?.data?.find(({ email }) => email === user);
 
       if (response.status === 200) {
         const data = JSON.stringify({ ...currentUser, type });
@@ -71,14 +69,14 @@ export const loginUser = createAsyncThunk(
         },
       };
       const response = await axios.post(
-        `${AUTH_API_COMPLETE}/${LOGIN}/${type}`,
+        `${AUTH_API_COMPLETE}/${LOGIN}`,
         { ...user },
         config
       );
 
       const [, token] = response?.headers?.authorization.split("Bearer ");
       localStorage.setItem("userToken", token);
-      return { username: user.username, type };
+      return { email: user.email, type };
     } catch (error) {
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);

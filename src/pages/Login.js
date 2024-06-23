@@ -46,7 +46,7 @@ const Login = () => {
   useEffect(() => {
     if (isAuth) {
       navigate("/welcome-admin");
-      dispatch(getUserData({ user: userInfo.username, type: userInfo.type }));
+      dispatch(getUserData({ user: userInfo.email, type: userInfo.type }));
     }
 
     if (error) {
@@ -56,6 +56,7 @@ const Login = () => {
         text: "Hubo un error. Por favor inténtelo nuevamente",
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error, userInfo, isAuth]);
 
   return (
@@ -126,8 +127,8 @@ const Login = () => {
                         type="text"
                         // required
                         className="style2-input pl-5 form-control text-grey-900 font-xssss fw-600"
-                        placeholder="Nombre de usuario"
-                        name="username"
+                        placeholder="Email"
+                        name="email"
                       />
                     </div>
                     <div className="form-group icon-input mb-1">

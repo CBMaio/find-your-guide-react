@@ -115,6 +115,12 @@ const Register = () => {
         navigate("/login");
       }
     }, 1500);
+
+    setTimeout(() => {
+      setDisplayCustomAlert({
+        display: false,
+      });
+    }, 2000);
   };
 
   useEffect(() => {
@@ -124,11 +130,18 @@ const Register = () => {
         isSuccess: false,
         text: "Hubo un error con su registro. Por favor inténtelo nuevamente",
       });
+
+      setTimeout(() => {
+        setDisplayCustomAlert({
+          display: false,
+        });
+      }, 2000);
     }
 
     if (success) {
       handleSuccess();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, error, success]);
 
   return (
