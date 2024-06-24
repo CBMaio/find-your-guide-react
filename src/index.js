@@ -54,8 +54,6 @@ class Root extends Component {
 
             <Route exact path={`/about`} element={<About />} />
 
-            <Route exact path={`/courses-grid`} element={<Coursesgridone />} />
-
             <Route exact path={`/chat`} element={<Chat />} />
 
             <Route
@@ -66,7 +64,7 @@ class Root extends Component {
 
             <Route
               exact
-              path={`/course-detail/:courseId`}
+              path={`/service-detail/:serviceId`}
               element={<Coursedetails />}
             />
 
@@ -80,6 +78,11 @@ class Root extends Component {
 
             {/* privates routes */}
             <Route element={<ProtectedRoute />}>
+              <Route
+                exact
+                path={`/services-grid`}
+                element={<Coursesgridone />}
+              />
               <Route exact path={`/admin`} element={<WelcomeAdmin />} />
               <Route
                 exact
@@ -91,7 +94,7 @@ class Root extends Component {
 
               <Route
                 exact
-                path={`/edit-course/:courseId`}
+                path={`/edit-service/:serviceId`}
                 element={<EditCoursePage />}
               />
 
