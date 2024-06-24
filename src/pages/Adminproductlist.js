@@ -1,16 +1,19 @@
 import React, { Fragment, useState } from "react";
+import { useSelector } from "react-redux";
 
 import Adminsidebar from "../components/Adminsidebar";
 import AdminTopnav from "../components/AdminTopnav";
 import Adminfooter from "../components/Adminfooter";
 import MyCoursesList from "../features/courses/MyCoursesList";
 import { BREAKPOIN_SMALL } from "../utils";
+import { isGuide, isTourist } from "../features/auth/authSlice";
 
 import "../scss/pages/admin-product-list.scss";
 
 const Adminproductlist = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < BREAKPOIN_SMALL);
-
+  const isGuideUser = useSelector(isGuide);
+  const isTouristUser = useSelector(isTourist);
   const onResizeScrren = () => {
     setIsMobile(window.innerWidth < BREAKPOIN_SMALL);
   };
@@ -34,7 +37,10 @@ const Adminproductlist = () => {
                   <div className="card border-0 mt-2 rounded-10">
                     <div className="card-body d-flex px-4 pb-0 pt-4">
                       <h4 className="font-xss text-grey-800 mt-3 fw-700">
-                        Mis servicios publicados
+                        {isGuideUser && <span>Mis servicios publicados</span>}
+                        {isTouristUser && (
+                          <span>Mis servicios contratados</span>
+                        )}
                       </h4>
                     </div>
                     <div className="card-body p-2">

@@ -123,10 +123,11 @@ const EditCourseForm = () => {
                     <select
                       name="serviceType"
                       className="form-control form_control"
+                      defaultValue={service.serviceType}
                     >
-                      <option value="individual">Individual</option>
-                      <option value="grupal">Grupal</option>
-                      <option value="translation">Traducción</option>
+                      <option value="TOURS_INDIVIDUALES">Individual</option>
+                      <option value="TOURS_GRUPALES">Grupal</option>
+                      <option value="TRADUCCIONES">Traducción</option>
                     </select>
                   </div>
                 </div>

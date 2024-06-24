@@ -3,22 +3,23 @@ import { FETCH_STATUS } from "../../utils";
 import axios from "axios";
 import axiosInstance from "../../services/AxiosInstance";
 
-const { LOADING, IDLE, SUCCEEDED } = FETCH_STATUS;
+const { LOADING, IDLE, SUCCEEDED, FAILED } = FETCH_STATUS;
 
-const BOOKING_URL = "booking";
-const BOOKING_URL_COMPLETE = `${process.env.REACT_APP_JAVA_BACK_URL}/${BOOKING_URL}`;
+const BUY_URL = "buys";
+const BUY_URL_COMPLETE = `${process.env.REACT_APP_JAVA_BACK_URL}/api/v1/${BUY_URL}`;
 
 const initialState = {
   data: [],
   status: IDLE,
   error: null,
+  dataPurchase: [],
 };
 
 export const fetchRequests = createAsyncThunk(
   "booking/fetchRequests",
   async () => {
     try {
-      const response = await axiosInstance(BOOKING_URL);
+      const response = await axiosInstance(BUY_URL);
       return response.data;
     } catch (error) {
       console.error(error);
@@ -28,9 +29,10 @@ export const fetchRequests = createAsyncThunk(
 
 export const addNewRequest = createAsyncThunk(
   "booking/addNewRequest",
-  async (data) => {
+  async (id) => {
     try {
-      await axios.post(BOOKING_URL_COMPLETE, { ...data });
+      const response = await axiosInstance.post(`${BUY_URL_COMPLETE}/${id}`);
+      return response;
     } catch (error) {
       console.error(error);
     }
@@ -41,7 +43,7 @@ export const handleRequest = createAsyncThunk(
   "booking/accept",
   async (data) => {
     try {
-      await axiosInstance.put(`/${BOOKING_URL}/${data.id}`, {
+      await axiosInstance.put(`/${BUY_URL}/${data.id}`, {
         state: data.state,
       });
     } catch (error) {
@@ -52,11 +54,27 @@ export const handleRequest = createAsyncThunk(
 
 export const deleteRequest = createAsyncThunk("booking/delete", async (id) => {
   try {
-    await axiosInstance.delete(`/${BOOKING_URL}/${id}`);
+    await axiosInstance.delete(`/${BUY_URL}/${id}`);
   } catch (error) {
     console.error(error);
   }
 });
+
+export const getAllMyPurchases = createAsyncThunk(
+  "courses/myPurchase",
+  async (touristId) => {
+    try {
+      debugger;
+      const response = await axiosInstance.get(
+        `${BUY_URL_COMPLETE}/tourist/${touristId}`
+      );
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.error("Error getting all my purchase", error);
+    }
+  }
+);
 
 const requestsSlice = createSlice({
   name: "requests",
@@ -75,7 +93,7 @@ const requestsSlice = createSlice({
         state.status = LOADING;
       })
       .addCase(addNewRequest.fulfilled, (state, action) => {
-        state.status = IDLE;
+        state.status = SUCCEEDED;
       })
       .addCase(handleRequest.pending, (state, action) => {
         state.status = LOADING;
@@ -94,4 +112,6 @@ const requestsSlice = createSlice({
 
 export default requestsSlice.reducer;
 
+export const selectRequestStatus = (state) => state.requests.status;
 export const selectAllRequests = (state) => state.requests.data;
+export const selectAllTouristPurchase = (state) => state.requests.dataPurchase;

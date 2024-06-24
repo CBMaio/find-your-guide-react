@@ -13,17 +13,30 @@ import { FETCH_STATUS } from "../../utils";
 import "../../scss/pages/single-course.scss";
 import { CustomAlert } from "../../components/CustomAlert";
 import { addComment } from "../comments/commentsSlice";
+import { addNewRequest, selectRequestStatus } from "../requests/requestsSlice";
+import Modal from "../../components/Modal";
 
 const SingleCoursePage = () => {
-  const { LOADING, IDLE } = FETCH_STATUS;
+  const { LOADING, IDLE, SUCCEEDED, FAILED } = FETCH_STATUS;
   const dispatch = useDispatch();
   const { serviceId } = useParams();
   const [rating, setRating] = useState(0);
   const [emptyFields, setEmptyFields] = useState(false);
   const [selectedSevice, setSelectedService] = useState(null);
   const [commentSentSucceeded, setCommentSentSucceeded] = useState(false);
+  const [displayModal, setDisplayModal] = useState({
+    display: false,
+    title: "",
+    description: "",
+  });
+  const [displayCustomAlert, setDisplayCustomAlert] = useState({
+    display: false,
+    isSuccess: false,
+    text: "",
+  });
 
   const coursesStatus = useSelector(getCoursesStatus);
+  const requestStatus = useSelector(selectRequestStatus);
   const service = useSelector((state) => getSelectedService(state, serviceId));
 
   const {
@@ -39,6 +52,7 @@ const SingleCoursePage = () => {
     serviceType,
     image,
     quantity,
+    id,
   } = service || {};
 
   const handleRating = (rate) => {
@@ -74,6 +88,14 @@ const SingleCoursePage = () => {
     e.target.reset();
   };
 
+  const handleReservation = () => {
+    try {
+      dispatch(addNewRequest(serviceId));
+    } catch (error) {
+      console.error("Error buying de service", error);
+    }
+  };
+
   useEffect(() => {
     if (!selectedSevice) {
       dispatch(fetchServiceById(serviceId));
@@ -84,6 +106,24 @@ const SingleCoursePage = () => {
     }
   }, [coursesStatus, IDLE, dispatch, selectedSevice, serviceId, service]);
 
+  useEffect(() => {
+    if (requestStatus === SUCCEEDED) {
+      setDisplayModal({
+        display: true,
+        title: "Tu registro fue exitoso",
+        description: "Muchas gracias! Preparate para una aventura única",
+      });
+
+      if (requestStatus === FAILED) {
+        setDisplayCustomAlert({
+          display: true,
+          isSuccess: false,
+          text: "Hubo un problema con su registro. Si el problema persiste, vuelva a iniciar sesión",
+        });
+      }
+    }
+  }, [FAILED, SUCCEEDED, requestStatus]);
+
   if (coursesStatus === LOADING) {
     return <section>Cargando...</section>;
   } else if (!service) {
@@ -92,10 +132,10 @@ const SingleCoursePage = () => {
 
   return (
     <div className="row">
-      {commentSentSucceeded && (
+      {displayCustomAlert.display && (
         <CustomAlert
-          isSuccess={true}
-          text="Comentario enviado correctamente. En caso de ser aprobado podrá verlo en el listado de comentarios"
+          isSuccess={displayCustomAlert.isSuccess}
+          text={displayCustomAlert.text}
         />
       )}
       <div className="col-12">
@@ -110,12 +150,12 @@ const SingleCoursePage = () => {
           />
         </div>
         <div className="col-6 m-auto align-items-center border-0 pt-4 rounded-10 admin-form">
-          <Link
-            to={`/course-registration/${service.id}`}
+          <div
+            onClick={handleReservation}
             className="col-12 form-control text-center style2-input text-white fw-600 bg-current border-0 p-0 "
           >
             Reservar
-          </Link>
+          </div>
         </div>
         <div className="card d-block border-0 rounded-lg overflow-hidden dark-bg-transparent bg-transparent mt-4 pb-3">
           <div className="row">
@@ -132,7 +172,7 @@ const SingleCoursePage = () => {
                     />
                   ))}
               </div>
-              <Link to={`/author-profile/${guide.id}`}>
+              <Link to={`/guide-profile/${id}`}>
                 <span className="font-xssss fw-700 text-grey-900 d-inline-block ml-0 text-dark">
                   {guide.username}
                 </span>
@@ -263,6 +303,13 @@ const SingleCoursePage = () => {
           </div>
         </div>
       </div>
+
+      {displayModal.display && (
+        <Modal
+          title={displayModal.title}
+          description={displayModal.description}
+        />
+      )}
     </div>
   );
 };

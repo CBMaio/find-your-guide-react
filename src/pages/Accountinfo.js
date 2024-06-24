@@ -170,7 +170,7 @@ const Accountinfo = () => {
                             name="firstName"
                             type="text"
                             className="form-control"
-                            defaultValue={userInfo.firsName}
+                            defaultValue={userInfo.firstName}
                           />
                         </div>
                       </div>

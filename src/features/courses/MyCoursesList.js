@@ -9,7 +9,6 @@ import {
   getGuideServices,
 } from "./coursesSlice";
 import { BREAKPOIN_SMALL, FETCH_STATUS } from "../../utils";
-import { FetcherWithComponents } from "react-router-dom";
 
 const MyCoursesList = () => {
   const dispatch = useDispatch();

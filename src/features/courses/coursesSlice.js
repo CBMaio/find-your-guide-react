@@ -21,6 +21,7 @@ const initialState = {
   myCourses: {
     status: IDLE,
     data: [],
+    succeess: null,
     error: null,
     myCourseSelected: null,
     unpublishedCourses: {
@@ -222,6 +223,14 @@ const coursesSlice = createSlice({
       })
       // my courses
       .addCase(addNewCourse.fulfilled, (state, action) => {
+        if (!action.payload) {
+          state.myCourses.error = FAILED;
+        }
+
+        if (action.payload.statusCode === "CREATED") {
+          state.myCourses.succeess = SUCCEEDED;
+        }
+
         state.myCourses.status = IDLE;
       })
       .addCase(fetchMyCourses.fulfilled, (state, { payload = {} }) => {
@@ -308,6 +317,10 @@ export const selectCoursesByAuthor = (state, authorId) => {
 };
 export const getSelectedService = (state) => {
   return state.courses.serviceSelected;
+};
+export const getMyServiceStatus = (state) => {
+  const { error, succeess } = state.courses.myCourses;
+  return { error, succeess };
 };
 
 // export const selectCoursesByAuthor = createSelector(

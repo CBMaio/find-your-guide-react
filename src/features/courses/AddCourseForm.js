@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addNewCourse } from "./coursesSlice";
+import { addNewCourse, getMyServiceStatus } from "./coursesSlice";
 import { useEffect, useState } from "react";
 import { FETCH_STATUS } from "../../utils";
 import "./styles/add-course-form.scss";
@@ -8,9 +8,14 @@ import { convertBase64 } from "../../utils";
 
 const AddCourseForm = () => {
   const dispatch = useDispatch();
-  const { IDLE, SUCCEEDED, LOADING } = FETCH_STATUS;
+  const { IDLE, SUCCEEDED, LOADING, FAILED } = FETCH_STATUS;
+  const { error, succeess } = useSelector((state) => getMyServiceStatus(state));
   const [addRequestStatus, setAddRequestStatus] = useState(IDLE);
-  const [succeededAdded, setSucceededAdded] = useState(false);
+  const [displayCustomAlert, setDisplayCustomAlert] = useState({
+    display: false,
+    isSuccess: false,
+    text: "",
+  });
   const [selectedImage, setSelectedImage] = useState(null);
 
   const canSave = (values) =>
@@ -30,10 +35,6 @@ const AddCourseForm = () => {
         finalData = { ...formattedData, image: selectedImage };
       }
       dispatch(addNewCourse({ ...finalData })).unwrap();
-      setSucceededAdded(true);
-      setTimeout(() => {
-        setSucceededAdded(false);
-      }, 2000);
       e.target.reset();
     } catch (error) {
       console.error("Failed to save the course: ", error);
@@ -49,11 +50,30 @@ const AddCourseForm = () => {
     setSelectedImage(base64);
   };
 
-  // useEffect(() => {
-  //   if (statusCategory === IDLE) {
-  //     dispatch(fetchCategories());
-  //   }
-  // });
+  useEffect(() => {
+    if (error === FAILED) {
+      setDisplayCustomAlert({
+        display: true,
+        isSuccess: false,
+        text: "Error al agregar el servicio. Por favor inténtalo nuevamente",
+      });
+    }
+
+    if (succeess === SUCCEEDED) {
+      setDisplayCustomAlert({
+        display: true,
+        isSuccess: true,
+        text: "Serivicio agregado con éxito!",
+      });
+
+      setTimeout(() => {
+        setDisplayCustomAlert({
+          display: false,
+        });
+      }, 2000);
+    }
+  }, [FAILED, SUCCEEDED, error, succeess]);
+
   return (
     <div className="row">
       <div className="col-lg-12 ">
@@ -64,10 +84,10 @@ const AddCourseForm = () => {
         >
           <div className="card border-0 px-4 pt-4 mt-2 rounded-lg admin-form">
             <div className="card-body d-block">
-              {succeededAdded && (
+              {displayCustomAlert.display && (
                 <CustomAlert
-                  isSuccess={true}
-                  text="Serivicio agregado con éxito!"
+                  isSuccess={displayCustomAlert.isSuccess}
+                  text={displayCustomAlert.text}
                 />
               )}
               <h4 className="font-xss text-grey-800 mb-4 mt-0 fw-700">
@@ -108,9 +128,9 @@ const AddCourseForm = () => {
                       required
                       className="form-control form_control"
                     >
-                      <option value="individual">Individual</option>
-                      <option value="grupal">Grupal</option>
-                      <option value="translation">Traducción</option>
+                      <option value="TOURS_INDIVIDUALES">Individual</option>
+                      <option value="TOURS_GRUPALES">Grupal</option>
+                      <option value="TRADUCCIONES">Traducción</option>
                     </select>
                   </div>
                 </div>
@@ -131,6 +151,7 @@ const AddCourseForm = () => {
                       País
                     </label>
                     <input
+                      name="country"
                       className="number-input form-control form_control"
                       type="text"
                       placeholder="País"
@@ -143,6 +164,7 @@ const AddCourseForm = () => {
                       Ciudad
                     </label>
                     <input
+                      name="city"
                       className="number-input form-control form_control"
                       type="text"
                       placeholder="Ciudad"

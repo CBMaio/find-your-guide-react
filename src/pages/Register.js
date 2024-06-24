@@ -396,10 +396,10 @@ const Register = () => {
                             <i className="font-sm ti-user text-grey-500 pr-0"></i>
                             <input
                               // required
-                              name="cities"
+                              name="country"
                               type="text"
                               className="style2-input pl-5 form-control text-grey-900 font-xsss fw-600"
-                              placeholder="Ciudades"
+                              placeholder="País"
                             />
                           </div>
 
