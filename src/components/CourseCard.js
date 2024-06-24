@@ -85,10 +85,10 @@ const CourseCard = ({ service = {} }) => {
           <div className="card-body-bottom">
             <div className="text-center mt-3 mb-2">
               <Link
-                to={`/course-registration/${id}`}
+                to={`/service-detail/${id}`}
                 className="w-100 p-1 font-xssss text-uppercase fw-600 rounded-lg float-right register-btn text-center"
               >
-                Quiero reservar
+                Ver más información
               </Link>
             </div>
           </div>

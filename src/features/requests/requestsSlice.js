@@ -5,6 +5,7 @@ import axiosInstance from "../../services/AxiosInstance";
 
 const { LOADING, IDLE, SUCCEEDED, FAILED } = FETCH_STATUS;
 
+const expectedCode = "OK";
 const BUY_URL = "buys";
 const BUY_URL_COMPLETE = `${process.env.REACT_APP_JAVA_BACK_URL}/api/v1/${BUY_URL}`;
 
@@ -54,7 +55,7 @@ export const handleRequest = createAsyncThunk(
 
 export const deleteRequest = createAsyncThunk("booking/delete", async (id) => {
   try {
-    await axiosInstance.delete(`/${BUY_URL}/${id}`);
+    await axiosInstance.delete(`${BUY_URL_COMPLETE}/${id}`);
   } catch (error) {
     console.error(error);
   }
@@ -64,12 +65,11 @@ export const getAllMyPurchases = createAsyncThunk(
   "courses/myPurchase",
   async (touristId) => {
     try {
-      debugger;
       const response = await axiosInstance.get(
         `${BUY_URL_COMPLETE}/tourist/${touristId}`
       );
       console.log(response);
-      return response;
+      return response.data;
     } catch (error) {
       console.error("Error getting all my purchase", error);
     }
@@ -94,6 +94,15 @@ const requestsSlice = createSlice({
       })
       .addCase(addNewRequest.fulfilled, (state, action) => {
         state.status = SUCCEEDED;
+      })
+      .addCase(getAllMyPurchases.pending, (state, action) => {
+        state.status = LOADING;
+      })
+      .addCase(getAllMyPurchases.fulfilled, (state, { payload = {} }) => {
+        if (payload.statusCode === expectedCode) {
+          state.status = SUCCEEDED;
+          state.dataPurchase = payload.data;
+        }
       })
       .addCase(handleRequest.pending, (state, action) => {
         state.status = LOADING;

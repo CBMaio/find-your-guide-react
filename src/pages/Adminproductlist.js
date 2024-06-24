@@ -9,6 +9,7 @@ import { BREAKPOIN_SMALL } from "../utils";
 import { isGuide, isTourist } from "../features/auth/authSlice";
 
 import "../scss/pages/admin-product-list.scss";
+import MyPurchseList from "../features/courses/MyPurchseList";
 
 const Adminproductlist = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < BREAKPOIN_SMALL);
@@ -68,7 +69,8 @@ const Adminproductlist = () => {
                               </tr>
                             </thead>
                             <tbody>
-                              <MyCoursesList />
+                              {isGuideUser && <MyCoursesList />}
+                              {isTouristUser && <MyPurchseList />}
                             </tbody>
                           </table>
                         </div>
@@ -83,7 +85,8 @@ const Adminproductlist = () => {
                               </div>
                             </div>
                             <div>
-                              <MyCoursesList />
+                              {isGuideUser && <MyCoursesList />}
+                              {isTouristUser && <MyPurchseList />}
                             </div>
                           </div>
                         </div>
