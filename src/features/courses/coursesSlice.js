@@ -11,12 +11,13 @@ const { LOADING, IDLE, SUCCEEDED, FAILED } = FETCH_STATUS;
 
 const SERVICE_BASE_URL = `${process.env.REACT_APP_JAVA_BACK_URL}/api/v1`;
 const BASE_URL = "service";
+const statusCodeOk = "OK";
 
 const initialState = {
   data: [],
   status: IDLE,
   error: null,
-  courseSelected: null,
+  serviceSelected: null,
   myCourses: {
     status: IDLE,
     data: [],
@@ -37,7 +38,7 @@ export const fetchCourses = createAsyncThunk(
       const response = await axiosInstance.get(
         `${SERVICE_BASE_URL}/${BASE_URL}`
       );
-      return response;
+      return response.data;
     } catch (error) {
       console.error(error);
     }
@@ -107,7 +108,7 @@ export const getGuideServices = createAsyncThunk(
         `${SERVICE_BASE_URL}/${BASE_URL}/guide/${id}`
       );
       console.log(response);
-      return response;
+      return response.data;
     } catch (error) {
       console.error(error);
     }
@@ -129,6 +130,21 @@ export const fetchMyCoursesUnpublished = createAsyncThunk(
   }
 );
 
+export const fetchServiceById = createAsyncThunk(
+  "courses/serviceById",
+  async (id) => {
+    try {
+      const response = await axiosInstance.get(
+        `${SERVICE_BASE_URL}/${BASE_URL}/${id}`
+      );
+
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
 export const fetchMyCourseById = createAsyncThunk(
   "courses/myCourse",
   async (id) => {
@@ -141,11 +157,15 @@ export const fetchMyCourseById = createAsyncThunk(
   }
 );
 
-export const updateMyCourseById = createAsyncThunk(
-  "courses/updateMyCourse",
-  async (course) => {
+export const updateMyServiceById = createAsyncThunk(
+  "courses/updateMyService",
+  async (service) => {
     try {
-      const response = await axiosInstance.put(`/course/${course._id}`, course);
+      const response = await axiosInstance.put(
+        `${SERVICE_BASE_URL}/${BASE_URL}/${service.id}`,
+        service
+      );
+
       return response.data;
     } catch (error) {
       console.error(error);
@@ -190,9 +210,11 @@ const coursesSlice = createSlice({
       .addCase(fetchCourses.pending, (state, action) => {
         state.status = LOADING;
       })
-      .addCase(fetchCourses.fulfilled, (state, action) => {
-        state.status = SUCCEEDED;
-        state.data = action.payload?.data || [];
+      .addCase(fetchCourses.fulfilled, (state, { payload = {} }) => {
+        if (payload.statusCode === statusCodeOk) {
+          state.status = SUCCEEDED;
+          state.data = payload.data || [];
+        }
       })
       .addCase(fetchCourses.rejected, (state, action) => {
         state.status = FAILED;
@@ -220,10 +242,16 @@ const coursesSlice = createSlice({
           state.myCourses.myCourseSelected = action.payload.data[0];
         }
       })
-      .addCase(updateMyCourseById.pending, (state, action) => {
+      .addCase(fetchServiceById.fulfilled, (state, { payload = {} }) => {
+        if (payload.statusCode === statusCodeOk) {
+          state.serviceSelected = payload.data || {};
+        }
+      })
+      .addCase(updateMyServiceById.pending, (state, action) => {
         state.myCourses.status = LOADING;
       })
-      .addCase(updateMyCourseById.fulfilled, (state, action) => {
+      .addCase(updateMyServiceById.fulfilled, (state, { payload }) => {
+        state.status = IDLE;
         state.myCourses.status = IDLE;
       })
       .addCase(deleteCourse.fulfilled, (state, action) => {
@@ -244,9 +272,9 @@ const coursesSlice = createSlice({
         state.myCourses.status = IDLE;
       })
       .addCase(getGuideServices.fulfilled, (state, { payload = {} }) => {
-        if (payload.status === 200) {
+        if (payload.statusCode === statusCodeOk) {
           state.myCourses.status = SUCCEEDED;
-          state.myCourses.data = payload.data.data;
+          state.myCourses.data = payload.data;
         }
       })
       .addCase(getGuideServices.pending, (state, { payload }) => {
@@ -259,13 +287,13 @@ const coursesSlice = createSlice({
   },
 });
 
-export const { courseAdded } = coursesSlice.actions;
+// export const { courseAdded } = coursesSlice.actions;
 
 export default coursesSlice.reducer;
 
 export const selectAllCourses = (state) => state.courses.data;
 export const selectCourseById = (state, courseId) => {
-  return state.courses.data.find(({ _id: id }) => id === courseId);
+  return state.courses.data.find(({ id }) => id === courseId);
 };
 export const selectedCourse = (state) =>
   state.courses.myCourses.myCourseSelected;
@@ -277,6 +305,9 @@ export const getUnpublishedCourses = (state) =>
   state.courses.myCourses.unpublishedCourses.data;
 export const selectCoursesByAuthor = (state, authorId) => {
   return state.courses.data.filter(({ author }) => author._id === authorId);
+};
+export const getSelectedService = (state) => {
+  return state.courses.serviceSelected;
 };
 
 // export const selectCoursesByAuthor = createSelector(

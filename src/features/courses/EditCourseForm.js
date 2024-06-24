@@ -6,9 +6,9 @@ import { FETCH_STATUS } from "../../utils";
 import { convertBase64 } from "../../utils";
 
 import {
-  fetchMyCourseById,
-  selectedCourse,
-  updateMyCourseById,
+  fetchServiceById,
+  getSelectedService,
+  updateMyServiceById,
 } from "./coursesSlice";
 
 import "./styles/add-course-form.scss";
@@ -16,12 +16,9 @@ import { CustomAlert } from "../../components/CustomAlert";
 
 const EditCourseForm = () => {
   const { IDLE, SUCCEEDED, LOADING } = FETCH_STATUS;
-  const { courseId } = useParams();
-  let course = useSelector(selectedCourse);
-  console.log(course);
-  const status = useSelector((state) => state.courses.myCourses.status);
-  const { status: statusCategory } = useSelector((state) => state.category);
-  const categories = useSelector(getCategories);
+  const { serviceId } = useParams();
+  let service = useSelector(getSelectedService);
+  const status = useSelector((state) => state.courses.status);
 
   const [succeededEdit, setSucceededEdit] = useState(false);
   const [addRequestStatus, setAddRequestStatus] = useState(IDLE);
@@ -48,17 +45,18 @@ const EditCourseForm = () => {
 
     try {
       setAddRequestStatus(LOADING);
-      const data = { ...formattedData, _id: courseId };
+      const data = { ...formattedData, id: serviceId };
       if (selectedImage) {
         finalData = { ...data, image: selectedImage };
       } else {
         finalData = data;
       }
-      dispatch(updateMyCourseById(finalData)).unwrap();
+
+      dispatch(updateMyServiceById(finalData)).unwrap();
       setSucceededEdit(true);
       e.target.reset();
     } catch (error) {
-      console.error("Failed to save the course: ", error);
+      console.error("Failed to save the service: ", error);
     } finally {
       setAddRequestStatus(IDLE);
       window.scrollTo(0, 0);
@@ -66,15 +64,11 @@ const EditCourseForm = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchMyCourseById(courseId));
+    dispatch(fetchServiceById(serviceId));
+  }, [serviceId, dispatch, IDLE]);
 
-    if (statusCategory === IDLE) {
-      dispatch(fetchCategories());
-    }
-  }, [courseId, dispatch, IDLE, statusCategory, status]);
-
-  if (!course && status !== IDLE) return;
-  if (!course) course = {};
+  if (!service && status !== IDLE) return;
+  if (!service) service = {};
   return (
     <div className="row">
       <div className="col-lg-12">
@@ -90,114 +84,98 @@ const EditCourseForm = () => {
               )}
 
               <h4 className="font-xss text-grey-800 mb-4 mt-0 fw-700">
-                Información del curso
+                Información del servicio
               </h4>
 
               <div className="row">
                 <div className="col-md-6">
                   <div className="form-group mb30">
                     <label htmlFor="product_sku" className="form-label">
-                      Título
+                      Nombre del servicio
                     </label>
                     <input
-                      name="title"
+                      name="name"
                       className="form-control form_control"
                       type="text"
                       required
-                      placeholder="Título"
-                      defaultValue={course.title}
+                      placeholder="Nombre"
+                      defaultValue={service.name}
                     />
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="form-group mb30">
-                    <label className="form-label">Categoría</label>
-                    <select
-                      name="category"
-                      required
-                      className="form-control form_control"
-                      defaultValue={course.category?._id}
-                    >
-                      {categories.map(({ _id: id, title }) => (
-                        <option key={id} value={id}>
-                          {title}
-                        </option>
-                      ))}
-                    </select>
                   </div>
                 </div>
                 <div className="col-md-6">
                   <div className="form-group mb30">
                     <label htmlFor="product_sku" className="form-label">
-                      Duración del curso
+                      Fecha
                     </label>
                     <input
-                      name="duration"
+                      name="date"
                       className="form-control form_control"
                       type="text"
-                      placeholder="Duración (Semanas)"
-                      required
-                      defaultValue={course.duration}
+                      placeholder="YYYY-MM-DD"
+                      defaultValue={service.date}
                     />
                   </div>
                 </div>
                 <div className="col-md-6">
                   <div className="form-group mb30">
-                    <label className="form-label">Frecuencia</label>
+                    <label className="form-label">Tipo de service</label>
                     <select
-                      name="frequency"
-                      required
+                      name="serviceType"
                       className="form-control form_control"
-                      defaultValue={course.frequency}
-                    >
-                      <option value="unica">Unica</option>
-                      <option value="semanal">Semanal</option>
-                      <option value="mensual">Mensual</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="col-sm-12">
-                  <div className="form-group mb30">
-                    <label className="form-label">Tipo de curso</label>
-                    <select
-                      name="type"
-                      required
-                      className="form-control form_control"
-                      defaultValue={course.type}
                     >
                       <option value="individual">Individual</option>
                       <option value="grupal">Grupal</option>
+                      <option value="translation">Traducción</option>
                     </select>
                   </div>
                 </div>
-                <div className="col-sm-12">
-                  <div className="form-group">
-                    <label htmlFor="product_sku" className="form-label">
-                      Descripción
-                    </label>
-                    <textarea
-                      required
-                      name="description"
-                      className="form-control h150"
-                      rows="6"
-                      placeholder="Descripción del curso"
-                      defaultValue={course.description}
-                    ></textarea>
+                <div className="col-md-6">
+                  <div className="form-group mb30">
+                    <label className="form-label">Cupo disponible</label>
+                    <input
+                      name="quantity"
+                      className="number-input form-control form_control"
+                      type="text"
+                      placeholder="Cantidad de personas (solo número)"
+                      defaultValue={service.quantity}
+                    />
                   </div>
                 </div>
 
+                <div className="col-md-6">
+                  <div className="form-group mb30">
+                    <label htmlFor="product_sku" className="form-label">
+                      País
+                    </label>
+                    <input
+                      className="number-input form-control form_control"
+                      type="text"
+                      placeholder="País"
+                    />
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="form-group mb30">
+                    <label htmlFor="product_sku" className="form-label">
+                      Ciudad
+                    </label>
+                    <input
+                      className="number-input form-control form_control"
+                      type="text"
+                      placeholder="Ciudad"
+                    />
+                  </div>
+                </div>
                 <div className="col-sm-12">
                   <div className="form-group">
-                    <label htmlFor="product_sku" className="form-label">
-                      Requisitos
-                    </label>
+                    <label className="form-label">Descripción</label>
                     <textarea
-                      name="requirements"
-                      required
+                      name="description"
                       className="form-control h150"
                       rows="6"
-                      placeholder="Requisitos del curso"
-                      defaultValue={course.requirements}
+                      placeholder="Descripción del servicio"
+                      defaultValue={service.description}
                     ></textarea>
                   </div>
                 </div>
@@ -212,7 +190,6 @@ const EditCourseForm = () => {
               <div className="form-group mb30">
                 <div className="input-file-container">
                   <input
-                    name="course-image"
                     className="upload-file-input"
                     type="file"
                     onChange={(event) => handleFile(event)}
@@ -238,7 +215,7 @@ const EditCourseForm = () => {
                       className="form-control form_control"
                       type="text"
                       placeholder="($)"
-                      defaultValue={course.price}
+                      defaultValue={service.price}
                     />
                   </div>
                 </div>

@@ -96,7 +96,7 @@ const Home = () => {
                 <div className="row">
                   <div className="col-6">
                     <Link
-                      to="/courses-grid"
+                      to="/services-grid"
                       className="w-100 btn font-xssss fw-600 ls-3 banner-btn p-0 border-0 text-uppercase light-btn "
                     >
                       Buscar destinos
@@ -217,7 +217,7 @@ const Home = () => {
 
           <div className="row justify-content-center pt-5">
             <Link
-              to="/courses-grid"
+              to="/services-grid"
               className="ml-1 mr-1 rounded-lg font-xss border-size-md fw-600 open-font p-3 w250 btn outline-btn"
             >
               Ver todos los destinos

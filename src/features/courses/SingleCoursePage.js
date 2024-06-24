@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import {
-  selectCourseById,
+  getSelectedService,
   getCoursesStatus,
   fetchCourses,
+  fetchServiceById,
 } from "./coursesSlice";
 import { Rating } from "react-simple-star-rating";
 import { FETCH_STATUS } from "../../utils";
@@ -16,27 +17,29 @@ import { addComment } from "../comments/commentsSlice";
 const SingleCoursePage = () => {
   const { LOADING, IDLE } = FETCH_STATUS;
   const dispatch = useDispatch();
-  const { courseId } = useParams();
+  const { serviceId } = useParams();
   const [rating, setRating] = useState(0);
   const [emptyFields, setEmptyFields] = useState(false);
+  const [selectedSevice, setSelectedService] = useState(null);
   const [commentSentSucceeded, setCommentSentSucceeded] = useState(false);
 
   const coursesStatus = useSelector(getCoursesStatus);
-  const course = useSelector((state) => selectCourseById(state, courseId));
+  const service = useSelector((state) => getSelectedService(state, serviceId));
 
   const {
     avg_rating,
-    title,
-    author,
+    name,
+    guide,
     description,
     requirements,
     comments,
-    frequency,
+    date,
     duration,
     price,
-    type,
+    serviceType,
     image,
-  } = course || {};
+    quantity,
+  } = service || {};
 
   const handleRating = (rate) => {
     setRating(rate);
@@ -50,7 +53,7 @@ const SingleCoursePage = () => {
     const finalData = {
       ...formattedData,
       rating,
-      course: course._id,
+      course: service.id,
     };
 
     if (!canSave(finalData)) {
@@ -72,15 +75,19 @@ const SingleCoursePage = () => {
   };
 
   useEffect(() => {
+    if (!selectedSevice) {
+      dispatch(fetchServiceById(serviceId));
+      setSelectedService(service);
+    }
     if (coursesStatus === IDLE) {
       dispatch(fetchCourses());
     }
-  }, [coursesStatus, IDLE, dispatch]);
+  }, [coursesStatus, IDLE, dispatch, selectedSevice, serviceId, service]);
 
   if (coursesStatus === LOADING) {
     return <section>Cargando...</section>;
-  } else if (!course) {
-    return <section>Course not found!</section>;
+  } else if (!service) {
+    return <section>Service not found!</section>;
   }
 
   return (
@@ -94,7 +101,9 @@ const SingleCoursePage = () => {
       <div className="col-12">
         <div className="col-md-6 card border-0 mb-0 rounded-lg overflow-hidden m-auto">
           <img
-            src={image}
+            src={
+              image || "/assets/images/FindYourGuide-images/noServiceImage.jpg"
+            }
             alt="course-img"
             className="single-course-main-img"
             style={{ height: "300px", objectFit: "contain" }}
@@ -102,16 +111,16 @@ const SingleCoursePage = () => {
         </div>
         <div className="col-6 m-auto align-items-center border-0 pt-4 rounded-10 admin-form">
           <Link
-            to={`/course-registration/${course._id}`}
+            to={`/course-registration/${service.id}`}
             className="col-12 form-control text-center style2-input text-white fw-600 bg-current border-0 p-0 "
           >
-            Inscribirme
+            Reservar
           </Link>
         </div>
         <div className="card d-block border-0 rounded-lg overflow-hidden dark-bg-transparent bg-transparent mt-4 pb-3">
           <div className="row">
             <div className="col-10">
-              <h2 className="fw-700 font-md d-block lh-4 mb-2">{title}</h2>
+              <h2 className="fw-700 font-md d-block lh-4 mb-2">{name}</h2>
               <div className="star d-block w-100 text-left">
                 {avg_rating &&
                   Array.from(Array(avg_rating).keys()).map((n) => (
@@ -123,9 +132,9 @@ const SingleCoursePage = () => {
                     />
                   ))}
               </div>
-              <Link to={`/author-profile/${author._id}`}>
+              <Link to={`/author-profile/${guide.id}`}>
                 <span className="font-xssss fw-700 text-grey-900 d-inline-block ml-0 text-dark">
-                  {author.name}
+                  {guide.username}
                 </span>
               </Link>
             </div>
@@ -133,7 +142,7 @@ const SingleCoursePage = () => {
         </div>
         <div className="card d-block border-0 rounded-lg overflow-hidden p-4 shadow-xss mt-4 course-data-container">
           <h2 className="fw-700 font-sm mb-3 mt-1 pl-1 data-title mb-4">
-            Información del curso
+            Información del servicio
           </h2>
           <h4 className="font-xssss fw-600 text-grey-600 mb-2 pl-30 position-relative lh-24">
             <i className="ti-check font-xssss btn-round-xs bg-dark-purple text-white position-absolute left-0 top-5"></i>
@@ -141,26 +150,18 @@ const SingleCoursePage = () => {
           </h4>
           <h4 className="font-xssss fw-600 text-grey-600 mb-2 pl-30 position-relative lh-24">
             <i className="ti-check font-xssss btn-round-xs bg-dark-purple text-white position-absolute left-0 top-5"></i>
-            Este curso será {type}
+            Este curso será {serviceType}.{" "}
+            {serviceType === "grupal" && (
+              <span>Cupo máximo: {quantity} personas</span>
+            )}
           </h4>
           <h4 className="font-xssss fw-600 text-grey-600 mb-2 pl-30 position-relative lh-24">
             <i className="ti-check font-xssss btn-round-xs bg-dark-purple text-white position-absolute left-0 top-5"></i>
-            Frecuencia: {frequency}
+            Fecha: {date}
           </h4>
           <h4 className="font-xssss fw-600 text-grey-600 mb-2 pl-30 position-relative lh-24">
-            <i className="ti-check font-xssss btn-round-xs bg-dark-purple text-white position-absolute left-0 top-5"></i>
-            Duracion: {duration} semanas
-          </h4>
-          <h4 className="font-xssss fw-600 text-grey-600 mb-5 pl-30 position-relative lh-24">
             <i className="ti-check font-xssss btn-round-xs bg-dark-purple text-white position-absolute left-0 top-5"></i>
             Costo total del curso: ${price}
-          </h4>
-          <h2 className="fw-700 font-sm mb-3 mt-1 pl-1 data-title mb-4">
-            Requisitos
-          </h2>
-          <h4 className="font-xssss fw-600 text-grey-600 mb-3 pl-30 position-relative lh-24">
-            <i className="ti-check font-xssss btn-round-xs bg-dark-purple text-white position-absolute left-0 top-5"></i>
-            {requirements}
           </h4>
         </div>
 
@@ -175,7 +176,7 @@ const SingleCoursePage = () => {
             </div>
           </div>
 
-          {course.comments?.map(
+          {service.comments?.map(
             ({ _id: id, name, description, rating, created_at: date }) => (
               <div key={id} className="row mt-2 mb-1">
                 <div className="col-10 pl-4">
@@ -207,7 +208,7 @@ const SingleCoursePage = () => {
           <div className="row">
             <div className="col-12  mb-4">
               <h2 className="lh-1 m-0 text-grey-900 fw-700">
-                Agregar un comentario
+                Deja un comentario para tu guía
               </h2>
               <form className="row" onSubmit={sendComment}>
                 <div className="col-md-6">

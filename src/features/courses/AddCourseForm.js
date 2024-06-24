@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { FETCH_STATUS } from "../../utils";
 import "./styles/add-course-form.scss";
 import { CustomAlert } from "../../components/CustomAlert";
-import { fetchCategories, getCategories } from "../categories/categorySlice";
 import { convertBase64 } from "../../utils";
 
 const AddCourseForm = () => {
@@ -12,10 +11,7 @@ const AddCourseForm = () => {
   const { IDLE, SUCCEEDED, LOADING } = FETCH_STATUS;
   const [addRequestStatus, setAddRequestStatus] = useState(IDLE);
   const [succeededAdded, setSucceededAdded] = useState(false);
-  const categories = useSelector(getCategories);
   const [selectedImage, setSelectedImage] = useState(null);
-
-  const { status: statusCategory } = useSelector((state) => state.category);
 
   const canSave = (values) =>
     Object.values(values).every(Boolean) && addRequestStatus === IDLE;
@@ -87,7 +83,7 @@ const AddCourseForm = () => {
                       name="name"
                       className="form-control form_control"
                       type="text"
-                      placeholder="Título"
+                      placeholder="Nombre"
                     />
                   </div>
                 </div>

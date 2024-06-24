@@ -13,6 +13,7 @@ const CourseCard = ({ service = {} }) => {
     createdBy,
     image,
     description,
+    guide,
   } = service;
 
   return (
@@ -23,11 +24,14 @@ const CourseCard = ({ service = {} }) => {
       <div className="card course-card w-100 p-0 shadow-xss border-0 rounded-lg overflow-hidden mr-1">
         <div className="card-image w-100 mb-3">
           <a
-            href={`/course-detail/${id}`}
+            href={`/service-detail/${id}`}
             className="position-relative d-block img-link"
           >
             <img
-              src={image || "/assets/images/user.png"}
+              src={
+                image ||
+                "/assets/images/FindYourGuide-images/noServiceImage.jpg"
+              }
               alt="course"
               className="w-100"
             />
@@ -47,7 +51,7 @@ const CourseCard = ({ service = {} }) => {
             </div>
             <h4 className="fw-700 font-xss mt-3 lh-28 mt-0">
               <Link
-                to={`/course-detail/${id}`}
+                to={`/service-detail/${id}`}
                 className="text-dark text-grey-900"
               >
                 {name}
@@ -74,7 +78,7 @@ const CourseCard = ({ service = {} }) => {
                   to={`/author-profile/${createdBy}`}
                   className="fw-500 text-grey-500 font-xssss"
                 >
-                  Guía: {createdBy}
+                  Guía: {guide?.username}
                 </Link>
               </li>
             </div>

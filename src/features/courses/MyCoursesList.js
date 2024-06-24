@@ -57,7 +57,7 @@ const MyCoursesList = () => {
             {!isMobile ? (
               <tr className="my-course-line desktop-view">
                 <td className="product-thumbnail text-start ps-0">
-                  <Link to={`/edit-course/${value.id}`} className="small-icon">
+                  <Link to={`/edit-service/${value.id}`} className="small-icon">
                     <img
                       src={
                         value.image
@@ -90,7 +90,7 @@ const MyCoursesList = () => {
                 </td>
                 <td className="product-remove text-right">
                   <Button className="bg-transparent border-0 pr-0 course-action">
-                    <Link to={`/edit-course/${value.id}`}>
+                    <Link to={`/edit-service/${value.id}`}>
                       <i className="feather-edit mr-1 font-xs text-grey-500"></i>
                       <span className="button-legend">Editar</span>
                     </Link>
@@ -164,13 +164,13 @@ const MyCoursesList = () => {
                 <Button className="col-12 bg-current border-0 action-btn filled-btn">
                   <Link
                     className="text-white"
-                    to={`/edit-course/${selectedCourse.id}`}
+                    to={`/edit-service/${selectedCourse.id}`}
                   >
                     <span>Editar</span>
                   </Link>
                 </Button>
                 <Button
-                  onClick={() => deleteCourseAction(selectedCourse._id)}
+                  onClick={() => deleteCourseAction(selectedCourse.id)}
                   className="col-12 action-btn outline-btn"
                 >
                   <span>Eliminar</span>
