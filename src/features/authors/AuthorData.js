@@ -1,36 +1,44 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Tab, Tabs } from "react-bootstrap";
-import { selectCoursesByAuthor } from "../courses/coursesSlice";
 import {
-  selectAuthorById,
-  selectAuthorStatus,
-  fetchAuthors,
-} from "./authorsSlice";
-import CourseCard from "../../components/CourseCard";
+  getSelectedService,
+  getCoursesStatus,
+  fetchCourses,
+  fetchServiceById,
+} from "../courses/coursesSlice";
+import { FETCH_STATUS } from "../../utils";
 
 const AuthorData = () => {
-  const { authorId } = useParams();
-  const authorStatus = useSelector(selectAuthorStatus);
-  const author = useSelector((state) => selectAuthorById(state, authorId));
+  const { LOADING, IDLE } = FETCH_STATUS;
+  const { serviceId } = useParams();
   const dispatch = useDispatch();
 
-  const coursesForAuthor = useSelector((state) =>
-    selectCoursesByAuthor(state, authorId)
-  );
+  const service = useSelector((state) => getSelectedService(state, serviceId));
+  const coursesStatus = useSelector(getCoursesStatus);
+
+  const [guide, setGuide] = useState(null);
+  const [selectedSevice, setSelectedService] = useState(null);
 
   useEffect(() => {
-    if (authorStatus === "idle") {
-      dispatch(fetchAuthors());
+    if (!selectedSevice) {
+      dispatch(fetchServiceById(serviceId));
+      setSelectedService(service);
+      setGuide(service?.guide);
     }
-  });
 
-  if (!author) {
-    return <section>Autor no encontrado!</section>;
+    if (coursesStatus === IDLE) {
+      dispatch(fetchCourses());
+    }
+  }, [coursesStatus, IDLE, dispatch, selectedSevice, serviceId, service]);
+
+  if (!guide) {
+    return <section>Guía no encontrado!</section>;
   }
 
-  const { name, email, experience, degree, picture } = author;
+  const { firstName, lastName, username, email, picture, country, language } =
+    guide || {};
 
   return (
     <div className="course-details pb-lg--7 pt-4 pb-5">
@@ -55,7 +63,7 @@ const AuthorData = () => {
                     </div>
                     <div className="col-xl-4 col-lg-6 pl-xl-5 pb-xl-5 pb-3">
                       <h4 className="fw-700 font-md text-white mt-3 mb-1">
-                        {name}
+                        {`${firstName} ${lastName}`}
                       </h4>
                       <span className="font-xssss fw-600 text-grey-500 d-inline-block ml-0">
                         {email}
@@ -82,28 +90,32 @@ const AuthorData = () => {
                       <div className="row">
                         <div className="col-xl-12">
                           <p className="font-xssss fw-600 lh-28 text-grey-500 pl-0">
-                            {experience}
+                            Puedes encontrarme con mi nombre de usuario:{" "}
+                            {username}
                           </p>
                           <p className="font-xssss fw-600 lh-28 text-grey-500 pl-0">
-                            {degree}
+                            Soy de: {country}
+                          </p>
+                          <p className="font-xssss fw-600 lh-28 text-grey-500 pl-0">
+                            Mi idioma principal es: {language}
                           </p>
                         </div>
                       </div>
                     </div>
                   </div>
                 </Tab>
-                <Tab eventKey="courses" title="Cursos">
+                <Tab eventKey="services" title="Servicios">
                   <div className="card d-block w-100 border-0 shadow-xss rounded-lg overflow-hidden p-lg-4 p-2">
                     <div className="card-body mb-lg-3 pb-0">
                       <h2 className="fw-400 font-lg d-block">
-                        Mis <b>Cursos</b>
+                        Mis <b>Servicios</b>
                       </h2>
                     </div>
                     <div className="card-body pb-0">
                       <div className="row">
-                        {coursesForAuthor.map((value) => (
+                        {/* {coursesForAuthor.map((value) => (
                           <CourseCard course={value} key={value._id} />
-                        ))}
+                        ))} */}
                       </div>
                     </div>
                   </div>

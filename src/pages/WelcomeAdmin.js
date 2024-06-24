@@ -25,7 +25,7 @@ const WelcomeAdmin = () => {
             <main className="main-section container px-3 py-4">
               <h1 className="col-12 display4-xs-size">
                 Bienvenido/a,
-                <br /> {user?.firsName || "Usuario"}!
+                <br /> {user?.username || "Usuario"}!
               </h1>
               <div className="row">
                 <div className="illustration-container">

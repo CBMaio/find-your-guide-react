@@ -58,7 +58,7 @@ class Root extends Component {
 
             <Route
               exact
-              path={`/author-profile/:authorId`}
+              path={`/guide-profile/:serviceId`}
               element={<AuthorProfile />}
             />
 

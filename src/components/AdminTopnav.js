@@ -26,7 +26,7 @@ const AdminTopnav = () => {
               className="w45 mt-n1 rounded-circle user-img"
             />
             <span className="d-none d-lg-inline text-grey-600 fw-700 ml-4 mr-4 font-xssss">
-              {userInfo?.firsName}
+              {userInfo?.firstName}
               <i className="font-xsssss d-block text-grey-500 fw-500 black-icon">
                 {userInfo?.email}
               </i>

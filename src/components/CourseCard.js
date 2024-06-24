@@ -10,7 +10,6 @@ const CourseCard = ({ service = {} }) => {
     price,
     name,
     date,
-    createdBy,
     image,
     description,
     guide,
@@ -75,7 +74,7 @@ const CourseCard = ({ service = {} }) => {
             <div className="memberlist mt-3 mb-2 ml-0 d-block">
               <li className="w-auto">
                 <Link
-                  to={`/author-profile/${createdBy}`}
+                  to={`/guide-profile/${id}`}
                   className="fw-500 text-grey-500 font-xssss"
                 >
                   Guía: {guide?.username}
