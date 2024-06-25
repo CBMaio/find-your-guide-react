@@ -25,7 +25,6 @@ import Password from "./pages/Password";
 import Register from "./pages/Register";
 import ScrollToTop from "./components/ScrollToTop";
 import WelcomeAdmin from "./pages/WelcomeAdmin";
-import Reset from "./pages/Reset";
 
 import ProtectedRoute from "./pages/ProtectedRoute";
 import Chat from "./pages/Chat";
@@ -59,8 +58,6 @@ class Root extends Component {
               path={`/service-detail/:serviceId`}
               element={<ServiceDetails />}
             />
-
-            <Route exact path={`/reset`} element={<Reset />} />
 
             {/* privates routes */}
             <Route element={<ProtectedRoute />}>
