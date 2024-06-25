@@ -212,9 +212,9 @@ const SinglePage = () => {
           onClick={handleReservation}
         >
           {/* <Link to={`/registration/${id}`}> */}
-          <div className="col-12 form-control text-center style2-input text-white fw-600 bg-current border-0 p-0 ">
+          <button className="col-12 form-control text-center style2-input text-white fw-600 bg-current border-0 p-0 ">
             Reservar
-          </div>
+          </button>
           {/* </Link> */}
         </div>
         <div className="card d-block border-0 rounded-lg overflow-hidden dark-bg-transparent bg-transparent mt-4 pb-3">

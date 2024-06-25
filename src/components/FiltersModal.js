@@ -51,6 +51,24 @@ const FiltersModal = ({ handleModal, setFilters }) => {
 
                     <div className="form-group icon-input mb-0">
                       <i className="ti-package font-xs text-grey-400"></i>
+                      <input
+                        name="city"
+                        className="style1-select bg-transparent border-0 pl-5"
+                        placeholder="Buscar por ciudad"
+                      />
+                    </div>
+
+                    <div className="form-group icon-input mb-0">
+                      <i className="ti-package font-xs text-grey-400"></i>
+                      <input
+                        name="country"
+                        className="style1-select bg-transparent border-0 pl-5"
+                        placeholder="Buscar por país"
+                      />
+                    </div>
+
+                    <div className="form-group icon-input mb-0">
+                      <i className="ti-package font-xs text-grey-400"></i>
                       <select
                         name="lenguaje"
                         className="style1-select bg-transparent border-0 pl-5"
