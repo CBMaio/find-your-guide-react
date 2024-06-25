@@ -99,49 +99,6 @@ export const updateUser = createAsyncThunk(
   }
 );
 
-export const sendEmailForReset = createAsyncThunk(
-  "auth/reset",
-  async (email) => {
-    try {
-      await axios.post(`${AUTH_API_COMPLETE}/reset`, {
-        email,
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-);
-
-export const resetPassword = createAsyncThunk("users/resetPw", async (data) => {
-  try {
-    const config = {
-      headers: {
-        "x-access-token": data.token,
-      },
-    };
-
-    const response = await axios.put(
-      `${AUTH_API_COMPLETE}/update`,
-      { password: data.password },
-      config
-    );
-  } catch (error) {
-    console.error(error);
-  }
-});
-
-export const verifyUser = createAsyncThunk("user/verify", async (email) => {
-  try {
-    const response = await axios.get(
-      `${AUTH_API_COMPLETE}/verify?email=${email}`
-    );
-    console.log(response);
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
-});
-
 export const getCurrentUser = () => {
   return JSON.parse(localStorage.getItem("userToken"));
 };

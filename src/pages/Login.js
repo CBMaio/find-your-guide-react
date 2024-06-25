@@ -159,14 +159,6 @@ const Login = () => {
                       </div>
                     )}
 
-                    <div className="form-check text-left mb-5">
-                      <a
-                        href="/forgot"
-                        className="fw-600 font-xssss text-grey-700 mt-1 float-right"
-                      >
-                        Olvidaste tu contraseña?
-                      </a>
-                    </div>
                     <div className="col-sm-12 p-0 text-left">
                       <div className="form-group mb-1">
                         <button

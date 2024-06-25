@@ -19,7 +19,6 @@ import Contact from "./pages/Contact";
 import ServiceDetails from "./pages/ServiceDetails";
 import ServicesGrid from "./pages/ServicesGrid";
 import EditServicePage from "./pages/EditServicePage";
-import Forgot from "./pages/Forgot";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Password from "./pages/Password";
@@ -42,8 +41,6 @@ class Root extends Component {
             <Route exact path={`/login`} element={<Login />} />
 
             <Route exact path={`/register`} element={<Register />} />
-
-            <Route exact path={`/forgot`} element={<Forgot />} />
 
             <Route exact path={`/contact`} element={<Contact />} />
 
