@@ -24,19 +24,16 @@ const ModalToPay = ({ service, close }) => {
               </div>
             </div>
 
-            <div className="mb-2 mt-2" onClick={closeModal}>
+            <div className="mb-2 mt-2">
               <div className="m-auto rounded-lg style1-input mb-0 bg-current text-white text-center font-xss fw-500 border-0 p-2 w175">
-                Cancelar
+                Pagar
               </div>
             </div>
 
-            <div className="form-group mb-0">
-              <Link
-                to="/"
-                className="m-auto rounded-lg style1-input mb-0 bg-current text-white text-center font-xss fw-500 border-0 p-0 w175"
-              >
-                Ir al inicio
-              </Link>
+            <div className="form-group mb-0" onClick={closeModal}>
+              <div className="m-auto rounded-lg style1-input mb-0 bg-current text-white text-center font-xss fw-500 border-0 p-0 w175">
+                Cancelar
+              </div>
             </div>
           </div>
         </div>

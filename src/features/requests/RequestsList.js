@@ -30,14 +30,14 @@ const RequestsList = () => {
 
   const getRequestState = (state) => {
     switch (state) {
-      case "pending":
+      case "PENDING":
         return "PENDIENTE";
       case "accepted":
-        return "ACEPTADO";
-      case "rejected":
+        return "CONFIRMED";
+      case "CANCELED":
         return "RECHAZADO";
       default:
-        return "PENDIENTE";
+        return "";
     }
   };
 
@@ -58,7 +58,7 @@ const RequestsList = () => {
   }, [requestsStatus, dispatch, IDLE]);
 
   useEffect(() => {
-    const data = !["pending", "accepted", "rejected"].includes(selectedFilter)
+    const data = !["PENDING", "CONFIRMED", "CANCELED"].includes(selectedFilter)
       ? requests
       : requests.filter(({ state }) => state === selectedFilter);
 
