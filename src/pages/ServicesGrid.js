@@ -4,11 +4,17 @@ import Footer from "../components/Footer";
 import Searcharea from "../components/Searcharea";
 import ServiceList from "../features/courses/ServiceList";
 import FiltersModal from "../components/FiltersModal";
+import { CustomAlert } from "../components/CustomAlert";
 
 const ServicesGrid = () => {
   const [searchProductByQuery, setSearchProductByQuery] = useState(null);
   const [isOpenFiltersModal, setIsOpenFiltersModal] = useState(false);
   const [filterSelected, setFiltersSelected] = useState({});
+  const [displayCustomAlert, setDisplayCustomAlert] = useState({
+    display: false,
+    isSuccess: false,
+    text: "",
+  });
 
   const handleModal = (state) => {
     setIsOpenFiltersModal(state);
@@ -25,6 +31,14 @@ const ServicesGrid = () => {
 
   const handleDeleteFilters = () => {
     setFiltersSelected({});
+  };
+
+  const handleAlert = ({ display, isSuccess, text }) => {
+    setDisplayCustomAlert({
+      display,
+      isSuccess,
+      text,
+    });
   };
 
   return (
@@ -46,6 +60,7 @@ const ServicesGrid = () => {
             </div>
 
             <ServiceList
+              handleAlert={handleAlert}
               queryFilter={searchProductByQuery}
               filterSelected={filterSelected}
             />

@@ -12,7 +12,12 @@ import Card from "../../components/Card";
 import { FETCH_STATUS, isEmptyObject } from "../../utils";
 import axiosInstance from "../../services/AxiosInstance";
 
-const ServiceList = ({ limit = false, queryFilter, filterSelected }) => {
+const ServiceList = ({
+  limit = false,
+  queryFilter,
+  filterSelected,
+  handleAlert,
+}) => {
   const { LOADING, SUCCEEDED, IDLE } = FETCH_STATUS;
   const dispatch = useDispatch();
 
@@ -50,19 +55,34 @@ const ServiceList = ({ limit = false, queryFilter, filterSelected }) => {
       return;
     }
 
-    const endpoint = `${process.env.REACT_APP_JAVA_BACK_URL}/api/v1/user`;
-    const queryString = Object.entries(filters)
-      .map(
-        ([key, value]) =>
-          `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
-      )
-      .join("&");
+    try {
+      const endpoint = `${process.env.REACT_APP_JAVA_BACK_URL}/api/v1/user`;
+      const queryString = Object.entries(filters)
+        .map(
+          ([key, value]) =>
+            `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+        )
+        .join("&");
 
-    const url = `${endpoint}/?${queryString}`;
-    const { data } = await axiosInstance.get(url);
+      const url = `${endpoint}/?${queryString}`;
+      const { data } = await axiosInstance.get(url);
 
-    if (data.statusCode === "OK") {
-      return data.data;
+      if (data.statusCode === "OK") {
+        return data.data;
+      }
+    } catch (error) {
+      handleAlert({
+        display: true,
+        isSuccess: false,
+        text: "Hubo un error aplicando los filtros. Inténtalo nuevamente",
+      });
+
+      setTimeout(() => {
+        handleAlert({
+          display: false,
+        });
+      }, 2000);
+      console.error("Error fetching services with filters", error);
     }
   };
 
