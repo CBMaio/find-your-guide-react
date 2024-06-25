@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addNewRequest } from "./requestsSlice";
 
-const RequestAplicationForm = ({ setFormStatus, courseId }) => {
+const RequestAplicationForm = ({ setFormStatus, id }) => {
   const dispatch = useDispatch();
 
   const sendForm = async (e) => {
@@ -9,12 +9,12 @@ const RequestAplicationForm = ({ setFormStatus, courseId }) => {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
 
-    if (!courseId) {
-      alert("Por favor, asegurese de estar en un curso existente");
-      return;
-    }
+    // if (!id) {
+    //   alert("Por favor, asegurese de estar en un curso existente");
+    //   return;
+    // }
 
-    dispatch(addNewRequest({ ...data, course: courseId }));
+    // dispatch(addNewRequest({ ...data, course: courseId }));
     setFormStatus(true);
   };
 

@@ -19,10 +19,9 @@ export const fetchComments = createAsyncThunk(
   async (id) => {
     try {
       const response = await axiosInstance.get(`${COMMENT_URL}/user/${id}`);
-      console.log(response);
       return response.data;
     } catch (error) {
-      console.error(error);
+      console.error("Error fetching comments", error);
     }
   }
 );
@@ -35,10 +34,10 @@ export const addComment = createAsyncThunk(
         `${COMMENT_URL}/${id}`,
         comment
       );
-      console.log(response);
+
       return response.data;
     } catch (error) {
-      console.error(error);
+      console.error("Error in addComment", error);
     }
   }
 );
@@ -50,7 +49,6 @@ export const updateComment = createAsyncThunk(
       const response = await axiosInstance.put(`/comment/${data.id}`, {
         state: data.state,
       });
-      console.log(response);
     } catch (error) {
       console.error(error);
     }

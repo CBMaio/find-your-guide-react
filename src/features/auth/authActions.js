@@ -40,10 +40,13 @@ export const getUserData = createAsyncThunk(
     try {
       const getToken = localStorage.getItem("userToken");
       if (!getToken) return;
-      const response = await axiosInstance.get(`${USER_PATH}/${type}`);
-      const currentUser = response?.data?.find(({ email }) => email === user);
+      const { data } = await axiosInstance.get(
+        `${USER_PATH}/getBy/parameter/jwt`
+      );
 
-      if (response.status === 200) {
+      const currentUser = data.data;
+
+      if (data.statusCode === "OK") {
         const data = JSON.stringify({ ...currentUser, type });
         localStorage.setItem("userData", data);
       }

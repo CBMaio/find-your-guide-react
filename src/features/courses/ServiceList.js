@@ -66,7 +66,7 @@ const ServiceList = ({ limit = false, queryFilter, filterSelected }) => {
   return servicesStatus === LOADING ? (
     <div className="pl-3">Cargando...</div>
   ) : !elementsToShow.length ? (
-    <div className="pl-3">No se encontraron cursos</div>
+    <div className="pl-3">No se encontraron coincidencias con la búsqueda</div>
   ) : (
     elementsToShow
       .slice(0, limit || elementsToShow.length)

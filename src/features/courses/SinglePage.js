@@ -208,12 +208,11 @@ const SinglePage = () => {
           />
         </div>
         <div className="col-6 m-auto align-items-center border-0 pt-4 rounded-10 admin-form">
-          <div
-            onClick={handleReservation}
-            className="col-12 form-control text-center style2-input text-white fw-600 bg-current border-0 p-0 "
-          >
-            Reservar
-          </div>
+          <Link to={`/registration/${id}`}>
+            <div className="col-12 form-control text-center style2-input text-white fw-600 bg-current border-0 p-0 ">
+              Reservar
+            </div>
+          </Link>
         </div>
         <div className="card d-block border-0 rounded-lg overflow-hidden dark-bg-transparent bg-transparent mt-4 pb-3">
           <div className="row">
@@ -239,7 +238,7 @@ const SinglePage = () => {
           <h4 className="font-xssss fw-600 text-grey-600 mb-2 pl-30 position-relative lh-24">
             <i className="ti-check font-xssss btn-round-xs bg-dark-purple text-white position-absolute left-0 top-5"></i>
             Este curso será {serviceType}.{" "}
-            {serviceType === "grupal" && (
+            {serviceType === "TOURS_GRUPALES" && (
               <span>Cupo máximo: {quantity} personas</span>
             )}
           </h4>

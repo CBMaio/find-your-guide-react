@@ -317,7 +317,6 @@ const Accountinfo = () => {
                                 <input
                                   className="account-input-file"
                                   type="file"
-                                  name="credentialPhoto"
                                   onChange={(event) => handleFile(event)}
                                 />
                               </figure>

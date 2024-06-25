@@ -29,6 +29,7 @@ import WelcomeAdmin from "./pages/WelcomeAdmin";
 
 import ProtectedRoute from "./pages/ProtectedRoute";
 import Chat from "./pages/Chat";
+import Registration from "./pages/Registration";
 
 class Root extends Component {
   render() {
@@ -94,6 +95,12 @@ class Root extends Component {
                 exact
                 path={`/admin-requests`}
                 element={<AdminRequests />}
+              />
+
+              <Route
+                exact
+                path={`/registration/:serviceId`}
+                element={<Registration />}
               />
 
               <Route exact path={`/admin-prizes`} element={<AdminPrizes />} />
