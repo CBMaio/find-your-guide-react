@@ -35,10 +35,16 @@ const RequestsList = () => {
     switch (state) {
       case "PENDING":
         return "PENDIENTE";
-      case "accepted":
+      case "FULL_PAID":
+        return "PAGADO";
+      case "CONFIRMED":
         return "CONFIRMED";
       case "CANCELED":
         return "RECHAZADO";
+      case "INTOUR":
+        return "EN TOUR";
+      case "END":
+        return "FINALIZADO";
       default:
         return "";
     }
@@ -54,14 +60,27 @@ const RequestsList = () => {
   };
 
   useEffect(async () => {
-    const { data } = await axiosInstance.get(
-      `${BASE_URL}/api/v1/buys/guide/${
-        JSON.parse(localStorage.getItem("userData")).id
-      }`
-    );
-    setRequestsToShow(data.data);
-    console.log(data.data);
+    const getDefaultNormalizer = async () => {
+      const { data } = await axiosInstance.get(
+        `${BASE_URL}/api/v1/buys/guide/${
+          JSON.parse(localStorage.getItem("userData")).id
+        }`
+      );
+      setRequestsToShow(data.data);
+    };
+    getDefaultNormalizer();
   }, []);
+
+  const handleChangeStatus = (id, status) => {
+    axiosInstance
+      .put(`${BASE_URL}/api/v1/buys/status`, {
+        id: id,
+        status: status,
+      })
+      .then((resp) => {
+        window.location.reload();
+      });
+  };
 
   useEffect(() => {
     const data = !["PENDING", "CONFIRMED", "CANCELED"].includes(selectedFilter)
@@ -92,10 +111,10 @@ const RequestsList = () => {
               </select>
             </div>
             <div className="card-body p-4">
-              {!requests.length && (
+              {!requestsToShow.length && (
                 <div>No hay contrataciones para mostar </div>
               )}
-              {!!requests.length && (
+              {!!requestsToShow.length && (
                 <div className="table-responsive">
                   <table className="table table-admin mb-0">
                     <thead className="bg-greylight rounded-10 ovh">
@@ -120,17 +139,17 @@ const RequestsList = () => {
                       {requestsToShow.map((value) => (
                         <tr key={value.id}>
                           <td>
-                            <b>{value.service.title}</b>
+                            <b>{value.service.name}</b>
                           </td>
                           <td>{value.name}</td>
-                          <td>{value.email}</td>
+                          <td>{value.date}</td>
                           <td>
                             <span
                               className={`badge rounded-pill font-xsssss fw-700 pl-3 pr-3 lh-24 text-uppercase rounded-3 ls-2 bg-${getRequestState(
-                                value.state
+                                value?.status
                               ).toLowerCase()}`}
                             >
-                              {getRequestState(value.state)}
+                              {getRequestState(value?.status)}
                             </span>
                           </td>
                           <td className="product-remove text-end comments-actions">
@@ -163,7 +182,7 @@ const RequestsList = () => {
                         </div>
                         <div className="course-title pt-3">
                           <h1 className="text-grey-900 fw-700 mb-3 lh-3 text-center">
-                            {selectedComment.course.title}
+                            {selectedComment.service.name}
                           </h1>
                         </div>
                         <div className="course-modal-body">
@@ -180,25 +199,19 @@ const RequestsList = () => {
                             </span>
                           </div>
                           <div>
-                            <span>Comentario: </span>
+                            <span>Estado de la reserva: </span>
                             <span>
-                              <b>{selectedComment.message} </b>
-                            </span>
-                          </div>
-                          <div>
-                            <span>Estado del comentario: </span>
-                            <span>
-                              <b>{getRequestState(selectedComment.state)} </b>
+                              <b>{getRequestState(selectedComment.status)} </b>
                             </span>
                           </div>
 
-                          {
+                          {selectedComment.status == "PENDING" && (
                             <div className="mt-4 actions-container">
                               <Button
                                 onClick={() =>
-                                  handleRequestFunction(
-                                    selectedComment._id,
-                                    "accepted"
+                                  handleChangeStatus(
+                                    selectedComment.id,
+                                    "CONFIRMED"
                                   )
                                 }
                                 className="col-12 bg-current border-0 action-btn filled-btn"
@@ -207,20 +220,9 @@ const RequestsList = () => {
                               </Button>
                               <Button
                                 onClick={() =>
-                                  handleRequestFunction(
-                                    selectedComment._id,
-                                    "pending"
-                                  )
-                                }
-                                className="col-12 action-btn outline-btn"
-                              >
-                                <span>Pendiente</span>
-                              </Button>
-                              <Button
-                                onClick={() =>
-                                  handleRequestFunction(
-                                    selectedComment._id,
-                                    "rejected"
+                                  handleChangeStatus(
+                                    selectedComment.id,
+                                    "CANCELED"
                                   )
                                 }
                                 className="col-12 action-btn outline-btn"
@@ -228,7 +230,35 @@ const RequestsList = () => {
                                 <span>Rechazar</span>
                               </Button>
                             </div>
-                          }
+                          )}
+
+                          {selectedComment.status == "FULL_PAID" && (
+                            <div className="mt-4 actions-container">
+                              <Button
+                                onClick={() =>
+                                  handleChangeStatus(
+                                    selectedComment.id,
+                                    "INTOUR"
+                                  )
+                                }
+                                className="col-12 bg-current border-0 action-btn filled-btn"
+                              >
+                                <span>Empezar Tour</span>
+                              </Button>
+                            </div>
+                          )}
+                          {selectedComment.status == "INTOUR" && (
+                            <div className="mt-4 actions-container">
+                              <Button
+                                onClick={() =>
+                                  handleChangeStatus(selectedComment.id, "END")
+                                }
+                                className="col-12 bg-current border-0 action-btn filled-btn"
+                              >
+                                <span>Terminar Tour</span>
+                              </Button>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
