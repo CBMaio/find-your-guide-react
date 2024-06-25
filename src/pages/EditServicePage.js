@@ -3,9 +3,9 @@ import React, { Fragment } from "react";
 import Adminsidebar from "../components/Adminsidebar";
 import AdminTopnav from "../components/AdminTopnav";
 import Adminfooter from "../components/Adminfooter";
-import EditCourseForm from "../features/courses/EditCourseForm";
+import EditServiceForm from "../features/courses/EditServiceForm";
 
-const EditCoursePage = () => {
+const EditServicePage = () => {
   return (
     <Fragment>
       <div id="wrapper">
@@ -24,7 +24,7 @@ const EditCoursePage = () => {
                   <i className="ml-auto feather-command font-lg text-grey-500"></i>
                 </div>
               </div>
-              <EditCourseForm />
+              <EditServiceForm />
             </div>
 
             <Adminfooter />
@@ -35,4 +35,4 @@ const EditCoursePage = () => {
   );
 };
 
-export default EditCoursePage;
+export default EditServicePage;

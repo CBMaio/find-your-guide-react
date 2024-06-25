@@ -5,7 +5,6 @@ import { Card } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import CourseList from "../features/courses/CourseList";
 import { isAuthenticated } from "../features/auth/authSlice";
 import { categories } from "../utils";
 
@@ -192,36 +191,6 @@ const Home = () => {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="how-to-work pb-lg--7 pb-5">
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="page-title style1 col-xl-6 col-lg-6 col-md-10 text-center mb-5">
-              <h2 className="text-grey-900 fw-700 display1-size display2-md-size pb-3 mb-0 d-block">
-                Principales destinos
-              </h2>
-              <p className="fw-300 font-xsss lh-28 text-grey-500">
-                Descubre nuestra selección de guías turísticos altamente
-                recomendados. Amplía tus horizontes y vive experiencias únicas
-                con nuestros guías líderes en el mercado.
-              </p>
-            </div>
-          </div>
-
-          <div className="row">
-            <CourseList limit={6} />
-          </div>
-
-          <div className="row justify-content-center pt-5">
-            <Link
-              to="/services-grid"
-              className="ml-1 mr-1 rounded-lg font-xss border-size-md fw-600 open-font p-3 w250 btn outline-btn"
-            >
-              Ver todos los destinos
-            </Link>
           </div>
         </div>
       </div>

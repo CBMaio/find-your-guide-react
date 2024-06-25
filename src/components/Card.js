@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
-import "../scss/components/course-card.scss";
+import "../scss/components/card.scss";
 
-const CourseCard = ({ service = {} }) => {
+const Card = ({ service = {} }) => {
   const {
     avg_rating,
     id,
@@ -31,7 +31,7 @@ const CourseCard = ({ service = {} }) => {
                 image ||
                 "/assets/images/FindYourGuide-images/noServiceImage.jpg"
               }
-              alt="course"
+              alt="service"
               className="w-100"
             />
           </a>
@@ -98,4 +98,4 @@ const CourseCard = ({ service = {} }) => {
   );
 };
 
-export default CourseCard;
+export default Card;

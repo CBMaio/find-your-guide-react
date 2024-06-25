@@ -4,10 +4,10 @@ import axios from "axios";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Searcharea from "../components/Searcharea";
-import CourseList from "../features/courses/CourseList";
+import ServiceList from "../features/courses/ServiceList";
 import FiltersModal from "../components/FiltersModal";
 
-const Coursesgrid = () => {
+const ServicesGrid = () => {
   const [searchProductByQuery, setSearchProductByQuery] = useState(null);
   const [isOpenFiltersModal, setIsOpenFiltersModal] = useState(false);
   const [filterSelected, setFiltersSelected] = useState({});
@@ -39,7 +39,7 @@ const Coursesgrid = () => {
               <h2 className="fw-400 font-lg">Resultados</h2>
             </div>
 
-            <CourseList
+            <ServiceList
               queryFilter={searchProductByQuery}
               filterSelected={filterSelected}
             />
@@ -56,4 +56,4 @@ const Coursesgrid = () => {
   );
 };
 
-export default Coursesgrid;
+export default ServicesGrid;

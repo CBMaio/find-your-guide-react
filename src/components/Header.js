@@ -35,9 +35,6 @@ const Header = () => {
                       <NavLink to="/services-grid" className="text-dark">
                         Todos los tours
                       </NavLink>
-                      {/* <NavLink to="/contact" className="text-dark">
-                        Contacto
-                      </NavLink> */}
                       <NavLink
                         to="/login"
                         className="account-navlink text-dark"

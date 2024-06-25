@@ -1,37 +1,34 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux/";
 import axios from "axios";
+
 import {
   selectAllCourses,
   fetchCourses,
   getCoursesStatus,
 } from "./coursesSlice";
-import { fetchAuthors } from "../authors/authorsSlice";
-import CourseCard from "../../components/CourseCard";
+
+import Card from "../../components/Card";
 import { FETCH_STATUS } from "../../utils";
 
-const CourseList = ({ limit = false, queryFilter, filterSelected }) => {
+const ServiceList = ({ limit = false, queryFilter, filterSelected }) => {
   const { LOADING, SUCCEEDED, IDLE } = FETCH_STATUS;
   const dispatch = useDispatch();
-  const [coursesToShow, setCoursesToShow] = useState([]);
-  const courseData = useSelector(selectAllCourses);
-  const coursesStatus = useSelector(getCoursesStatus);
 
-  const authorsStatus = useSelector((state) => state.authors.status);
+  const [elementsToShow, setElementsToShow] = useState([]);
+
+  const serviceData = useSelector(selectAllCourses);
+  const servicesStatus = useSelector(getCoursesStatus);
 
   useEffect(() => {
-    if (coursesStatus === IDLE) {
+    if (servicesStatus === IDLE) {
       dispatch(fetchCourses());
     }
-
-    // if (authorsStatus === IDLE) {
-    //   dispatch(fetchAuthors());
-    // }
-  }, [coursesStatus, authorsStatus, dispatch, IDLE]);
+  }, [servicesStatus, dispatch, IDLE]);
 
   useEffect(() => {
     const getProducts = async () => {
-      let data = courseData || [];
+      let data = serviceData || [];
       const filter = queryFilter?.toLowerCase() || "";
       // const filteredData = await filterByItems(filterSelected);
       // if (filteredData) {
@@ -39,14 +36,16 @@ const CourseList = ({ limit = false, queryFilter, filterSelected }) => {
       // }
 
       data = data.length
-        ? data.filter(({ name }) => name.toLowerCase().includes(filter))
+        ? data.filter(({ guide }) =>
+            guide.username.toLowerCase().includes(filter)
+          )
         : data;
       console.log(data);
-      setCoursesToShow(data);
+      setElementsToShow(data);
     };
 
     getProducts();
-  }, [queryFilter, courseData, filterSelected]);
+  }, [queryFilter, serviceData, filterSelected]);
 
   // const filterByItems = async (filters) => {
   //   console.log(filters);
@@ -64,15 +63,15 @@ const CourseList = ({ limit = false, queryFilter, filterSelected }) => {
   //   }
   // };
 
-  return coursesStatus === LOADING ? (
+  return servicesStatus === LOADING ? (
     <div className="pl-3">Cargando...</div>
-  ) : !coursesToShow.length ? (
+  ) : !elementsToShow.length ? (
     <div className="pl-3">No se encontraron cursos</div>
   ) : (
-    coursesToShow
-      .slice(0, limit || coursesToShow.length)
-      .map((serice) => <CourseCard key={serice.id} service={serice} />)
+    elementsToShow
+      .slice(0, limit || elementsToShow.length)
+      .map((serice) => <Card key={serice.id} service={serice} />)
   );
 };
 
-export default CourseList;
+export default ServiceList;

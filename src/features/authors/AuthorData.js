@@ -2,21 +2,23 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Tab, Tabs } from "react-bootstrap";
+
 import {
   getSelectedService,
   getCoursesStatus,
   fetchCourses,
   fetchServiceById,
 } from "../courses/coursesSlice";
+
 import { FETCH_STATUS } from "../../utils";
 
 const AuthorData = () => {
-  const { LOADING, IDLE } = FETCH_STATUS;
+  const { IDLE } = FETCH_STATUS;
   const { serviceId } = useParams();
   const dispatch = useDispatch();
 
   const service = useSelector((state) => getSelectedService(state, serviceId));
-  const coursesStatus = useSelector(getCoursesStatus);
+  const servicesStatus = useSelector(getCoursesStatus);
 
   const [guide, setGuide] = useState(null);
   const [selectedSevice, setSelectedService] = useState(null);
@@ -28,10 +30,10 @@ const AuthorData = () => {
       setGuide(service?.guide);
     }
 
-    if (coursesStatus === IDLE) {
+    if (servicesStatus === IDLE) {
       dispatch(fetchCourses());
     }
-  }, [coursesStatus, IDLE, dispatch, selectedSevice, serviceId, service]);
+  }, [servicesStatus, IDLE, dispatch, selectedSevice, serviceId, service]);
 
   if (!guide) {
     return <section>Guía no encontrado!</section>;
@@ -113,8 +115,8 @@ const AuthorData = () => {
                     </div>
                     <div className="card-body pb-0">
                       <div className="row">
-                        {/* {coursesForAuthor.map((value) => (
-                          <CourseCard course={value} key={value._id} />
+                        {/* {services.map((value) => (
+                          <Card course={value} key={value._id} />
                         ))} */}
                       </div>
                     </div>

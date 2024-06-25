@@ -1,10 +1,9 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { CustomAlert } from "../components/CustomAlert";
 import { registerUser } from "../features/auth/authActions";
-import { getUserInfo } from "../features/auth/authActions";
 import { USER_ROL } from "../utils";
 
 import { isAuthenticated } from "../features/auth/authSlice";
@@ -19,7 +18,6 @@ const Register = () => {
 
   const [userData, setUserData] = useState({});
   const [step, setStep] = useState(0);
-  const [existingEmail, setExistingEmail] = useState(false);
   const [displayCustomAlert, setDisplayCustomAlert] = useState({
     display: false,
     isSuccess: false,
@@ -35,19 +33,6 @@ const Register = () => {
     const data = Object.fromEntries(formData.entries());
     if (nextStep === 1 && !isValidPassword(data)) {
       return;
-    }
-
-    if (nextStep === 1) {
-      // current step = 0
-      const { email } = data;
-      // const invalidEmail = await isInvalidEmail(email);
-      // if (invalidEmail) {
-      //   setExistingEmail(true);
-      //   setTimeout(() => {
-      //     setExistingEmail(false);
-      //   }, 2000);
-      //   return;
-      // }
     }
 
     if (nextStep === 2 || userRol === USER_ROL.TOURIST) {
@@ -84,19 +69,6 @@ const Register = () => {
   const togglePw = (elementId) => {
     const element = document.querySelector(`#${elementId}`);
     element.type = element.type === "password" ? "text" : "password";
-  };
-
-  const isInvalidEmail = async (email) => {
-    const AUTH_API_COMPLETE = `${process.env.REACT_APP_JAVA_BACK_URL}/users`;
-    try {
-      const response = await axios.get(
-        `${AUTH_API_COMPLETE}/verify?email=${email}`
-      );
-
-      return response.data.message;
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   const setRol = (rol) => {
@@ -144,6 +116,11 @@ const Register = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, error, success]);
 
+  useEffect(() => {
+    if (isAuth) {
+      navigate("/welcome-admin");
+    }
+  }, [isAuth, navigate]);
   return (
     <Fragment>
       <div className="main-wrap">
@@ -237,7 +214,7 @@ const Register = () => {
                           <div className="form-group icon-input mb-3">
                             <i className="font-sm ti-user text-grey-500 pr-0"></i>
                             <input
-                              // required
+                              required
                               type="text"
                               name="username"
                               className="style2-input pl-5 form-control text-grey-900 font-xsss fw-600"
@@ -248,7 +225,7 @@ const Register = () => {
                           <div className="form-group icon-input mb-3">
                             <i className="font-sm ti-user text-grey-500 pr-0"></i>
                             <input
-                              // required
+                              required
                               type="text"
                               name="firstName"
                               className="style2-input pl-5 form-control text-grey-900 font-xsss fw-600"
@@ -259,7 +236,7 @@ const Register = () => {
                           <div className="form-group icon-input mb-3">
                             <i className="font-sm ti-user text-grey-500 pr-0"></i>
                             <input
-                              // required
+                              required
                               type="text"
                               name="lastName"
                               className="style2-input pl-5 form-control text-grey-900 font-xsss fw-600"
@@ -270,23 +247,18 @@ const Register = () => {
                           <div className="form-group icon-input mb-3">
                             <i className="font-sm ti-email text-grey-500 pr-0"></i>
                             <input
-                              // required
+                              required
                               type="email"
                               name="email"
                               className="style2-input pl-5 form-control text-grey-900 font-xsss fw-600"
                               placeholder="Tu correo"
                             />
-                            {existingEmail && (
-                              <div className="font-xssss text-danger mb-2">
-                                Email ya existente
-                              </div>
-                            )}
                           </div>
 
                           <div className="form-group icon-input mb-3">
                             <i className="font-sm ti-id-badge text-grey-500 pr-0"></i>
                             <input
-                              // required
+                              required
                               type="text"
                               name="dni"
                               className="style2-input pl-5 form-control text-grey-900 font-xsss fw-600"
@@ -297,7 +269,7 @@ const Register = () => {
                           <div className="form-group icon-input mb-3">
                             <i className="font-sm ti-user text-grey-500 pr-0"></i>
                             <input
-                              // required
+                              required
                               name="gender"
                               type="text"
                               className="style2-input pl-5 form-control text-grey-900 font-xsss fw-600 number-input"
@@ -308,7 +280,7 @@ const Register = () => {
                           <div className="form-group icon-input mb-3">
                             <i className="font-sm feather-phone text-grey-500 pr-0"></i>
                             <input
-                              // required
+                              required
                               name="phone"
                               type="number"
                               className="style2-input pl-5 form-control text-grey-900 font-xsss fw-600 number-input"
@@ -369,7 +341,7 @@ const Register = () => {
                           <div className="form-group icon-input mb-3">
                             <i className="font-sm ti-user text-grey-500 pr-0"></i>
                             <input
-                              // required
+                              required
                               name="credentialPhoto"
                               type="text"
                               className="style2-input pl-5 form-control text-grey-900 font-xsss fw-600"
@@ -379,7 +351,7 @@ const Register = () => {
                           <div className="form-group icon-input mb-3">
                             <i className="font-sm ti-user text-grey-500 pr-0"></i>
                             <select
-                              // required
+                              required
                               name="language"
                               type="text"
                               className="style2-input pl-5 form-control text-grey-900 font-xsss fw-600"
@@ -395,7 +367,7 @@ const Register = () => {
                           <div className="form-group icon-input mb-3">
                             <i className="font-sm ti-user text-grey-500 pr-0"></i>
                             <input
-                              // required
+                              required
                               name="country"
                               type="text"
                               className="style2-input pl-5 form-control text-grey-900 font-xsss fw-600"

@@ -1,81 +1,12 @@
 import React, { Fragment } from "react";
-import Header from "../components/Header";
 import { Link } from "react-router-dom";
+import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Slider from "react-slick";
 
 import "../scss/pages/about.scss";
 import "../scss/variables.scss";
 
 const About = () => {
-  const feedbackList = [
-    {
-      imageUrl: "student1.jpg",
-      name: "Goria Coast",
-      status: "Diseñadora gráfica",
-      des: "MarketClass ha sido una revelación para mí. Los cursos son muy completos y están impartidos por expertos en la industria. Aprendí mucho y ahora me siento más segura en el mundo digital.",
-    },
-    {
-      imageUrl: "student2.jpg",
-      name: "Thomas Smith",
-      status: "Desarrollador de software junior",
-      des: "¡Increíble! Los cursos de MarketClass me ayudaron a conseguir un nuevo empleo en el campo de la programación. La plataforma es fácil de usar y las lecciones son muy informativas.",
-    },
-    {
-      imageUrl: "student3.jpg",
-      name: "Hurin Seary",
-      status: "Analista de datos",
-      des: "Me encanta cómo MarketClass simplifica el aprendizaje en tecnología. Las opciones de filtrado me ayudaron a encontrar el curso perfecto para mis necesidades.",
-    },
-    {
-      imageUrl: "student1.jpg",
-      name: "Goria Coast",
-      status: "Administrador de sistemas",
-      des: "Como profesional de TI, siempre estoy en busca de actualizaciones. MarketClass me mantiene al día con las últimas tendencias y herramientas. ¡Muy recomendado!",
-    },
-    {
-      imageUrl: "student2.jpg",
-      name: "Thomas Smith",
-      status: "Marketing digital",
-      des: "MarketClass no solo ofrece cursos de alta calidad, sino que también fomenta la comunidad. He conocido a personas increíbles a través de los foros de discusión.",
-    },
-    {
-      imageUrl: "student3.jpg",
-      name: "Hurin Seary",
-      status: "Desarrollador web front-end",
-      des: "MarketClass es la clave para avanzar en mi carrera de desarrollo web. Los instructores son apasionados y están comprometidos con el éxito de los estudiantes. ¡No puedo esperar para seguir aprendiendo!",
-    },
-  ];
-  const feedbacksettings = {
-    arrows: true,
-    dots: false,
-    infinite: false,
-    speed: 300,
-    slidesToShow: 3,
-    centerMode: false,
-    variableWidth: false,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-        },
-      },
-      {
-        breakpoint: 800,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
-  };
-
   return (
     <Fragment>
       <Header />
@@ -104,10 +35,13 @@ const About = () => {
 
             <div className="col-lg-12 mt-3">
               <p>
-              En FindYourGuide, creemos que cada viaje es una oportunidad para descubrir, aprender y vivir experiencias únicas. 
-              Nuestra misión es facilitar conexiones auténticas entre viajeros y guías locales, asegurando que cada turista reciba una experiencia 
-              enriquecedora y personalizada. 
-              Queremos que cada viaje sea más que una simple visita, sea una aventura memorable guiada por expertos apasionados y conocedores.
+                En FindYourGuide, creemos que cada viaje es una oportunidad para
+                descubrir, aprender y vivir experiencias únicas. Nuestra misión
+                es facilitar conexiones auténticas entre viajeros y guías
+                locales, asegurando que cada turista reciba una experiencia
+                enriquecedora y personalizada. Queremos que cada viaje sea más
+                que una simple visita, sea una aventura memorable guiada por
+                expertos apasionados y conocedores.
               </p>
             </div>
             <div className="col-lg-12 mt-5 text-center pt-3">
@@ -124,7 +58,6 @@ const About = () => {
               >
                 Quiero contratar un tour
               </a>
-
             </div>
           </div>
         </div>
@@ -136,7 +69,7 @@ const About = () => {
             <div className="col-lg-5 mb-4 text-center">
               <img
                 src="\assets\images\FindYourGuide-images\tourist-couple.jpg"
-                alt="about"  
+                alt="about"
                 className="rounded-lg shadow-xs tourist-img"
               />
             </div>
@@ -154,8 +87,8 @@ const About = () => {
                 Encuentra lo que necesitas
               </h4>
               <p className="fw-300 font-xsss lh-28 text-grey-500 mt-0 ml-4 pl-3 w-75 w-xs-90">
-                Explora y filtra entre cientos de opciones de tours. Busca según el destino, idioma, puntuación y tipo 
-                de servicio.
+                Explora y filtra entre cientos de opciones de tours. Busca según
+                el destino, idioma, puntuación y tipo de servicio.
               </p>
 
               <h4 className="fw-600 font-xs mt-4 mb-2">
@@ -221,7 +154,8 @@ const About = () => {
                   <div className="col-lg-8 text-center">
                     <p className="font-xsss lh-28 text-white mb-0 d-none-xs">
                       Nos basamos en las reseñas de nuestros seguidores para
-                      poder bridar el mejor servicio. Explora el mundo con nosotros!
+                      poder bridar el mejor servicio. Explora el mundo con
+                      nosotros!
                     </p>
                   </div>
                 </div>

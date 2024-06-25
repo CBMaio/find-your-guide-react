@@ -73,21 +73,25 @@ const Accountinfo = () => {
     }, 2000);
   };
 
+  const handleError = () => {
+    setDisplayCustomAlert({
+      display: true,
+      isSuccess: false,
+      text: "Hubo un error actualizando sus datos. Por favor inténtelo nuevamente",
+    });
+
+    setTimeout(() => {
+      setDisplayCustomAlert({
+        display: false,
+      });
+    }, 2000);
+  };
+
   useEffect(() => {
     setDisplayCustomAlert({ display: false });
 
     if (error) {
-      setDisplayCustomAlert({
-        display: true,
-        isSuccess: false,
-        text: "Hubo un error actualizando sus datos. Por favor inténtelo nuevamente",
-      });
-
-      setTimeout(() => {
-        setDisplayCustomAlert({
-          display: false,
-        });
-      }, 2000);
+      handleError();
     }
 
     if (success) {
@@ -272,7 +276,7 @@ const Accountinfo = () => {
                                 name="cities"
                                 type="text"
                                 className="form-control"
-                                defaultValue={userInfo.dni}
+                                defaultValue={userInfo.city || ""}
                               />
                             </div>
                           </div>

@@ -12,11 +12,10 @@ const Adminsidebar = () => {
   const isGuideUser = useSelector(isGuide);
   const isTouristUser = useSelector(isTourist);
 
-  const [displayCourseOptions, setDisplayCouseOptions] = useState(false);
+  const [displayOptions, setDisplayOptions] = useState(false);
   const [isOpenNavbar, setIsOpenNavbar] = useState(false);
 
-  const toggleCourseOptions = () =>
-    setDisplayCouseOptions(!displayCourseOptions);
+  const toggleCourseOptions = () => setDisplayOptions(!displayOptions);
 
   const toggleNavbar = () => {
     setIsOpenNavbar(!isOpenNavbar);
@@ -74,7 +73,7 @@ const Adminsidebar = () => {
             <i className="feather-globe mr-2 droupdown-toggle"></i>
             <span>Mis Servicios</span>
           </div>
-          {displayCourseOptions && isGuideUser && (
+          {displayOptions && isGuideUser && (
             <ul className="submenu active">
               <li className="nav-item">
                 <NavLink className="navi-link" to="/admin-productlist">
@@ -82,13 +81,13 @@ const Adminsidebar = () => {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="navi-link" to="/add-course">
+                <NavLink className="navi-link" to="/add-service">
                   Añadir
                 </NavLink>
               </li>
             </ul>
           )}
-          {displayCourseOptions && isTouristUser && (
+          {displayOptions && isTouristUser && (
             <ul className="submenu active">
               <li className="nav-item">
                 <NavLink className="navi-link" to="/admin-productlist">
@@ -99,18 +98,15 @@ const Adminsidebar = () => {
           )}
         </li>
 
-        <li className="nav-item">
-          <NavLink className="navi-link" to="/admin-review">
-            <i className="feather-message-circle mr-2"></i>
-            <span>Comentarios</span>
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink className="navi-link" to="/admin-requests">
-            <i className="feather-heart mr-2"></i>
-            <span>Contrataciones</span>
-          </NavLink>
-        </li>
+        {isGuideUser && (
+          <li className="nav-item">
+            <NavLink className="navi-link" to="/admin-requests">
+              <i className="feather-heart mr-2"></i>
+              <span>Contrataciones</span>
+            </NavLink>
+          </li>
+        )}
+
         <div className="sidebar-heading">Contacte a su guia</div>
         <li className="nav-item">
           <NavLink className="navi-link" to="/Chat">
@@ -126,12 +122,6 @@ const Adminsidebar = () => {
             <span>Cuenta</span>
           </NavLink>
         </li>
-        {/* <li className="nav-item">
-          <NavLink className="navi-link" to="/password">
-            <i className="feather-lock mr-2"></i>
-            <span>Cambiar contraseña</span>
-          </NavLink>
-        </li> */}
 
         <li className="nav-item mobile-item">
           <div onClick={closeSession} className="navi-link">

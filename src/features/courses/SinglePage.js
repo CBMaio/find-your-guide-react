@@ -1,29 +1,37 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
+import { Rating } from "react-simple-star-rating";
+
 import {
   getSelectedService,
   getCoursesStatus,
   fetchCourses,
   fetchServiceById,
 } from "./coursesSlice";
-import { Rating } from "react-simple-star-rating";
+import { addNewRequest, selectRequestStatus } from "../requests/requestsSlice";
+
 import { FETCH_STATUS } from "../../utils";
 
-import "../../scss/pages/single-course.scss";
 import { CustomAlert } from "../../components/CustomAlert";
-import { addComment } from "../comments/commentsSlice";
-import { addNewRequest, selectRequestStatus } from "../requests/requestsSlice";
+import {
+  addComment,
+  fetchComments,
+  getCommentsStatus,
+  selectAllComments,
+} from "../comments/commentsSlice";
 import Modal from "../../components/Modal";
 
-const SingleCoursePage = () => {
+import "../../scss/pages/single-page.scss";
+
+const SinglePage = () => {
   const { LOADING, IDLE, SUCCEEDED, FAILED } = FETCH_STATUS;
+
   const dispatch = useDispatch();
   const { serviceId } = useParams();
   const [rating, setRating] = useState(0);
   const [emptyFields, setEmptyFields] = useState(false);
   const [selectedSevice, setSelectedService] = useState(null);
-  const [commentSentSucceeded, setCommentSentSucceeded] = useState(false);
   const [displayModal, setDisplayModal] = useState({
     display: false,
     title: "",
@@ -34,20 +42,19 @@ const SingleCoursePage = () => {
     isSuccess: false,
     text: "",
   });
+  const [username, setUsername] = useState("");
 
-  const coursesStatus = useSelector(getCoursesStatus);
+  const reviewStatus = useSelector(getCommentsStatus);
+  const servicesStatus = useSelector(getCoursesStatus);
   const requestStatus = useSelector(selectRequestStatus);
   const service = useSelector((state) => getSelectedService(state, serviceId));
+  const reviews = useSelector(selectAllComments);
 
   const {
-    avg_rating,
     name,
     guide,
     description,
-    requirements,
-    comments,
     date,
-    duration,
     price,
     serviceType,
     image,
@@ -62,12 +69,14 @@ const SingleCoursePage = () => {
 
   const sendComment = (e) => {
     e.preventDefault();
+
     const formData = new FormData(e.target);
     const formattedData = Object.fromEntries(formData.entries());
+    const currentDate = new Date().toISOString().substring(0, 10);
     const finalData = {
+      date: currentDate,
       ...formattedData,
-      rating,
-      course: service.id,
+      score: rating,
     };
 
     if (!canSave(finalData)) {
@@ -78,13 +87,10 @@ const SingleCoursePage = () => {
       return;
     }
 
-    dispatch(addComment(finalData));
+    dispatch(addComment({ comment: finalData, id: guide.id }));
 
     window.scrollTo(0, 0);
-    setCommentSentSucceeded(true);
-    setTimeout(() => {
-      setCommentSentSucceeded(false);
-    }, 3000);
+
     e.target.reset();
   };
 
@@ -101,10 +107,24 @@ const SingleCoursePage = () => {
       dispatch(fetchServiceById(serviceId));
       setSelectedService(service);
     }
-    if (coursesStatus === IDLE) {
+
+    if (servicesStatus === IDLE) {
       dispatch(fetchCourses());
     }
-  }, [coursesStatus, IDLE, dispatch, selectedSevice, serviceId, service]);
+
+    if (reviewStatus === IDLE && guide) {
+      dispatch(fetchComments(guide?.id));
+    }
+  }, [
+    servicesStatus,
+    IDLE,
+    dispatch,
+    selectedSevice,
+    serviceId,
+    service,
+    reviewStatus,
+    guide,
+  ]);
 
   useEffect(() => {
     if (requestStatus === SUCCEEDED) {
@@ -113,23 +133,61 @@ const SingleCoursePage = () => {
         title: "Tu registro fue exitoso",
         description: "Muchas gracias! Preparate para una aventura única",
       });
-
-      if (requestStatus === FAILED) {
-        setDisplayCustomAlert({
-          display: true,
-          isSuccess: false,
-          text: "Hubo un problema con su registro. Si el problema persiste, vuelva a iniciar sesión",
-        });
-      }
     }
+
+    if (requestStatus === FAILED) {
+      setDisplayCustomAlert({
+        display: true,
+        isSuccess: false,
+        text: "Hubo un problema con su registro. Si el problema persiste, vuelva a iniciar sesión",
+      });
+    }
+
+    setTimeout(() => {
+      setDisplayCustomAlert({
+        display: false,
+      });
+    }, 3000);
   }, [FAILED, SUCCEEDED, requestStatus]);
 
-  if (coursesStatus === LOADING) {
+  useEffect(() => {
+    if (reviewStatus === SUCCEEDED) {
+      setDisplayCustomAlert({
+        display: true,
+        isSuccess: true,
+        text: "Comentario envaido correctamente",
+      });
+    }
+
+    if (reviewStatus === FAILED) {
+      setDisplayCustomAlert({
+        display: true,
+        isSuccess: false,
+        text: "Hubo un problema al enviar su comentario. Inténtalo nuevamente",
+      });
+    }
+
+    setTimeout(() => {
+      setDisplayCustomAlert({
+        display: false,
+      });
+    }, 3000);
+  }, [FAILED, SUCCEEDED, reviewStatus]);
+
+  useEffect(() => {
+    const name = JSON.parse(localStorage.getItem("userData"))?.username;
+    if (name) {
+      setUsername(name);
+    }
+  }, []);
+
+  if (servicesStatus === LOADING) {
     return <section>Cargando...</section>;
   } else if (!service) {
     return <section>Service not found!</section>;
   }
 
+  console.log("reviews", reviews);
   return (
     <div className="row">
       {displayCustomAlert.display && (
@@ -144,7 +202,7 @@ const SingleCoursePage = () => {
             src={
               image || "/assets/images/FindYourGuide-images/noServiceImage.jpg"
             }
-            alt="course-img"
+            alt="service-img"
             className="single-course-main-img"
             style={{ height: "300px", objectFit: "contain" }}
           />
@@ -161,17 +219,7 @@ const SingleCoursePage = () => {
           <div className="row">
             <div className="col-10">
               <h2 className="fw-700 font-md d-block lh-4 mb-2">{name}</h2>
-              <div className="star d-block w-100 text-left">
-                {avg_rating &&
-                  Array.from(Array(avg_rating).keys()).map((n) => (
-                    <img
-                      key={n}
-                      src="/assets/images/star.png"
-                      alt="star"
-                      className="w10"
-                    />
-                  ))}
-              </div>
+
               <Link to={`/guide-profile/${id}`}>
                 <span className="font-xssss fw-700 text-grey-900 d-inline-block ml-0 text-dark">
                   {guide.username}
@@ -209,23 +257,23 @@ const SingleCoursePage = () => {
           <div className="row">
             <div className="pl-4 mb-4 pr-0">
               <h2 className="display1-size lh-1 m-0 text-grey-900 fw-700">
-                {comments?.length
-                  ? `${comments.length} Comentarios`
+                {reviews && reviews.length
+                  ? `${reviews.length} Comentarios sobre ${guide.username}`
                   : "Aún no hay comentarios"}
               </h2>
             </div>
           </div>
 
-          {service.comments?.map(
-            ({ _id: id, name, description, rating, created_at: date }) => (
+          {reviews &&
+            reviews.map(({ id, from, description, score, date }) => (
               <div key={id} className="row mt-2 mb-1">
                 <div className="col-10 pl-4">
                   <div className="content">
                     <h6 className="author-name font-xssss fw-600 mb-0 text-grey-800">
-                      {name}
+                      {date} | {from.username}
                     </h6>
                     <div className="star d-block w-100 text-left">
-                      {Array.from(Array(rating).keys()).map((n) => (
+                      {Array.from(Array(score).keys()).map((n) => (
                         <img
                           key={n}
                           src="/assets/images/star.png"
@@ -240,8 +288,7 @@ const SingleCoursePage = () => {
                   </div>
                 </div>
               </div>
-            )
-          )}
+            ))}
         </div>
 
         <div className="card w-100 border-0 mt-4 mb-4 p-4 shadow-xss position-relative rounded-lg bg-white">
@@ -255,11 +302,12 @@ const SingleCoursePage = () => {
                   <div className="mt-5 form-group mb30">
                     <label className="form-label">Nombre de usuario</label>
                     <input
-                      name="name"
                       className="form-control form_control"
                       type="text"
                       required
                       placeholder="Nombre"
+                      readOnly
+                      defaultValue={username}
                     />
                   </div>
                 </div>
@@ -314,4 +362,4 @@ const SingleCoursePage = () => {
   );
 };
 
-export default SingleCoursePage;
+export default SinglePage;

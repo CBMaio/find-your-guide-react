@@ -1,36 +1,22 @@
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { fetchCategories, getCategories } from "../categories/categorySlice";
+import { addNewCourse, getMyServiceStatus } from "./coursesSlice";
+import { useEffect, useState } from "react";
 import { FETCH_STATUS } from "../../utils";
+import "./styles/add-form.scss";
+import { CustomAlert } from "../../components/CustomAlert";
 import { convertBase64 } from "../../utils";
 
-import {
-  fetchServiceById,
-  getSelectedService,
-  updateMyServiceById,
-} from "./coursesSlice";
-
-import "./styles/add-course-form.scss";
-import { CustomAlert } from "../../components/CustomAlert";
-
-const EditCourseForm = () => {
-  const { IDLE, SUCCEEDED, LOADING } = FETCH_STATUS;
-  const { serviceId } = useParams();
-  let service = useSelector(getSelectedService);
-  const status = useSelector((state) => state.courses.status);
-
-  const [succeededEdit, setSucceededEdit] = useState(false);
-  const [addRequestStatus, setAddRequestStatus] = useState(IDLE);
-  const [selectedImage, setSelectedImage] = useState(null);
-
+const AddServiceForm = () => {
   const dispatch = useDispatch();
-
-  const handleFile = async (event) => {
-    const file = event.target.files[0];
-    const base64 = await convertBase64(file);
-    setSelectedImage(base64);
-  };
+  const { IDLE, SUCCEEDED, LOADING, FAILED } = FETCH_STATUS;
+  const { error, succeess } = useSelector((state) => getMyServiceStatus(state));
+  const [addRequestStatus, setAddRequestStatus] = useState(IDLE);
+  const [displayCustomAlert, setDisplayCustomAlert] = useState({
+    display: false,
+    isSuccess: false,
+    text: "",
+  });
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const canSave = (values) =>
     Object.values(values).every(Boolean) && addRequestStatus === IDLE;
@@ -45,33 +31,52 @@ const EditCourseForm = () => {
 
     try {
       setAddRequestStatus(LOADING);
-      const data = { ...formattedData, id: serviceId };
       if (selectedImage) {
-        finalData = { ...data, image: selectedImage };
-      } else {
-        finalData = data;
+        finalData = { ...formattedData, image: selectedImage };
       }
-
-      dispatch(updateMyServiceById(finalData)).unwrap();
-      setSucceededEdit(true);
+      dispatch(addNewCourse({ ...finalData })).unwrap();
       e.target.reset();
     } catch (error) {
-      console.error("Failed to save the service: ", error);
+      console.error("Failed to save the course: ", error);
     } finally {
       setAddRequestStatus(IDLE);
       window.scrollTo(0, 0);
     }
   };
 
-  useEffect(() => {
-    dispatch(fetchServiceById(serviceId));
-  }, [serviceId, dispatch, IDLE]);
+  const handleFile = async (event) => {
+    const file = event.target.files[0];
+    const base64 = await convertBase64(file);
+    setSelectedImage(base64);
+  };
 
-  if (!service && status !== IDLE) return;
-  if (!service) service = {};
+  useEffect(() => {
+    if (error === FAILED) {
+      setDisplayCustomAlert({
+        display: true,
+        isSuccess: false,
+        text: "Error al agregar el servicio. Por favor inténtalo nuevamente",
+      });
+    }
+
+    if (succeess === SUCCEEDED) {
+      setDisplayCustomAlert({
+        display: true,
+        isSuccess: true,
+        text: "Serivicio agregado con éxito!",
+      });
+
+      setTimeout(() => {
+        setDisplayCustomAlert({
+          display: false,
+        });
+      }, 2000);
+    }
+  }, [FAILED, SUCCEEDED, error, succeess]);
+
   return (
     <div className="row">
-      <div className="col-lg-12">
+      <div className="col-lg-12 ">
         <form
           className="contact_form"
           name="contact_form"
@@ -79,14 +84,15 @@ const EditCourseForm = () => {
         >
           <div className="card border-0 px-4 pt-4 mt-2 rounded-lg admin-form">
             <div className="card-body d-block">
-              {succeededEdit && (
-                <CustomAlert isSuccess={true} text="Curso editado con éxito!" />
+              {displayCustomAlert.display && (
+                <CustomAlert
+                  isSuccess={displayCustomAlert.isSuccess}
+                  text={displayCustomAlert.text}
+                />
               )}
-
               <h4 className="font-xss text-grey-800 mb-4 mt-0 fw-700">
                 Información del servicio
               </h4>
-
               <div className="row">
                 <div className="col-md-6">
                   <div className="form-group mb30">
@@ -97,9 +103,7 @@ const EditCourseForm = () => {
                       name="name"
                       className="form-control form_control"
                       type="text"
-                      required
                       placeholder="Nombre"
-                      defaultValue={service.name}
                     />
                   </div>
                 </div>
@@ -110,20 +114,19 @@ const EditCourseForm = () => {
                     </label>
                     <input
                       name="date"
-                      className="form-control form_control"
+                      className="number-input form-control form_control"
                       type="text"
                       placeholder="YYYY-MM-DD"
-                      defaultValue={service.date}
                     />
                   </div>
                 </div>
                 <div className="col-md-6">
                   <div className="form-group mb30">
-                    <label className="form-label">Tipo de service</label>
+                    <label className="form-label">Tipo de servicio</label>
                     <select
                       name="serviceType"
+                      required
                       className="form-control form_control"
-                      defaultValue={service.serviceType}
                     >
                       <option value="TOURS_INDIVIDUALES">Individual</option>
                       <option value="TOURS_GRUPALES">Grupal</option>
@@ -139,17 +142,16 @@ const EditCourseForm = () => {
                       className="number-input form-control form_control"
                       type="text"
                       placeholder="Cantidad de personas (solo número)"
-                      defaultValue={service.quantity}
                     />
                   </div>
                 </div>
-
                 <div className="col-md-6">
                   <div className="form-group mb30">
                     <label htmlFor="product_sku" className="form-label">
                       País
                     </label>
                     <input
+                      name="country"
                       className="number-input form-control form_control"
                       type="text"
                       placeholder="País"
@@ -162,6 +164,7 @@ const EditCourseForm = () => {
                       Ciudad
                     </label>
                     <input
+                      name="city"
                       className="number-input form-control form_control"
                       type="text"
                       placeholder="Ciudad"
@@ -170,13 +173,14 @@ const EditCourseForm = () => {
                 </div>
                 <div className="col-sm-12">
                   <div className="form-group">
-                    <label className="form-label">Descripción</label>
+                    <label htmlFor="product_sku" className="form-label">
+                      Descripción
+                    </label>
                     <textarea
                       name="description"
                       className="form-control h150"
                       rows="6"
                       placeholder="Descripción del servicio"
-                      defaultValue={service.description}
                     ></textarea>
                   </div>
                 </div>
@@ -193,6 +197,7 @@ const EditCourseForm = () => {
                   <input
                     className="upload-file-input"
                     type="file"
+                    id="course-image"
                     onChange={(event) => handleFile(event)}
                   />
                 </div>
@@ -216,17 +221,15 @@ const EditCourseForm = () => {
                       className="form-control form_control"
                       type="text"
                       placeholder="($)"
-                      defaultValue={service.price}
                     />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
           <div className="card align-items-center border-0 p-4 mt-3 rounded-10 admin-form">
             <button className="col-md-6 form-control text-center style2-input text-white fw-600 bg-dark border-0 p-0 ">
-              Guardar
+              {addRequestStatus === LOADING ? "Cargando" : "Guardar"}
             </button>
           </div>
         </form>
@@ -235,4 +238,4 @@ const EditCourseForm = () => {
   );
 };
 
-export default EditCourseForm;
+export default AddServiceForm;

@@ -4,12 +4,12 @@ import { useSelector } from "react-redux";
 import Adminsidebar from "../components/Adminsidebar";
 import AdminTopnav from "../components/AdminTopnav";
 import Adminfooter from "../components/Adminfooter";
-import MyCoursesList from "../features/courses/MyCoursesList";
-import { BREAKPOIN_SMALL } from "../utils";
+import MyServicesList from "../features/courses/MyServicesList";
+import MyPurchseList from "../features/courses/MyPurchseList";
 import { isGuide, isTourist } from "../features/auth/authSlice";
+import { BREAKPOIN_SMALL } from "../utils";
 
 import "../scss/pages/admin-product-list.scss";
-import MyPurchseList from "../features/courses/MyPurchseList";
 
 const Adminproductlist = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < BREAKPOIN_SMALL);
@@ -69,7 +69,7 @@ const Adminproductlist = () => {
                               </tr>
                             </thead>
                             <tbody>
-                              {isGuideUser && <MyCoursesList />}
+                              {isGuideUser && <MyServicesList />}
                               {isTouristUser && <MyPurchseList />}
                             </tbody>
                           </table>
@@ -85,7 +85,7 @@ const Adminproductlist = () => {
                               </div>
                             </div>
                             <div>
-                              {isGuideUser && <MyCoursesList />}
+                              {isGuideUser && <MyServicesList />}
                               {isTouristUser && <MyPurchseList />}
                             </div>
                           </div>

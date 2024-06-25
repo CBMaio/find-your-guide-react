@@ -10,21 +10,18 @@ import "./main.scss";
 import * as serviceWorker from "./serviceWorker";
 import About from "./pages/About";
 import Accountinfo from "./pages/Accountinfo";
-import AddCoursePage from "./pages/AddCoursePage";
-import AdminDraftList from "./pages/AdminDraftList";
+import AddServicePage from "./pages/AddServicePage";
 import Adminproductlist from "./pages/Adminproductlist";
 import AdminRequests from "./pages/AdminRequests";
 import Adminreview from "./pages/Adminreview";
 import AuthorProfile from "./pages/AuthorProfile";
 import Contact from "./pages/Contact";
-import CourseRegistration from "./pages/CourseRegistration";
-import Coursedetails from "./pages/Coursedetails";
-import Coursesgridone from "./pages/Coursesgrid";
-import EditCoursePage from "./pages/EditCoursePage";
+import ServiceDetails from "./pages/ServiceDetails";
+import ServicesGrid from "./pages/ServicesGrid";
+import EditServicePage from "./pages/EditServicePage";
 import Forgot from "./pages/Forgot";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import Notfound from "./pages/Notfound";
 import Password from "./pages/Password";
 import Register from "./pages/Register";
 import ScrollToTop from "./components/ScrollToTop";
@@ -48,8 +45,6 @@ class Root extends Component {
 
             <Route exact path={`/forgot`} element={<Forgot />} />
 
-            <Route exact path={`/notfound`} element={<Notfound />} />
-
             <Route exact path={`/contact`} element={<Contact />} />
 
             <Route exact path={`/about`} element={<About />} />
@@ -65,24 +60,14 @@ class Root extends Component {
             <Route
               exact
               path={`/service-detail/:serviceId`}
-              element={<Coursedetails />}
-            />
-
-            <Route
-              exact
-              path={`/course-registration/:courseId`}
-              element={<CourseRegistration />}
+              element={<ServiceDetails />}
             />
 
             <Route exact path={`/reset`} element={<Reset />} />
 
             {/* privates routes */}
             <Route element={<ProtectedRoute />}>
-              <Route
-                exact
-                path={`/services-grid`}
-                element={<Coursesgridone />}
-              />
+              <Route exact path={`/services-grid`} element={<ServicesGrid />} />
               <Route exact path={`/admin`} element={<WelcomeAdmin />} />
               <Route
                 exact
@@ -90,12 +75,12 @@ class Root extends Component {
                 element={<Adminproductlist />}
               />
 
-              <Route exact path={`/add-course`} element={<AddCoursePage />} />
+              <Route exact path={`/add-service`} element={<AddServicePage />} />
 
               <Route
                 exact
                 path={`/edit-service/:serviceId`}
-                element={<EditCoursePage />}
+                element={<EditServicePage />}
               />
 
               <Route exact path={`/admin-review`} element={<Adminreview />} />

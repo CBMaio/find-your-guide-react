@@ -1,6 +1,4 @@
 import React, { Fragment } from "react";
-import Appfooter from "../components/Appfooter";
-import { Link } from "react-router-dom";
 
 import Adminsidebar from "../components/Adminsidebar";
 import AdminTopnav from "../components/AdminTopnav";

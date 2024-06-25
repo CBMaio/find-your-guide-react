@@ -25,12 +25,12 @@ const MyPurchseList = () => {
 
   window.addEventListener("resize", () => onResizeScrren());
 
-  const openModalForSelectedCourse = (course) => {
-    setSelectedService(course);
+  const openModal = (purchase) => {
+    setSelectedService(purchase);
     setIsOpenSerivceModal(true);
   };
 
-  const closeCourseModal = () => setIsOpenSerivceModal(false);
+  const closeModal = () => setIsOpenSerivceModal(false);
 
   const cancelPurchase = (id) => {
     dispatch(deleteRequest(id));
@@ -97,7 +97,7 @@ const MyPurchseList = () => {
             ) : (
               <div
                 className="my-course-line mobile-view course-row"
-                onClick={() => openModalForSelectedCourse(purchase)}
+                onClick={() => openModal(purchase)}
               >
                 <div className="product-thumbnail text-start ps-0 course-image-container">
                   <img
@@ -122,7 +122,7 @@ const MyPurchseList = () => {
       {isOpenSerivceModal && (
         <div className="course-data-overlay">
           <div className="course-data-modal p-4 rounded-lg">
-            <div className="close-btn" onClick={closeCourseModal}>
+            <div className="close-btn" onClick={closeModal}>
               <i className="text-white font-lg text-grey-400 feather-x"></i>
             </div>
             <div className="course-title pt-3">

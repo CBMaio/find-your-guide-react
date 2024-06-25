@@ -59,6 +59,12 @@ const Login = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error, userInfo, isAuth]);
 
+  useEffect(() => {
+    if (isAuth) {
+      navigate("/welcome-admin");
+    }
+  }, [isAuth, navigate]);
+
   return (
     <Fragment>
       <div className="main-wrap">
@@ -125,7 +131,7 @@ const Login = () => {
                       <i className="font-sm ti-email text-grey-500 pr-0"></i>
                       <input
                         type="text"
-                        // required
+                        required
                         className="style2-input pl-5 form-control text-grey-900 font-xssss fw-600"
                         placeholder="Email"
                         name="email"
@@ -134,7 +140,7 @@ const Login = () => {
                     <div className="form-group icon-input mb-1">
                       <input
                         type="Password"
-                        // required
+                        required
                         id="password"
                         className="style2-input pl-5 form-control text-grey-900 font-xssss ls-3"
                         placeholder="Contraseña"

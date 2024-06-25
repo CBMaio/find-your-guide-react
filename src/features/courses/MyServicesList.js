@@ -10,13 +10,14 @@ import {
 } from "./coursesSlice";
 import { BREAKPOIN_SMALL, FETCH_STATUS } from "../../utils";
 
-const MyCoursesList = () => {
+const MyServicesList = () => {
   const dispatch = useDispatch();
   const { myCourses } = useSelector((state) => state.courses);
-  const [selectedCourse, setSelectedCourse] = useState(null);
-  const [isOpenCourseModal, setIsOpenCourseModal] = useState(false);
 
+  const [selectedService, setSelectedService] = useState(null);
+  const [isOpenCourseModal, setIsOpenCourseModal] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < BREAKPOIN_SMALL);
+
   const { status: coursesStatus, data: courseData } = myCourses;
   const { LOADING, IDLE } = FETCH_STATUS;
 
@@ -26,8 +27,8 @@ const MyCoursesList = () => {
 
   window.addEventListener("resize", () => onResizeScrren());
 
-  const openModalForSelectedCourse = (course) => {
-    setSelectedCourse(course);
+  const openModal = (course) => {
+    setSelectedService(course);
     setIsOpenCourseModal(true);
   };
 
@@ -106,7 +107,7 @@ const MyCoursesList = () => {
             ) : (
               <div
                 className="my-course-line mobile-view course-row"
-                onClick={() => openModalForSelectedCourse(value)}
+                onClick={() => openModal(value)}
               >
                 <div className="product-thumbnail text-start ps-0 course-image-container">
                   <img
@@ -136,26 +137,26 @@ const MyCoursesList = () => {
             </div>
             <div className="course-title pt-3">
               <h1 className="text-grey-900 fw-700 mb-3 lh-3 text-center">
-                {selectedCourse.name}
+                {selectedService.name}
               </h1>
             </div>
             <div className="course-modal-body">
               <div>
                 <span>Precio: </span>
                 <span>
-                  <b>$ {selectedCourse.price} </b>
+                  <b>$ {selectedService.price} </b>
                 </span>
               </div>
               <div>
                 <span>Tipo de servicio: </span>
                 <span>
-                  <b>{selectedCourse.serviceType} </b>
+                  <b>{selectedService.serviceType} </b>
                 </span>
               </div>
               <div>
                 <span>Descripción: </span>
                 <span>
-                  <b>{selectedCourse.description} </b>
+                  <b>{selectedService.description} </b>
                 </span>
               </div>
 
@@ -163,13 +164,13 @@ const MyCoursesList = () => {
                 <Button className="col-12 bg-current border-0 action-btn filled-btn">
                   <Link
                     className="text-white"
-                    to={`/edit-service/${selectedCourse.id}`}
+                    to={`/edit-service/${selectedService.id}`}
                   >
                     <span>Editar</span>
                   </Link>
                 </Button>
                 <Button
-                  onClick={() => deleteCourseAction(selectedCourse.id)}
+                  onClick={() => deleteCourseAction(selectedService.id)}
                   className="col-12 action-btn outline-btn"
                 >
                   <span>Eliminar</span>
@@ -183,4 +184,4 @@ const MyCoursesList = () => {
   );
 };
 
-export default MyCoursesList;
+export default MyServicesList;
