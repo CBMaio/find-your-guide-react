@@ -50,26 +50,29 @@ const MyTrophiesList = () => {
                 </td>
               </tr>
             ) : (
-              <div className="my-course-line mobile-view course-row">
-                <div className="course-title-container">
+              <tr className="my-course-line mobile-view course-row">
+                <td className="course-title-container">
                   <b>{value.date}</b>
-                </div>
+                </td>
 
-                <div className="course-title-container">
+                <td className="course-title-container">
                   <b>Trofeo ganado!</b>
-                </div>
+                </td>
 
-                <div className="course-title-container">
+                <td className="course-title-container">
                   <b>{value.condition}</b>
-                </div>
-              </div>
+                </td>
+              </tr>
             )}
           </Fragment>
         ))}
       {!trophiesData?.length && (
-        <div className="mt-4 course-title-container">
-          No tienes trofeos en este momento. Sigue intentando para conseguirlos!
-        </div>
+        <tr className="mt-4 course-title-container">
+          <td>
+            No tienes trofeos en este momento. Sigue intentando para
+            conseguirlos!
+          </td>
+        </tr>
       )}
     </>
   );
