@@ -43,10 +43,6 @@ const ServicesGrid = () => {
               queryFilter={searchProductByQuery}
               filterSelected={filterSelected}
             />
-
-            {isOpenFiltersModal && (
-              <FiltersModal handleModal={handleModal} setFilters={setFilters} />
-            )}
           </div>
         </div>
       </div>

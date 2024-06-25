@@ -14,6 +14,7 @@ import AddServicePage from "./pages/AddServicePage";
 import Adminproductlist from "./pages/Adminproductlist";
 import AdminRequests from "./pages/AdminRequests";
 import Adminreview from "./pages/Adminreview";
+import AdminPrizes from "./pages/AdminPrizes";
 import AuthorProfile from "./pages/AuthorProfile";
 import Contact from "./pages/Contact";
 import ServiceDetails from "./pages/ServiceDetails";
@@ -94,6 +95,8 @@ class Root extends Component {
                 path={`/admin-requests`}
                 element={<AdminRequests />}
               />
+
+              <Route exact path={`/admin-prizes`} element={<AdminPrizes />} />
             </Route>
           </Routes>
           <ScrollToTop />

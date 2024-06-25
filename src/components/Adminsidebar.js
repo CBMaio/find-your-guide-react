@@ -98,6 +98,13 @@ const Adminsidebar = () => {
           )}
         </li>
 
+        <li className="nav-item">
+          <NavLink className="navi-link" to="/admin-prizes">
+            <i className="feather-star mr-2"></i>
+            <span>Mis Trofeos</span>
+          </NavLink>
+        </li>
+
         {isGuideUser && (
           <li className="nav-item">
             <NavLink className="navi-link" to="/admin-requests">

@@ -1,38 +1,38 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  fetchCategories,
-  getCategories,
-} from "../features/categories/categorySlice";
+// import {
+//   fetchCategories,
+//   getCategories,
+// } from "../features/categories/categorySlice";
 import { FETCH_STATUS } from "../utils";
 
 import "../scss/components/custom-modal.scss";
 import "../scss/components/filters-modal.scss";
 
 const FiltersModal = ({ handleModal, setFilters }) => {
-  const closeModal = () => handleModal(false);
-  const dispatch = useDispatch();
-  const { IDLE, SUCCEEDED, LOADING } = FETCH_STATUS;
-  const { status: statusCategory } = useSelector((state) => state.category);
-  const filterCategories = useSelector(getCategories);
+  // const closeModal = () => handleModal(false);
+  // const dispatch = useDispatch();
+  // const { IDLE, SUCCEEDED, LOADING } = FETCH_STATUS;
+  // const { status: statusCategory } = useSelector((state) => state.category);
+  // const filterCategories = useSelector(getCategories);
 
-  const setSearch = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const formattedData = Object.fromEntries(formData.entries());
-    setFilters(formattedData);
-    closeModal();
-  };
+  // const setSearch = (e) => {
+  //   e.preventDefault();
+  //   const formData = new FormData(e.target);
+  //   const formattedData = Object.fromEntries(formData.entries());
+  //   setFilters(formattedData);
+  //   closeModal();
+  // };
 
-  useEffect(() => {
-    if (statusCategory === IDLE) {
-      dispatch(fetchCategories());
-    }
-  });
+  // useEffect(() => {
+  //   if (statusCategory === IDLE) {
+  //     dispatch(fetchCategories());
+  //   }
+  // });
   return (
     <div className="custom-modal filters-modal">
-      <div className="col-8 contact-wrap bg-white shadow-lg rounded-lg position-relative top-0 modal-content">
+      {/* <div className="col-8 contact-wrap bg-white shadow-lg rounded-lg position-relative top-0 modal-content">
         <div className="close-btn" onClick={closeModal}>
           x
         </div>
@@ -108,7 +108,7 @@ const FiltersModal = ({ handleModal, setFilters }) => {
             </form>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
