@@ -32,8 +32,8 @@ const trophiesSlice = createSlice({
       if (!payload) {
         return;
       }
-      state.status = SUCCEEDED;
-      state.data = payload.data.concat(payload.data);
+      state.status = IDLE;
+      state.data = payload.data;
     });
   },
 });

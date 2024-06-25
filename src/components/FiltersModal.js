@@ -1,38 +1,27 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-// import {
-//   fetchCategories,
-//   getCategories,
-// } from "../features/categories/categorySlice";
-import { FETCH_STATUS } from "../utils";
 
 import "../scss/components/custom-modal.scss";
 import "../scss/components/filters-modal.scss";
 
 const FiltersModal = ({ handleModal, setFilters }) => {
-  // const closeModal = () => handleModal(false);
-  // const dispatch = useDispatch();
-  // const { IDLE, SUCCEEDED, LOADING } = FETCH_STATUS;
-  // const { status: statusCategory } = useSelector((state) => state.category);
-  // const filterCategories = useSelector(getCategories);
+  const closeModal = () => handleModal(false);
 
-  // const setSearch = (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData(e.target);
-  //   const formattedData = Object.fromEntries(formData.entries());
-  //   setFilters(formattedData);
-  //   closeModal();
-  // };
+  const setSearch = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const formattedData = Object.fromEntries(formData.entries());
 
-  // useEffect(() => {
-  //   if (statusCategory === IDLE) {
-  //     dispatch(fetchCategories());
-  //   }
-  // });
+    const cleanData = Object.fromEntries(
+      Object.entries(formattedData).filter(([key, value]) => value !== "")
+    );
+
+    setFilters(cleanData);
+    closeModal();
+  };
+
   return (
     <div className="custom-modal filters-modal">
-      {/* <div className="col-8 contact-wrap bg-white shadow-lg rounded-lg position-relative top-0 modal-content">
+      <div className="col-8 contact-wrap bg-white shadow-lg rounded-lg position-relative top-0 modal-content">
         <div className="close-btn" onClick={closeModal}>
           x
         </div>
@@ -44,45 +33,53 @@ const FiltersModal = ({ handleModal, setFilters }) => {
                   <div className="filters-btn-container">
                     <div className="form-group icon-input mb-0">
                       <i className="ti-package font-xs text-grey-400"></i>
+                      <input
+                        name="firstName"
+                        className="style1-select bg-transparent border-0 pl-5"
+                        placeholder="Buscar por nombre"
+                      />
+                    </div>
+
+                    <div className="form-group icon-input mb-0">
+                      <i className="ti-package font-xs text-grey-400"></i>
+                      <input
+                        name="lastName"
+                        className="style1-select bg-transparent border-0 pl-5"
+                        placeholder="Buscar por apellido"
+                      />
+                    </div>
+
+                    <div className="form-group icon-input mb-0">
+                      <i className="ti-package font-xs text-grey-400"></i>
                       <select
-                        name="category"
+                        name="lenguaje"
                         className="style1-select bg-transparent border-0 pl-5"
                       >
-                        <option value="">Categoría</option>
-                        {filterCategories.map(({ _id: id, title }) => (
-                          <option key={id} value={id}>
-                            {title}
-                          </option>
-                        ))}
+                        <option value="">Lenguaje</option>
+                        <option value="ES">Español</option>
+                        <option value="EN">Inglés</option>
+                        <option value="RU">Ruso</option>
+                        <option value="GER">Aleman</option>
+                        <option value="POR">Portugués</option>
                       </select>
                     </div>
                     <div className="form-group icon-input mb-0">
                       <i className="ti-package font-xs text-grey-400"></i>
                       <select
-                        name="type"
+                        name="serviceType"
                         className="style1-select bg-transparent border-0 pl-5"
                       >
-                        <option value="">Tipo de clase</option>
-                        <option value={"individual"}>Individual</option>
-                        <option value={"grupal"}>Grupal</option>
+                        <option value="">Tipo de servicio</option>
+                        <option value="TOURS_INDIVIDUALES">Individual</option>
+                        <option value="TOURS_GRUPALES">Grupal</option>
+                        <option value="TRADUCCIONES">Traducción</option>
                       </select>
                     </div>
+
                     <div className="form-group icon-input mb-0">
                       <i className="ti-package font-xs text-grey-400"></i>
                       <select
-                        name="frequency"
-                        className="style1-select bg-transparent border-0 pl-5"
-                      >
-                        <option value="">Frecuencia</option>
-                        <option value="unica">Unica</option>
-                        <option value="semanal">Semanal</option>
-                        <option value="mensual">Mensual</option>
-                      </select>
-                    </div>
-                    <div className="form-group icon-input mb-0">
-                      <i className="ti-package font-xs text-grey-400"></i>
-                      <select
-                        name="ranking"
+                        name="score"
                         className="style1-select bg-transparent border-0 pl-5"
                       >
                         <option value="">Calificación</option>
@@ -108,7 +105,7 @@ const FiltersModal = ({ handleModal, setFilters }) => {
             </form>
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

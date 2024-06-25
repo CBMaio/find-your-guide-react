@@ -270,20 +270,6 @@ const Accountinfo = () => {
                           <div className="col-lg-6 mb-3">
                             <div className="form-group">
                               <label className="mont-font fw-600 font-xsss">
-                                Ciudad
-                              </label>
-                              <input
-                                name="cities"
-                                type="text"
-                                className="form-control"
-                                defaultValue={userInfo.city || ""}
-                              />
-                            </div>
-                          </div>
-
-                          <div className="col-lg-6 mb-3">
-                            <div className="form-group">
-                              <label className="mont-font fw-600 font-xsss">
                                 Lenguaje
                               </label>
                               <select

@@ -41,7 +41,7 @@ export const commentsStatus = {
   CANCELLED: "cancelled",
 };
 
-export const isEmptyObject = (obj) => Object.keys(obj).length;
+export const isEmptyObject = (obj) => !Object.keys(obj).length;
 
 export const convertBase64 = (file) => {
   return new Promise((resolve, reject) => {

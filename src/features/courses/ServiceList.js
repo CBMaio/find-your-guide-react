@@ -9,7 +9,8 @@ import {
 } from "./coursesSlice";
 
 import Card from "../../components/Card";
-import { FETCH_STATUS } from "../../utils";
+import { FETCH_STATUS, isEmptyObject } from "../../utils";
+import axiosInstance from "../../services/AxiosInstance";
 
 const ServiceList = ({ limit = false, queryFilter, filterSelected }) => {
   const { LOADING, SUCCEEDED, IDLE } = FETCH_STATUS;
@@ -29,39 +30,41 @@ const ServiceList = ({ limit = false, queryFilter, filterSelected }) => {
   useEffect(() => {
     const getProducts = async () => {
       let data = serviceData || [];
-      const filter = queryFilter?.toLowerCase() || "";
-      // const filteredData = await filterByItems(filterSelected);
-      // if (filteredData) {
-      //   data = filteredData;
-      // }
+      const filteredData = await filterByItems(filterSelected);
 
-      data = data.length
-        ? data.filter(({ guide }) =>
-            guide.username.toLowerCase().includes(filter)
-          )
-        : data;
-      console.log(data);
+      if (filteredData) {
+        const usernamesList = filteredData.map(({ username }) => username);
+        data = data.filter(({ guide }) =>
+          usernamesList.includes(guide.username)
+        );
+      }
+
       setElementsToShow(data);
     };
 
     getProducts();
   }, [queryFilter, serviceData, filterSelected]);
 
-  // const filterByItems = async (filters) => {
-  //   console.log(filters);
-  //   if (!filters) {
-  //     return null;
-  //   }
-  //   const { category = "", frequency = "", ranking = "", type = "" } = filters;
-  //   const params = `type=${type}&frequency=${frequency}&category=${category}&avg_rating=${ranking}`;
-  //   const response = await axios.get(
-  //     `${process.env.REACT_APP_JAVA_BACK_URL}/course?${params}`
-  //   );
+  const filterByItems = async (filters) => {
+    if (isEmptyObject(filters)) {
+      return;
+    }
 
-  //   if (response.status === 200) {
-  //     return response.data.data;
-  //   }
-  // };
+    const endpoint = `${process.env.REACT_APP_JAVA_BACK_URL}/api/v1/user`;
+    const queryString = Object.entries(filters)
+      .map(
+        ([key, value]) =>
+          `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+      )
+      .join("&");
+
+    const url = `${endpoint}?${queryString}`;
+    const { data } = await axiosInstance.get(url);
+
+    if (data.statusCode === "OK") {
+      return data.data;
+    }
+  };
 
   return servicesStatus === LOADING ? (
     <div className="pl-3">Cargando...</div>

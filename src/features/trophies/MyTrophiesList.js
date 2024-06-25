@@ -6,11 +6,13 @@ import {
   getAllTrophies,
   getTrophiesStatus,
 } from "./trophySlice";
+import { isGuide } from "../auth/authSlice";
 
 const MyTrophiesList = () => {
   const dispatch = useDispatch();
   const contextStatus = useSelector(getTrophiesStatus);
   const trophiesData = useSelector(getAllTrophies);
+  const isGuideUser = useSelector(isGuide);
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < BREAKPOIN_SMALL);
 
@@ -26,7 +28,7 @@ const MyTrophiesList = () => {
     if (contextStatus === IDLE) {
       dispatch(fetchTrophies());
     }
-  }, [contextStatus, dispatch, IDLE]);
+  }, [contextStatus, dispatch, IDLE, isGuideUser]);
 
   return (
     <>
@@ -42,11 +44,23 @@ const MyTrophiesList = () => {
                 <td>
                   <b>Trofeo ganado!</b>
                 </td>
+
+                <td>
+                  <b>{value.condition}</b>
+                </td>
               </tr>
             ) : (
               <div className="my-course-line mobile-view course-row">
                 <div className="course-title-container">
                   <b>{value.date}</b>
+                </div>
+
+                <div className="course-title-container">
+                  <b>Trofeo ganado!</b>
+                </div>
+
+                <div className="course-title-container">
+                  <b>{value.condition}</b>
                 </div>
               </div>
             )}
