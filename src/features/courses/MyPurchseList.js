@@ -9,6 +9,7 @@ import {
   selectRequestStatus,
 } from "../requests/requestsSlice";
 import ModalToPay from "../../components/ModalToPay";
+import axiosInstance from "../../services/AxiosInstance";
 
 const MyPurchseList = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const MyPurchseList = () => {
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < BREAKPOIN_SMALL);
   const { LOADING, IDLE } = FETCH_STATUS;
+  const BASE_URL = process.env.REACT_APP_JAVA_BACK_URL;
 
   const onResizeScrren = () => {
     setIsMobile(window.innerWidth < BREAKPOIN_SMALL);
@@ -49,6 +51,14 @@ const MyPurchseList = () => {
   const closeModalToPay = () => {
     setSelectedService(null);
     setIsOpenModalToPay(false);
+  };
+
+  const handellCancel = (id) => {
+    const response = axiosInstance.put(`${BASE_URL}/api/v1/buys/status`, {
+      id: id,
+      status: "CANCELED",
+    });
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -105,7 +115,7 @@ const MyPurchseList = () => {
                   </Button>
                   <Button
                     className="bg-transparent border-0 course-action"
-                    onClick={() => cancelPurchase(purchase.service.id)}
+                    onClick={() => handellCancel(purchase.id)}
                   >
                     <i className="ti-trash  font-xs text-danger"></i>
                     <span className="button-legend">Cancelar reserva</span>
@@ -170,7 +180,7 @@ const MyPurchseList = () => {
 
               <div className="mt-4 actions-container">
                 <Button
-                  onClick={() => cancelPurchase(selectedService.id)}
+                  onClick={() => handellCancel(selectedService.id)}
                   className="col-12 action-btn outline-btn"
                 >
                   <span>Cancelar reserva</span>

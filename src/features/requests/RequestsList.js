@@ -10,8 +10,11 @@ import {
 import { FETCH_STATUS } from "../../utils";
 
 import "../../scss/components/comment-list.scss";
+import axiosInstance from "../../services/AxiosInstance";
 
 const RequestsList = () => {
+  const BASE_URL = process.env.REACT_APP_JAVA_BACK_URL;
+
   const dispatch = useDispatch();
   const requests = useSelector(selectAllRequests);
   const requestsStatus = useSelector((state) => state.requests.status);
@@ -50,12 +53,15 @@ const RequestsList = () => {
     dispatch(deleteRequest(id));
   };
 
-  useEffect(() => {
-    console.log(requestsStatus);
-    // if (requestsStatus === IDLE) {
-    //   dispatch(fetchRequests());
-    // }
-  }, [requestsStatus, dispatch, IDLE]);
+  useEffect(async () => {
+    const { data } = await axiosInstance.get(
+      `${BASE_URL}/api/v1/buys/guide/${
+        JSON.parse(localStorage.getItem("userData")).id
+      }`
+    );
+    setRequestsToShow(data.data);
+    console.log(data.data);
+  }, []);
 
   useEffect(() => {
     const data = !["PENDING", "CONFIRMED", "CANCELED"].includes(selectedFilter)
