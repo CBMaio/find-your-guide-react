@@ -51,9 +51,10 @@ const RequestsList = () => {
   };
 
   useEffect(() => {
-    if (requestsStatus === IDLE) {
-      dispatch(fetchRequests());
-    }
+    console.log(requestsStatus);
+    // if (requestsStatus === IDLE) {
+    //   dispatch(fetchRequests());
+    // }
   }, [requestsStatus, dispatch, IDLE]);
 
   useEffect(() => {
@@ -63,8 +64,6 @@ const RequestsList = () => {
 
     setRequestsToShow(data);
   }, [selectedFilter, requests]);
-
-  if (!requests) return <div>No hay contrataciones</div>;
 
   return (
     <div className="container px-3 py-4">
@@ -81,8 +80,9 @@ const RequestsList = () => {
               >
                 <option>Filtrar por</option>
                 <option value="pending">Pendientes</option>
-                <option value="accepted">Aceptados</option>
-                <option value="rejected">Rechazados</option>
+                <option value="accepted">Aceptadas</option>
+                <option value="rejected">Rechazadas</option>
+                <option value="rejected">Finalizadas</option>
               </select>
             </div>
             <div className="card-body p-4">
@@ -112,9 +112,9 @@ const RequestsList = () => {
                     </thead>
                     <tbody>
                       {requestsToShow.map((value) => (
-                        <tr key={value._id}>
+                        <tr key={value.id}>
                           <td>
-                            <b>{value.course.title}</b>
+                            <b>{value.service.title}</b>
                           </td>
                           <td>{value.name}</td>
                           <td>{value.email}</td>

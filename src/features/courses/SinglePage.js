@@ -130,7 +130,7 @@ const SinglePage = () => {
     if (requestStatus === SUCCEEDED) {
       setDisplayModal({
         display: true,
-        title: "Tu registro fue exitoso",
+        title: "Tu reserva fue exitosa",
         description: "Muchas gracias! Preparate para una aventura única",
       });
     }
@@ -207,12 +207,15 @@ const SinglePage = () => {
             style={{ height: "300px", objectFit: "contain" }}
           />
         </div>
-        <div className="col-6 m-auto align-items-center border-0 pt-4 rounded-10 admin-form">
-          <Link to={`/registration/${id}`}>
-            <div className="col-12 form-control text-center style2-input text-white fw-600 bg-current border-0 p-0 ">
-              Reservar
-            </div>
-          </Link>
+        <div
+          className="col-6 m-auto align-items-center border-0 pt-4 rounded-10 admin-form"
+          onClick={handleReservation}
+        >
+          {/* <Link to={`/registration/${id}`}> */}
+          <div className="col-12 form-control text-center style2-input text-white fw-600 bg-current border-0 p-0 ">
+            Reservar
+          </div>
+          {/* </Link> */}
         </div>
         <div className="card d-block border-0 rounded-lg overflow-hidden dark-bg-transparent bg-transparent mt-4 pb-3">
           <div className="row">

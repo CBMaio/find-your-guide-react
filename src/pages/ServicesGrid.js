@@ -1,6 +1,4 @@
-import React, { useEffect, useState, Fragment } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import React, { useState, Fragment } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Searcharea from "../components/Searcharea";
@@ -25,6 +23,10 @@ const ServicesGrid = () => {
     setSearchProductByQuery(query);
   };
 
+  const handleDeleteFilters = () => {
+    setFiltersSelected({});
+  };
+
   return (
     <Fragment>
       <Header />
@@ -33,7 +35,11 @@ const ServicesGrid = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-12 mb-4">
-              <Searcharea search={searchCourse} handleModal={handleModal} />
+              <Searcharea
+                search={searchCourse}
+                handleModal={handleModal}
+                handleDeleteFilters={handleDeleteFilters}
+              />
             </div>
             <div className="col-lg-12 pt-2 mb-4">
               <h2 className="fw-400 font-lg">Resultados</h2>

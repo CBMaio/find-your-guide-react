@@ -8,6 +8,7 @@ import {
   selectAllTouristPurchase,
   selectRequestStatus,
 } from "../requests/requestsSlice";
+import ModalToPay from "../../components/ModalToPay";
 
 const MyPurchseList = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ const MyPurchseList = () => {
   const purchaseStatus = useSelector(selectRequestStatus);
   const [selectedService, setSelectedService] = useState(null);
   const [isOpenSerivceModal, setIsOpenSerivceModal] = useState(false);
+  const [isOpenModalToPay, setIsOpenModalToPay] = useState(false);
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < BREAKPOIN_SMALL);
   const { LOADING, IDLE } = FETCH_STATUS;
@@ -37,6 +39,16 @@ const MyPurchseList = () => {
     if (isOpenSerivceModal) {
       setIsOpenSerivceModal(false);
     }
+  };
+
+  const openModalToPay = (service) => {
+    setSelectedService(service);
+    setIsOpenModalToPay(true);
+  };
+
+  const closeModalToPay = () => {
+    setSelectedService(null);
+    setIsOpenModalToPay(false);
   };
 
   useEffect(() => {
@@ -85,6 +97,12 @@ const MyPurchseList = () => {
                   <b>{purchase.service.description}</b>
                 </td>
                 <td className="product-remove text-right">
+                  <Button
+                    className="bg-greylight border-0 text-grey-800"
+                    onClick={() => openModalToPay(purchase)}
+                  >
+                    <span>Pagos</span>
+                  </Button>
                   <Button
                     className="bg-transparent border-0 course-action"
                     onClick={() => cancelPurchase(purchase.service.id)}
@@ -161,6 +179,9 @@ const MyPurchseList = () => {
             </div>
           </div>
         </div>
+      )}
+      {isOpenModalToPay && (
+        <ModalToPay close={closeModalToPay} service={selectedService} />
       )}
     </>
   );

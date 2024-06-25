@@ -58,7 +58,7 @@ const ServiceList = ({ limit = false, queryFilter, filterSelected }) => {
       )
       .join("&");
 
-    const url = `${endpoint}?${queryString}`;
+    const url = `${endpoint}/?${queryString}`;
     const { data } = await axiosInstance.get(url);
 
     if (data.statusCode === "OK") {
